@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://www.tibco.com/schemas/workspace/Asmt6/Schema.xsd" xmlns:tns="http://xmlns.example.com/1609237967711" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/workspace/Asmt6 (1)/Schema.xsd" targetNamespace="http://xmlns.example.com/1609237967711">
+    <import namespace="http://www.tibco.com/schemas/workspace/Asmt6/Schema.xsd" location="Request.xsd"/>
+    <import namespace="http://www.tibco.com/schemas/workspace/Asmt6 (1)/Schema.xsd" location="Response.xsd"/>
+    <message name="ReqReadMessage">
+        <part name="Request" element="ns:RollNo"/>
+    </message>
+    <message name="ResReadMessage">
+        <part name="Response" element="ns2:StudentDetails"/>
+    </message>
+    <message name="ReqDeleteMessage">
+        <part name="Request" element="ns:RollNo"/>
+    </message>
+    <message name="ResDeleteMessage">
+        <part name="Response" type="xsd:string"/>
+    </message>
+    <message name="ReqModifyMessage">
+        <part name="Request" element="ns2:StudentDetails"/>
+    </message>
+    <message name="ResModifyMessage">
+        <part name="Response" type="xsd:string"/>
+    </message>
+    <portType name="PortType">
+        <operation name="ReadOperation">
+            <input message="tns:ReqReadMessage"/>
+            <output message="tns:ResReadMessage"/>
+        </operation>
+        <operation name="DeleteOperation">
+            <input message="tns:ReqDeleteMessage"/>
+            <output message="tns:ResDeleteMessage"/>
+        </operation>
+        <operation name="ModifyOperation">
+            <input message="tns:ReqModifyMessage"/>
+            <output message="tns:ResModifyMessage"/>
+        </operation>
+    </portType>
+</definitions>

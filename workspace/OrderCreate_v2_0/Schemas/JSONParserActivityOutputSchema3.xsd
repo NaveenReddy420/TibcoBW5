@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xs:element xmlns:xs="http://www.w3.org/2001/XMLSchema" name="ordercreaterequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="requestpreamble">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="isocountrycode" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="customernumber" type="xsd:string" minOccurs="0"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ordercreatedetails">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="systemid" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="customerponumber" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="actioncode" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="ompordernumber" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="ordertype" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="terms" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="enduserordernumber" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="billtosuffix" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="shiptosuffix" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="shiptoaddress" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="attention" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="name1" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="name2" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="name3" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="name4" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="addressline1" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="addressline2" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="addressline3" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="addressline4" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="housenumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="city" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="state" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="postalcode" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="countrycode" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="phonenumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="extensionnumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="mobilenumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="faxnumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="email" type="xsd:string" minOccurs="0"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="carriercode" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="freightamount" type="xsd:decimal" minOccurs="0"/>
+                            <xs:element name="thirdpartyfreightaccountnumber" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="vendororderhold" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="specialbidnumber" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="programtype" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="endusertype" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="solicitationnumber" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="enduserdata" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="enduserpostalcode" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="publicprivatecode" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="requesteddeliverydate" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="requestedshipbydate" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="requestedcancelbydate" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="emailaddress" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="placeoncustomerhold" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="promisedate" type="xsd:date" minOccurs="0"/>
+                            <xs:element name="currencycode" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="partialshipment" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="requestedshippingcondition" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="enduser" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="id" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="title" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="name1" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="name2" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="name3" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="name4" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="addressline1" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="addressline2" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="addressline3" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="addressline4" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="city" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="state" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="postalcode" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="countrycode" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="company" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="authorizationnumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="phonenumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="extensionnumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="faxnumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="pricinglevelcode" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="email" type="xsd:string" minOccurs="0"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="creditcarddetails" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="creditcardnumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="paymentcode" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="cardtype" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="expirationdate" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="cvvcheckbox" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="authorizationprovider" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="securitycode" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="firstname" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="lastname" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="authorizationprovider1" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="authorizationcode" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="address" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="city" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="state" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="postalcode" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="authorizationamount" type="xsd:double" minOccurs="0"/>
+                                        <xs:element name="paymentgroup" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="paymentcardtype" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="currency" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="authdate" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="authtime" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="requestid" type="xsd:string" minOccurs="0"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="vmf" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="quotenumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="vendauthnumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="csnumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="emailaddress" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="vendornumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="orderhold" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="veud" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="id" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="agreementid" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="contactid" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="addressid" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="licenseid" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="ordercode" type="xsd:string" minOccurs="0"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="vmfspecs" minOccurs="0" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="attributename" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="attributevalue" type="xsd:string" minOccurs="0"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="ssenduserinfo" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="ssenduserbranchno" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="ssendusercustomerno" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="ssendusersuffix" type="xsd:string" minOccurs="0"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="carrierdescription" type="xsd:string" minOccurs="0"/>
+                            <xs:element name="lines" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="linetype" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="isresellercentric" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="linenumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="globalskuid" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="quantity" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="ingrampartnumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="vendorpartnumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="customerpartnumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="manufacturerpartnumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="vendornumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="enduserponumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="productdescription" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="sellingprice" type="xsd:decimal" minOccurs="0"/>
+                                        <xs:element name="enduserprice" type="xsd:decimal" minOccurs="0"/>
+                                        <xs:element name="warehouseid" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="unitprice" type="xsd:decimal" minOccurs="0"/>
+                                        <xs:element name="currency" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="bidnumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="specialprice" type="xsd:double" minOccurs="0"/>
+                                        <xs:element name="specialcost" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="specialcostamount" type="xsd:double" minOccurs="0"/>
+                                        <xs:element name="specialprovidercostamount" type="xsd:double" minOccurs="0"/>
+                                        <xs:element name="specialprovidercostcurrency" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="acoptrackingnumber" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="netamount" type="xsd:decimal" minOccurs="0"/>
+                                        <xs:element name="taxamount" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="freightamount" type="xsd:string" minOccurs="0"/>
+                                        <xs:element name="enduser" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="id" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="title" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="name1" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="name2" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="name3" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="name4" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="addressline1" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="addressline2" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="addressline3" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="addressline4" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="city" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="state" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="postalcode" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="countrycode" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="phonenumber" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="extensionnumber" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="faxnumber" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="companyname" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="companyvatnumber" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="pricinglevelcode" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="email" type="xsd:string" minOccurs="0"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="vmf" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="vmfspecs" minOccurs="0" maxOccurs="unbounded">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="attributename" type="xsd:string" minOccurs="0"/>
+                                                                <xs:element name="attributevalue" type="xsd:string" minOccurs="0"/>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="variantconfiguration" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="configid" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="rootid" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="modelnumber" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="version" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="build" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="name" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="language" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="profilename" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="configinfo" type="xsd:string" minOccurs="0"/>
+                                                    <xs:element name="iscomplete" type="xsd:boolean" minOccurs="0"/>
+                                                    <xs:element name="isconsistent" type="xsd:boolean" minOccurs="0"/>
+                                                    <xs:element name="instance" minOccurs="0">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="instanceid" type="xsd:string" minOccurs="0"/>
+                                                                <xs:element name="objectkey" type="xsd:string" minOccurs="0"/>
+                                                                <xs:element name="objecttype" type="xsd:string" minOccurs="0"/>
+                                                                <xs:element name="classtype" type="xsd:string" minOccurs="0"/>
+                                                                <xs:element name="iscomplete" type="xsd:boolean" minOccurs="0"/>
+                                                                <xs:element name="isconsistent" type="xsd:boolean" minOccurs="0"/>
+                                                                <xs:element name="quantity" type="xsd:string" minOccurs="0"/>
+                                                                <xs:element name="quantityunit" type="xsd:string" minOccurs="0"/>
+                                                                <xs:element name="characteristic" minOccurs="0">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element name="name" type="xsd:string" minOccurs="0"/>
+                                                                            <xs:element name="value" type="xsd:string" minOccurs="0"/>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="productextendedspecs" minOccurs="0" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="attributename" type="xsd:string"/>
+                                                    <xs:element name="attributevalue" type="xsd:string"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="serviceextendedspecs" minOccurs="0" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="attributename" type="xsd:string"/>
+                                                    <xs:element name="attributevalue" type="xsd:string"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="carriercode" type="xsd:string" minOccurs="0"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="extendedspecs" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="attributename" type="xsd:string"/>
+                                        <xs:element name="attributevalue" type="xsd:string"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xsd:schema>

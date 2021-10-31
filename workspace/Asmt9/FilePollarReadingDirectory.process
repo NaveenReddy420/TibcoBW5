@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/namespaces/tnt/plugins/file" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <pd:name>Asmt9/FilePollarReadingDirectory.process</pd:name>
+    <pd:startName>File Poller</pd:startName>
+    <pd:startX>0</pd:startX>
+    <pd:startY>0</pd:startY>
+    <pd:returnBindings/>
+    <pd:starter name="File Poller">
+        <pd:type>com.tibco.plugin.file.FileEventSource</pd:type>
+        <pd:resourceType>ae.activities.FileEventSourceResource</pd:resourceType>
+        <pd:x>175</pd:x>
+        <pd:y>87</pd:y>
+        <config>
+            <pollInterval>5</pollInterval>
+            <createEvent>true</createEvent>
+            <modifyEvent>true</modifyEvent>
+            <deleteEvent>true</deleteEvent>
+            <mode>files-and-directories</mode>
+            <encoding>text</encoding>
+            <sortby>File Name</sortby>
+            <sortorder>descending</sortorder>
+            <fileName>D:\New folder\asmt9\*ExtractData*.csv</fileName>
+            <encodingUsed>ASCII</encodingUsed>
+        </config>
+        <pd:inputBindings/>
+    </pd:starter>
+    <pd:endName>End</pd:endName>
+    <pd:endX>751</pd:endX>
+    <pd:endY>93</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1609818962595</pd:targetNamespace>
+    <pd:group name="Group">
+        <pd:type>com.tibco.pe.core.LoopGroup</pd:type>
+        <pd:resourceType>ae.process.group</pd:resourceType>
+        <pd:x>527</pd:x>
+        <pd:y>18</pd:y>
+        <pd:width>147</pd:width>
+        <pd:height>140</pd:height>
+        <pd:collapsedWidth>57</pd:collapsedWidth>
+        <pd:collapsedHeight>70</pd:collapsedHeight>
+        <pd:groupVariables/>
+        <pd:joinToggle>inherit</pd:joinToggle>
+        <config>
+            <pd:groupType>inputLoop</pd:groupType>
+            <pd:serializable>false</pd:serializable>
+            <pd:over>$RemovingDuplicates/root/StudentDetails</pd:over>
+            <pd:iterationElementSlot>current</pd:iterationElementSlot>
+            <pd:indexSlot>i</pd:indexSlot>
+            <pd:activityOutputName/>
+            <pd:accumulateOutput>false</pd:accumulateOutput>
+        </config>
+        <pd:inputBindings/>
+        <pd:expanded>true</pd:expanded>
+        <pd:transition>
+            <pd:from>start</pd:from>
+            <pd:to>InsertIntoDB</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>InsertIntoDB</pd:from>
+            <pd:to>end</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:activity name="InsertIntoDB">
+            <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
+            <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
+            <pd:x>600</pd:x>
+            <pd:y>93</pd:y>
+            <config>
+                <timeout>10</timeout>
+                <commit>false</commit>
+                <emptyStrAsNil>false</emptyStrAsNil>
+                <jdbcSharedConfig>/SharedResources/Connections/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+                <statement>insert into studentdetailscsv values (?,?,?,?,?,?,?)</statement>
+                <Prepared_Param_DataType>
+                    <parameter>
+                        <parameterName>rollno</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>studentname</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>fathername</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>branch</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>m1</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>m2</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                    <parameter>
+                        <parameterName>m3</parameterName>
+                        <dataType>VARCHAR</dataType>
+                    </parameter>
+                </Prepared_Param_DataType>
+            </config>
+            <pd:inputBindings>
+                <jdbcUpdateActivityInput>
+                    <rollno>
+                        <xsl:value-of select="$current/StudentDetails/rollno"/>
+                    </rollno>
+                    <studentname>
+                        <xsl:value-of select="$current/StudentDetails/studentname"/>
+                    </studentname>
+                    <fathername>
+                        <xsl:value-of select="$current/StudentDetails/fathername"/>
+                    </fathername>
+                    <branch>
+                        <xsl:value-of select="$current/StudentDetails/branch"/>
+                    </branch>
+                    <m1>
+                        <xsl:value-of select="$current/StudentDetails/m1"/>
+                    </m1>
+                    <m2>
+                        <xsl:value-of select="$current/StudentDetails/m2"/>
+                    </m2>
+                    <m3>
+                        <xsl:value-of select="$current/StudentDetails/m3"/>
+                    </m3>
+                </jdbcUpdateActivityInput>
+            </pd:inputBindings>
+        </pd:activity>
+    </pd:group>
+    <pd:activity name="Parse Data">
+        <pd:type>com.tibco.plugin.parse.ParseActivity</pd:type>
+        <pd:resourceType>ae.activities.ParseActivity</pd:resourceType>
+        <pd:x>310</pd:x>
+        <pd:y>90</pd:y>
+        <config>
+            <InputType>String</InputType>
+            <Encoding>ASCII</Encoding>
+            <ParseSharedConfig>/Asmt9/Data Format.sharedparse</ParseSharedConfig>
+            <SpecifyStartRecord>true</SpecifyStartRecord>
+        </config>
+        <pd:inputBindings>
+            <Input>
+                <text>
+                    <xsl:value-of select="$File-Poller/ns:EventSourceOuputTextClass/fileContent/textContent"/>
+                </text>
+                <startRecord>
+                    <xsl:value-of select="2"/>
+                </startRecord>
+                <noOfRecords>
+                    <xsl:value-of select="-1"/>
+                </noOfRecords>
+            </Input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="RemovingDuplicates">
+        <pd:type>com.tibco.plugin.mapper.MapperActivity</pd:type>
+        <pd:resourceType>ae.activities.MapperActivity</pd:resourceType>
+        <pd:x>447</pd:x>
+        <pd:y>91</pd:y>
+        <config>
+            <element>
+                <xsd:element name="root">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="StudentDetails" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="rollno" type="xsd:string"/>
+                                        <xsd:element name="studentname" type="xsd:string"/>
+                                        <xsd:element name="fathername" type="xsd:string"/>
+                                        <xsd:element name="branch" type="xsd:string"/>
+                                        <xsd:element name="m1" type="xsd:string"/>
+                                        <xsd:element name="m2" type="xsd:string"/>
+                                        <xsd:element name="m3" type="xsd:string"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </element>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <xsl:for-each-group select="$Parse-Data/Output/Rows/root/StudentDetails" group-by="rollno">
+                    <xsl:for-each select="current-group()[1]">
+                        <StudentDetails>
+                            <rollno>
+                                <xsl:value-of select="current-group()[1]/rollno"/>
+                            </rollno>
+                            <studentname>
+                                <xsl:value-of select="current-group()[1]/studentname"/>
+                            </studentname>
+                            <fathername>
+                                <xsl:value-of select="current-group()[1]/fathername"/>
+                            </fathername>
+                            <branch>
+                                <xsl:value-of select="current-group()[1]/branch"/>
+                            </branch>
+                            <m1>
+                                <xsl:value-of select="current-group()[1]/m1"/>
+                            </m1>
+                            <m2>
+                                <xsl:value-of select="current-group()[1]/m2"/>
+                            </m2>
+                            <m3>
+                                <xsl:value-of select="current-group()[1]/m3"/>
+                            </m3>
+                        </StudentDetails>
+                    </xsl:for-each>
+                </xsl:for-each-group>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>File Poller</pd:from>
+        <pd:to>Parse Data</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Parse Data</pd:from>
+        <pd:to>RemovingDuplicates</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>RemovingDuplicates</pd:from>
+        <pd:to>Group</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Group</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

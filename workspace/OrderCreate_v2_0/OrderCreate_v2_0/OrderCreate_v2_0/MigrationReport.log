@@ -1,0 +1,19 @@
+2021-02-09 17:43:13,082 [Worker-1] INFO  com.tibco.bw.migration.logger  - Generating BW 6 application for BW5 project/projects at C:\Users\Naveen Nallakalva\Downloads\New folder\OrderCreate_v2_0
+2021-02-09 17:43:15,243 [Worker-1] INFO  com.tibco.bw.migration.logger  - Migrating Global Variables..
+2021-02-09 17:43:15,576 [Worker-1] INFO  com.tibco.bw.migration.logger  - Migrating Shared Resources..
+2021-02-09 17:43:15,715 [Worker-1] INFO  com.tibco.bw.migration.logger  - Migrating XML Schema resource :C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Resources/CloudBlue/OMPOrderCreateRequest.xsd
+2021-02-09 17:43:15,766 [Worker-1] INFO  com.tibco.bw.migration.logger  - Migrating XML Schema resource :C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Resources/CloudBlue/OrderCancelRequestCloudBlue.xsd
+2021-02-09 17:43:15,785 [Worker-1] INFO  com.tibco.bw.migration.logger  - Migrating XML Schema resource :C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Resources/CloudBlue/OrderCancelResponseCloudBlue.xsd
+2021-02-09 17:43:15,804 [Worker-1] INFO  com.tibco.bw.migration.logger  - Migrating XML Schema resource :C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Resources/CloudBlue/OrderCreateRequestCloudBlue.xsd
+2021-02-09 17:43:15,834 [Worker-1] INFO  com.tibco.bw.migration.logger  - Migrating XML Schema resource :C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Resources/CloudBlue/OrderCreateResponseCloudBlue.xsd
+2021-02-09 17:43:15,852 [Worker-1] INFO  com.tibco.bw.migration.logger  - Migrating XML Schema resource :C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Resources/CloudBlue/ResellerID_Request.xsd
+2021-02-09 17:43:15,861 [Worker-1] INFO  com.tibco.bw.migration.logger  - Migrating XML Schema resource :C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Resources/CloudBlue/ResellerID_Response.xsd
+2021-02-09 17:43:15,900 [Worker-1] INFO  com.tibco.bw.migration.logger  - Migrating XML Schema resource :C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Resources/ImpulseStockRequest.xsd
+2021-02-09 17:43:15,908 [Worker-1] INFO  com.tibco.bw.migration.logger  - Migrating XML Schema resource :C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Resources/ImpulseStockResponse.xsd
+2021-02-09 17:43:15,926 [Worker-1] INFO  com.tibco.bw.migration.logger  - Migrating XML Schema resource :C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Resources/OrderCreateAuthRequest.xsd
+2021-02-09 17:43:15,947 [Worker-1] INFO  com.tibco.bw.migration.logger  - Migrating XML Schema resource :C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Resources/OrderCreateMappingResponse_v2_0.xsd
+2021-02-09 17:43:15,967 [Worker-1] INFO  com.tibco.bw.migration.logger  - Migrating XML Schema resource :C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Resources/OrderCreateRequest.xsd
+2021-02-09 17:43:15,988 [Worker-1] INFO  com.tibco.bw.migration.logger  - Migrating XML Schema resource :C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Resources/OrderCreateRequestIFS.xsd
+2021-02-09 17:43:16,010 [Worker-1] INFO  com.tibco.bw.migration.logger  - Migrating XML Schema resource :C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Resources/OrderCreateRequestImpulse.xsd
+2021-02-09 17:43:16,031 [Worker-1] INFO  com.tibco.bw.migration.logger  - Migrating XML Schema resource :C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Resources/OrderCreateRequestSAP.xsd
+2021-02-09 17:43:16,049 [Worker-1] INFO  com.tibco.bw.migration.logger  - Migrating XML Schema resource :C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Resources/OrderCreateResponse.xsd

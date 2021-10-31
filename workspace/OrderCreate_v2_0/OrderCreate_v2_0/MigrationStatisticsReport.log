@@ -1,0 +1,29 @@
+2021-02-09 17:44:23,792 [Worker-1] INFO  com.tibco.bw.migration.stats  - Migrating Business Works 5.x projects to version 6 using arguments:: 
+[Target Project Directory: c:\Users\Naveen Nallakalva\Downloads\New folder\OrderCreate_v2_0/OrderCreate_v2_0 ]
+[Source Project Directory: C:\Users\Naveen Nallakalva\Downloads\New folder\OrderCreate_v2_0 ]
+[Project Name: OrderCreate_v2_0 ]
+
+
+------------------ Migration Statistics ----------------
+
+Project Migration Time [Millisecond]: 70708
+
+Process Migration Time [Millisecond]
+1. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/CloudBlue/GetCloudBlueResellerID.process: 1617
+2. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/Common/Load_OnOffLineTimes.process: 2059
+3. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/ValidateRequest.process: 904
+4. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/CloudBlue/CallCloudBlue.process: 5702
+5. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/CloudBlue/OrderCreateCloudBlue.process: 4392
+6. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/RESTJSONHTTPReceiver.process: 7450
+7. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/CloudBlue/GetCloudBlueSubscriptionID.process: 1886
+8. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/OrderCreateSAP.process: 3494
+9. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/OrderCreateImpulse.process: 13587
+10. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/ParseValidationErrorStackTrace.process: 886
+11. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/CloudBlue/OrderCancelCloudBlue.process: 1990
+12. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/Common/DownTimes.process: 9570
+
+Artifacts Migrated [Count]
+1. Process(& Service Agent) Migrated:12
+2. WSDL Migrated:12
+3. Schema Migrated:37
+4. XSLT Migrated:2

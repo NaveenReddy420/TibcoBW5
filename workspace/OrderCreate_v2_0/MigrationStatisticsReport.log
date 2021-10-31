@@ -1,0 +1,29 @@
+2021-02-09 18:41:39,661 [Worker-5] INFO  com.tibco.bw.migration.stats  - Migrating Business Works 5.x projects to version 6 using arguments:: 
+[Target Project Directory: c:\Users\Naveen Nallakalva\.TIBCO\workspace/OrderCreate_v2_0 ]
+[Source Project Directory: C:\Users\Naveen Nallakalva\Downloads\New folder\OrderCreate_v2_0 ]
+[Project Name: OrderCreate_v2_0 ]
+
+
+------------------ Migration Statistics ----------------
+
+Project Migration Time [Millisecond]: 65823
+
+Process Migration Time [Millisecond]
+1. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/CloudBlue/GetCloudBlueResellerID.process: 1665
+2. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/Common/Load_OnOffLineTimes.process: 1886
+3. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/ValidateRequest.process: 1148
+4. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/CloudBlue/CallCloudBlue.process: 2935
+5. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/CloudBlue/OrderCreateCloudBlue.process: 3751
+6. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/RESTJSONHTTPReceiver.process: 7539
+7. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/CloudBlue/GetCloudBlueSubscriptionID.process: 2475
+8. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/OrderCreateSAP.process: 5045
+9. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/OrderCreateImpulse.process: 14669
+10. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/ParseValidationErrorStackTrace.process: 751
+11. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/CloudBlue/OrderCancelCloudBlue.process: 2067
+12. C:/Users/Naveen Nallakalva/Downloads/New folder/OrderCreate_v2_0/Processes/Common/DownTimes.process: 3432
+
+Artifacts Migrated [Count]
+1. Process(& Service Agent) Migrated:12
+2. WSDL Migrated:19
+3. Schema Migrated:91
+4. XSLT Migrated:3

@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <pd:name>Asmt3 data from html to db/http.process</pd:name>
+    <pd:startName>HTTP Receiver</pd:startName>
+    <pd:startX>0</pd:startX>
+    <pd:startY>0</pd:startY>
+    <pd:returnBindings/>
+    <pd:starter name="HTTP Receiver">
+        <pd:type>com.tibco.plugin.http.HTTPEventSource</pd:type>
+        <pd:resourceType>httppalette.httpEventSource</pd:resourceType>
+        <pd:x>152</pd:x>
+        <pd:y>60</pd:y>
+        <config>
+            <outputMode>String</outputMode>
+            <defaultEncoding>ISO8859_1</defaultEncoding>
+            <inputOutputVersion>5.3.0</inputOutputVersion>
+            <newMimeSupport>true</newMimeSupport>
+            <sharedChannel>/Asmt3 data from html to db/HTTP Connection.sharedhttp</sharedChannel>
+            <parsePostData>true</parsePostData>
+            <customField>
+                <row>
+                    <attribute>ROLLNO</attribute>
+                    <attributeType>string</attributeType>
+                    <attributeCard>required</attributeCard>
+                </row>
+                <row>
+                    <attribute>STUDENTNAME</attribute>
+                    <attributeType>string</attributeType>
+                    <attributeCard>required</attributeCard>
+                </row>
+                <row>
+                    <attribute>FATHERNAME</attribute>
+                    <attributeType>string</attributeType>
+                    <attributeCard>required</attributeCard>
+                </row>
+                <row>
+                    <attribute>BRANCH</attribute>
+                    <attributeType>string</attributeType>
+                    <attributeCard>required</attributeCard>
+                </row>
+                <row>
+                    <attribute>M1</attribute>
+                    <attributeType>string</attributeType>
+                    <attributeCard>required</attributeCard>
+                </row>
+                <row>
+                    <attribute>M2</attribute>
+                    <attributeType>string</attributeType>
+                    <attributeCard>required</attributeCard>
+                </row>
+                <row>
+                    <attribute>M3</attribute>
+                    <attributeType>string</attributeType>
+                    <attributeCard>required</attributeCard>
+                </row>
+            </customField>
+            <Headers>
+                <xsd:element name="root">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="Accept" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Accept-Charset" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Accept-Encoding" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Content-Type" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Content-Length" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Connection" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Cookie" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Pragma" type="xsd:string" minOccurs="0"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </Headers>
+        </config>
+        <pd:inputBindings/>
+    </pd:starter>
+    <pd:endName>End</pd:endName>
+    <pd:endX>727</pd:endX>
+    <pd:endY>59</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1608185649410</pd:targetNamespace>
+    <pd:activity name="insert data">
+        <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
+        <pd:x>352</pd:x>
+        <pd:y>65</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/SharedResources/Connections/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>insert into studentdetails values (?,?,?,?,?,?,?)</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>rollno</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>studentname</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>fathername</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>branch</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>m1</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>m2</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>m3</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+        </config>
+        <pd:inputBindings>
+            <jdbcUpdateActivityInput>
+                <rollno>
+                    <xsl:choose>
+                        <xsl:when test="exists($HTTP-Receiver/ProcessStarterOutput/parameters/ROLLNO)">
+                            <xsl:value-of select="$HTTP-Receiver/ProcessStarterOutput/parameters/ROLLNO"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </rollno>
+                <studentname>
+                    <xsl:choose>
+                        <xsl:when test="exists($HTTP-Receiver/ProcessStarterOutput/parameters/STUDENTNAME)">
+                            <xsl:value-of select="$HTTP-Receiver/ProcessStarterOutput/parameters/STUDENTNAME"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </studentname>
+                <fathername>
+                    <xsl:choose>
+                        <xsl:when test="exists($HTTP-Receiver/ProcessStarterOutput/parameters/FATHERNAME)">
+                            <xsl:value-of select="$HTTP-Receiver/ProcessStarterOutput/parameters/FATHERNAME"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </fathername>
+                <branch>
+                    <xsl:choose>
+                        <xsl:when test="exists($HTTP-Receiver/ProcessStarterOutput/parameters/BRANCH)">
+                            <xsl:value-of select="$HTTP-Receiver/ProcessStarterOutput/parameters/BRANCH"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </branch>
+                <m1>
+                    <xsl:choose>
+                        <xsl:when test="exists($HTTP-Receiver/ProcessStarterOutput/parameters/M1)">
+                            <xsl:value-of select="$HTTP-Receiver/ProcessStarterOutput/parameters/M1"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </m1>
+                <m2>
+                    <xsl:choose>
+                        <xsl:when test="exists($HTTP-Receiver/ProcessStarterOutput/parameters/M2)">
+                            <xsl:value-of select="$HTTP-Receiver/ProcessStarterOutput/parameters/M2"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </m2>
+                <m3>
+                    <xsl:choose>
+                        <xsl:when test="exists($HTTP-Receiver/ProcessStarterOutput/parameters/M3)">
+                            <xsl:value-of select="$HTTP-Receiver/ProcessStarterOutput/parameters/M3"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </m3>
+            </jdbcUpdateActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Send HTTP Response">
+        <pd:type>com.tibco.plugin.http.HTTPResponseActivity</pd:type>
+        <pd:resourceType>httppalette.httpWebResponse</pd:resourceType>
+        <pd:x>527</pd:x>
+        <pd:y>61</pd:y>
+        <config>
+            <closeConnection>true</closeConnection>
+            <eventSource>HTTP Receiver</eventSource>
+            <Headers>
+                <xsd:element name="root">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="StatusLine" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Content-Type" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Set-Cookie" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Pragma" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Location" type="xsd:string" minOccurs="0"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </Headers>
+        </config>
+        <pd:inputBindings>
+            <ResponseActivityInput>
+                <asciiContent>
+                    <xsl:value-of select="&quot;Data inserted successfully&quot;"/>
+                </asciiContent>
+            </ResponseActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="JDBC Query">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>257</pd:x>
+        <pd:y>133</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/SharedResources/Connections/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>SELECT ROLLNO, STUDENTNAME FROM STUDENTDETAILS WHERE ROLLNO=?</statement>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>ROLLNO</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR2</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>STUDENTNAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR2</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>INPUT_ROLLNO</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <INPUT_ROLLNO>
+                    <xsl:choose>
+                        <xsl:when test="exists($HTTP-Receiver/ProcessStarterOutput/parameters/ROLLNO)">
+                            <xsl:value-of select="$HTTP-Receiver/ProcessStarterOutput/parameters/ROLLNO"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="xsi:nil">true</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </INPUT_ROLLNO>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="send_record_exists_response">
+        <pd:type>com.tibco.plugin.http.HTTPResponseActivity</pd:type>
+        <pd:resourceType>httppalette.httpWebResponse</pd:resourceType>
+        <pd:x>508</pd:x>
+        <pd:y>166</pd:y>
+        <config>
+            <closeConnection>true</closeConnection>
+            <eventSource>HTTP Receiver</eventSource>
+            <Headers>
+                <xsd:element name="root">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="StatusLine" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Content-Type" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Set-Cookie" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Pragma" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Location" type="xsd:string" minOccurs="0"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </Headers>
+        </config>
+        <pd:inputBindings>
+            <ResponseActivityInput>
+                <asciiContent>
+                    <xsl:value-of select="&quot;Data already exists&quot;"/>
+                </asciiContent>
+            </ResponseActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>HTTP Receiver</pd:from>
+        <pd:to>JDBC Query</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>insert data</pd:from>
+        <pd:to>Send HTTP Response</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Send HTTP Response</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>JDBC Query</pd:from>
+        <pd:to>insert data</pd:to>
+        <pd:xpathDescription>not exists</pd:xpathDescription>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>count($JDBC-Query/resultSet/Record)=0</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>JDBC Query</pd:from>
+        <pd:to>send_record_exists_response</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>otherwise</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>send_record_exists_response</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

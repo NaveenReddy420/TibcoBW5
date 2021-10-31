@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pd="http://xmlns.tibco.com/bw/process/2003">
+    <pd:name>insert multiple records with one jdbc update activity/Process Definition.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startX>150</pd:startX>
+    <pd:startY>64</pd:startY>
+    <pd:returnBindings/>
+    <pd:endName>End</pd:endName>
+    <pd:endX>450</pd:endX>
+    <pd:endY>64</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1607511728581</pd:targetNamespace>
+    <pd:activity name="JDBC Update">
+        <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
+        <pd:x>287</pd:x>
+        <pd:y>85</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/SharedResources/Connections/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>insert into tbl_files values (?,?)</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>file_name</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>file_size</parameterName>
+                    <dataType>INTEGER</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+            <batchUpdate>true</batchUpdate>
+        </config>
+        <pd:inputBindings>
+            <jdbcUpdateActivityInput>
+                <Record>
+                    <file_name>
+                        <xsl:value-of select="&quot;venky.txt&quot;"/>
+                    </file_name>
+                    <file_size>
+                        <xsl:value-of select="330"/>
+                    </file_size>
+                </Record>
+                <Record>
+                    <file_name>
+                        <xsl:value-of select="&quot;somu.txt&quot;"/>
+                    </file_name>
+                    <file_size>
+                        <xsl:value-of select="348"/>
+                    </file_size>
+                </Record>
+            </jdbcUpdateActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>JDBC Update</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>JDBC Update</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

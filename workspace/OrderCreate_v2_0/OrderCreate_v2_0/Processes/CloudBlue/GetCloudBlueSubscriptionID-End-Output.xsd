@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="/OrderCreate_v2_0/Processes/CloudBlue/GetCloudBlueSubscriptionID-End-Output.xsd" xmlns:BW="java://com.tibco.pe.core.JavaCustomXPATHFunctions" xmlns:ns="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns1="http://www.tibco.com/namespaces/tnt/plugins/json" xmlns:ns12="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:ns2="www.tibco.com/plugin/Sleep" xmlns:ns3="http://schemas.tibco.com/bw/plugins/xml/5.0/RESTJSONExceptions" xmlns:ns4="http://schemas.tibco.com/bw/pe/plugin/5.0/exceptions" xmlns:ns5="http://www.tibco.com/pe/EngineTypes" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:pfx="http://www.tibco.com/schemas/OrderCreate_v2_0/Resources/CloudBlue/Schema.xsd2" xmlns:pfx2="http://www.tibco.com/schemas/EAILoggingFramework_1_0/Resources/Schema/LoggingFrameworkCDM.xsd" xmlns:pfx3="http://www.tibco.com/schemas/SplunkEAILoggingLibrary_1_0/LoggingFrameworkResources/LoggingFrameworkSchema/ErrorHandler_V3.0.xsd" xmlns:pfx4="http://www.tibco.com/schemas/SplunkEAILoggingLibrary_v1_0/Resources/Common/JobSharedVariables/Schema.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="/OrderCreate_v2_0/Processes/CloudBlue/GetCloudBlueSubscriptionID-End-Output.xsd">
+    <xsd:element name="root">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element minOccurs="0" name="subscriptionId" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

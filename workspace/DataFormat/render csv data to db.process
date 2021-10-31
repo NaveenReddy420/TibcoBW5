@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/namespaces/tnt/plugins/file/v2" xmlns:ns1="http://www.tibco.com/namespaces/tnt/plugins/file">
+    <pd:name>DataFormat/render csv data to db.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startX>164</pd:startX>
+    <pd:startY>85</pd:startY>
+    <pd:returnBindings/>
+    <pd:endName>End</pd:endName>
+    <pd:endX>767</pd:endX>
+    <pd:endY>79</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1607406143157</pd:targetNamespace>
+    <pd:group name="Group">
+        <pd:type>com.tibco.pe.core.LoopGroup</pd:type>
+        <pd:resourceType>ae.process.group</pd:resourceType>
+        <pd:x>547</pd:x>
+        <pd:y>1</pd:y>
+        <pd:width>147</pd:width>
+        <pd:height>140</pd:height>
+        <pd:collapsedWidth>57</pd:collapsedWidth>
+        <pd:collapsedHeight>70</pd:collapsedHeight>
+        <pd:groupVariables/>
+        <pd:joinToggle>inherit</pd:joinToggle>
+        <config>
+            <pd:groupType>inputLoop</pd:groupType>
+            <pd:serializable>false</pd:serializable>
+            <pd:over>$Render-Data/Text</pd:over>
+            <pd:iterationElementSlot>EmployeeData</pd:iterationElementSlot>
+            <pd:indexSlot>i</pd:indexSlot>
+            <pd:activityOutputName/>
+            <pd:accumulateOutput>false</pd:accumulateOutput>
+        </config>
+        <pd:inputBindings/>
+        <pd:expanded>true</pd:expanded>
+        <pd:transition>
+            <pd:from>start</pd:from>
+            <pd:to>JDBC Update</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>JDBC Update</pd:from>
+            <pd:to>end</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:activity name="JDBC Update">
+            <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
+            <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
+            <pd:x>619</pd:x>
+            <pd:y>80</pd:y>
+            <config>
+                <timeout>10</timeout>
+                <commit>false</commit>
+                <emptyStrAsNil>false</emptyStrAsNil>
+            </config>
+            <pd:inputBindings>
+                <jdbcUpdateActivityInput/>
+            </pd:inputBindings>
+        </pd:activity>
+    </pd:group>
+    <pd:activity name="Parse Data">
+        <pd:type>com.tibco.plugin.parse.ParseActivity</pd:type>
+        <pd:resourceType>ae.activities.ParseActivity</pd:resourceType>
+        <pd:x>360</pd:x>
+        <pd:y>81</pd:y>
+        <config>
+            <InputType>String</InputType>
+            <Encoding>ASCII</Encoding>
+            <SpecifyStartRecord>true</SpecifyStartRecord>
+            <StrictValidation>true</StrictValidation>
+            <ParseSharedConfig>/DataFormat/render csv.sharedparse</ParseSharedConfig>
+        </config>
+        <pd:inputBindings>
+            <Input>
+                <text>
+                    <xsl:value-of select="$Read-File/ns1:ReadActivityOutputTextClass/fileContent/textContent"/>
+                </text>
+                <startRecord>
+                    <xsl:value-of select="3"/>
+                </startRecord>
+                <noOfRecords>
+                    <xsl:value-of select="-1"/>
+                </noOfRecords>
+            </Input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Read File">
+        <pd:type>com.tibco.plugin.file.FileReadActivity</pd:type>
+        <pd:resourceType>ae.activities.FileReadActivity</pd:resourceType>
+        <pd:x>263</pd:x>
+        <pd:y>82</pd:y>
+        <config>
+            <encoding>text</encoding>
+        </config>
+        <pd:inputBindings>
+            <ns:ReadActivityInputClass>
+                <fileName>
+                    <xsl:value-of select="&quot;D:\Employee3.csv&quot;"/>
+                </fileName>
+            </ns:ReadActivityInputClass>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Render Data">
+        <pd:type>com.tibco.plugin.parse.RenderActivity</pd:type>
+        <pd:resourceType>ae.activities.RenderActivity</pd:resourceType>
+        <pd:x>468</pd:x>
+        <pd:y>80</pd:y>
+        <config>
+            <ParseSharedConfig>/DataFormat/render csv.sharedparse</ParseSharedConfig>
+        </config>
+        <pd:inputBindings>
+            <Rows>
+                <Employee>
+                    <EmployeeCode>
+                        <xsl:value-of select="$Parse-Data/Output/Rows/Employee[$i]/EmployeeCode"/>
+                    </EmployeeCode>
+                    <EmployeeName>
+                        <xsl:value-of select="$Parse-Data/Output/Rows/Employee[$i]/EmployeeName"/>
+                    </EmployeeName>
+                    <EmployeeDesignation>
+                        <xsl:value-of select="$Parse-Data/Output/Rows/Employee[$i]/EmployeeDesignation"/>
+                    </EmployeeDesignation>
+                    <EmployeeAge>
+                        <xsl:value-of select="$Parse-Data/Output/Rows/Employee[$i]/EmployeeAge"/>
+                    </EmployeeAge>
+                </Employee>
+            </Rows>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Read File</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Render Data</pd:from>
+        <pd:to>Group</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Group</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Read File</pd:from>
+        <pd:to>Parse Data</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Parse Data</pd:from>
+        <pd:to>Render Data</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

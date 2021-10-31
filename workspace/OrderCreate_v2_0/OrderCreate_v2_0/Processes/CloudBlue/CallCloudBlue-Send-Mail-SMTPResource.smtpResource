@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:smtp="http://xsd.tns.tibco.com/bw/models/sharedresource/smtp" xmi:id="_N7xvEGrQEeurlrtlMW-pzw" name="Processes.CloudBlue.CallCloudBlue-Send-Mail-SMTPResource" type="smtp:SmtpConfiguration">
+  <jndi:configuration xsi:type="smtp:SmtpConfiguration" xmi:id="_N7y9MGrQEeurlrtlMW-pzw">
+    <tcpDetails xmi:id="_N7y9MWrQEeurlrtlMW-pzw" port="25">
+      <substitutionBindings xmi:id="_N70yYGrQEeurlrtlMW-pzw" template="host" propName="CloudBlue/Email/EmailServer"/>
+    </tcpDetails>
+    <userCredentials xmi:id="_N7y9MmrQEeurlrtlMW-pzw"/>
+  </jndi:configuration>
+</jndi:namedResource>

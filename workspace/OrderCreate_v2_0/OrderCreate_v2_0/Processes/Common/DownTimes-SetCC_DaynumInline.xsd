@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:BW="java://com.tibco.pe.core.JavaCustomXPATHFunctions" xmlns:ns="http://www.tibco.com/pe/EngineTypes" xmlns:ns1="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:ns2="http://www.tibco.com/schemas/EAILoggingFramework_1_0/Resources/Schema/LoggingFrameworkCDM.xsd" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:pfx="http://www.tibco.com/pe/DeployedVarsType" xmlns:pfx2="http://www.tibco.com/xmlns/ae2xsd/2002/05/Ingram/ErrorHandlerEvent_v2_1" xmlns:pfx3="http://www.tibco.com/schemas/SplunkEAILoggingLibrary_1_0/LoggingFrameworkResources/LoggingFrameworkSchema/ErrorHandler_V3.0.xsd" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:tns="/Processes/Common/DownTimes.process/SetCC_Daynum" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="/Processes/Common/DownTimes.process/SetCC_Daynum">
+    <xsd:element name="root">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Country_day" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="CurrentDateTime" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

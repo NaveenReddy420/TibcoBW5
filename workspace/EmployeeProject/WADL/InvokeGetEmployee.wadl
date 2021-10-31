@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ns0:application xmlns:ns0="http://wadl.dev.java.net/2009/02" name="Application">
+    <ns0:resources name="GetRestService" base="http://localhost:8082">
+        <ns0:resource id="Resource0">
+            <ns0:method id="Method0" name="GET">
+                <ns0:doc/>
+            </ns0:method>
+        </ns0:resource>
+    </ns0:resources>
+</ns0:application>

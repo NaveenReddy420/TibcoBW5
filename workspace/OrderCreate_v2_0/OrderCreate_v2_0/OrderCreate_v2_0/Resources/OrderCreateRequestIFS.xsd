@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ocreq="http://www.ingrammicro.com/product/OrderCreate_v2_0_Service/Resources/OrderCreateRequestIFS.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.ingrammicro.com/product/OrderCreate_v2_0_Service/Resources/OrderCreateRequestIFS.xsd">
+	<annotation>
+		<documentation>
+
+            This top level element represents a
+    </documentation>
+	</annotation>
+	<import namespace="http://www.w3.org/XML/1998/namespace"/>
+	<element name="ServiceRequest">
+		<complexType>
+			<sequence>
+				<element name="ordercreaterequest" type="ocreq:OrderCreateRequestType"/>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="OrderCreateRequestType">
+		<sequence>
+			<element minOccurs="0" name="customernumber" type="xsd:string"/>
+			<element minOccurs="0" name="customerponumber" type="xsd:string"/>
+			<element minOccurs="0" name="isocountrycode" type="xsd:string"/>
+			<element minOccurs="0" name="ordertype" type="xsd:string"/>
+			<element minOccurs="0" name="enduserordernumber" type="xsd:string"/>
+			<element minOccurs="0" name="billtosuffix">
+				<simpleType>
+					<restriction base="xsd:string">
+						<length value="3"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="shiptosuffix">
+				<simpleType>
+					<restriction base="xsd:string">
+						<length value="3"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="shiptoaddress" type="ocreq:AddressType"/>
+			<element minOccurs="0" name="carriercode" type="xsd:string"/>
+			<element minOccurs="0" name="thirdpartyfrieghtaccountnumber" type="xsd:string"/>
+			<element minOccurs="0" name="specialbidnumber" type="xsd:string"/>
+			<element minOccurs="0" name="terms" type="xsd:string"/>
+			<element minOccurs="0" name="promisedate" type="xsd:date"/>
+			<element minOccurs="0" name="isdirectshiporder" type="xsd:boolean"/>
+			<element minOccurs="0" name="isorderdetailsrequired" type="xsd:boolean"/>
+			<element default="FAILONERROR" minOccurs="0" name="errorhandling">
+				<simpleType>
+					<restriction base="xsd:string">
+						<enumeration value="FAILONERROR"/>
+						<enumeration value="CONTINUEONERROR"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element maxOccurs="unbounded" minOccurs="0" name="lines">
+				<complexType>
+					<sequence>
+						<element minOccurs="0" name="linetype" type="xsd:string"/>
+						<element minOccurs="0" name="linenumber" type="xsd:string"/>
+						<element minOccurs="0" name="globalskuid" type="xsd:string"/>
+						<element minOccurs="0" name="quantity" type="xsd:string"/>
+						<element minOccurs="0" name="ingrampartnumber" type="xsd:string"/>
+						<element minOccurs="0" name="manufacturerpartnumber" type="xsd:string"/>
+						<element minOccurs="0" name="vendornumber" type="xsd:string"/>
+						<element minOccurs="0" name="sellingprice" type="xsd:decimal"/>
+						<element minOccurs="0" name="warehouseid" type="xsd:string"/>
+						<element minOccurs="0" name="unitprice" type="xsd:decimal"/>
+						<element minOccurs="0" name="enduserprice" type="xsd:decimal"/>
+						<element minOccurs="0" name="enduserponumber" type="xsd:string"/>
+						<element minOccurs="0" name="singlesourceinfo" type="ocreq:singleSourceInfoType"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element minOccurs="0" name="enduser" type="ocreq:EndUserType"/>
+		</sequence>
+	</complexType>
+	<complexType name="AddressType">
+		<sequence>
+			<element minOccurs="0" name="attention" type="xsd:string"/>
+			<element minOccurs="0" name="addressline1" type="xsd:string"/>
+			<element minOccurs="0" name="addressline2" type="xsd:string"/>
+			<element minOccurs="0" name="addressline3" type="xsd:string"/>
+			<element minOccurs="0" name="city" type="xsd:string"/>
+			<element minOccurs="0" name="state" type="xsd:string"/>
+			<element minOccurs="0" name="postalcode" type="xsd:string"/>
+			<element minOccurs="0" name="countrycode" type="xsd:string"/>
+			<element minOccurs="0" name="ignoreaddressvalidation">
+				<simpleType>
+					<restriction base="xsd:string">
+						<enumeration value="Y"/>
+						<enumeration value="N"/>
+						<length value="1"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="EndUserType">
+		<sequence>
+			<element minOccurs="0" name="id" type="xsd:string"/>
+			<element minOccurs="0" name="title" type="xsd:string"/>
+			<element minOccurs="0" name="name1" type="xsd:string"/>
+			<element minOccurs="0" name="name2" type="xsd:string"/>
+			<element minOccurs="0" name="name3" type="xsd:string"/>
+			<element minOccurs="0" name="name4" type="xsd:string"/>
+			<element minOccurs="0" name="addressline1" type="xsd:string"/>
+			<element minOccurs="0" name="addressline2" type="xsd:string"/>
+			<element minOccurs="0" name="addressline3" type="xsd:string"/>
+			<element minOccurs="0" name="addressline4" type="xsd:string"/>
+			<element minOccurs="0" name="city" type="xsd:string"/>
+			<element minOccurs="0" name="state" type="xsd:string"/>
+			<element minOccurs="0" name="postalcode" type="xsd:string"/>
+			<element minOccurs="0" name="countrycode" type="xsd:string"/>
+			<element minOccurs="0" name="phonenumber" type="xsd:string"/>
+			<element minOccurs="0" name="extensionnumber" type="xsd:string"/>
+			<element minOccurs="0" name="faxnumber" type="xsd:string"/>
+			<element minOccurs="0" name="email" type="xsd:string"/>
+		</sequence>
+	</complexType>
+	<complexType name="singleSourceInfoType">
+		<sequence>
+			<element minOccurs="0" name="enduserid" type="xsd:string"/>
+			<element minOccurs="0" name="addresssequencenumber" type="xsd:integer"/>
+			<element minOccurs="0" name="ctacid" type="xsd:integer"/>
+			<element minOccurs="0" name="eudataavailableswitch" type="xsd:string"/>
+			<element minOccurs="0" name="authbidnumber" type="xsd:string"/>
+		</sequence>
+	</complexType>
+</schema>

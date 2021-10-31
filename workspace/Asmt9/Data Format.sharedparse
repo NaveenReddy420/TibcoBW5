@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BWSharedResource xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <name>Data Format</name>
+    <resourceType>ae.shared.ParseSharedResource</resourceType>
+    <config xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <FormatType>Delimiter separated</FormatType>
+        <ColumnSeparator>,</ColumnSeparator>
+        <ColSeparatorRule>Treat all characters as entered as a single column separator string</ColSeparatorRule>
+        <LineSeparator>
+</LineSeparator>
+        <FillCharacter>Space</FillCharacter>
+        <DataFormat>
+            <xsd:element name="root">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="StudentDetails">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="rollno" type="xsd:string"/>
+                                    <xsd:element name="studentname" type="xsd:string"/>
+                                    <xsd:element name="fathername" type="xsd:string"/>
+                                    <xsd:element name="branch" type="xsd:string"/>
+                                    <xsd:element name="m1" type="xsd:string"/>
+                                    <xsd:element name="m2" type="xsd:string"/>
+                                    <xsd:element name="m3" type="xsd:string"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </DataFormat>
+    </config>
+</BWSharedResource>

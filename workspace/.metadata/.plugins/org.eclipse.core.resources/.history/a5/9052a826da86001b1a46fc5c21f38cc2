@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_6C2WQIMMEeuIOY10ASOSpw" targetNamespace="http://tns.tibco.com/bw/composite/tests3.module" name="tests3.module" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:property xmi:id="_8K0IUIMMEeuIOY10ASOSpw" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_8LJfgIMMEeuIOY10ASOSpw" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_8LUeoIMMEeuIOY10ASOSpw" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_8Le2sIMMEeuIOY10ASOSpw" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_8LmygIMMEeuIOY10ASOSpw" name="BW.DOMAIN.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_8LuHQIMMEeuIOY10ASOSpw" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_8L008IMMEeuIOY10ASOSpw" name="BW.APPSPACE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_8L67kIMMEeuIOY10ASOSpw" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_8MCQUIMMEeuIOY10ASOSpw" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_V7CVYIMeEeuIOY10ASOSpw" name="Property" type="XMLSchema:string" scaext:simpleValue="" publicAccess="true" scalable="true"/>
+  <sca:component xmi:id="_7Rhv4IMMEeuIOY10ASOSpw" name="ComponentProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_7RkMIIMMEeuIOY10ASOSpw" processName="tests3.module.getFileFromS3"/>
+  </sca:component>
+  <sca:component xmi:id="_Zo7WsIV_EeuECYvCWW0yVQ" name="Component1Process" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_Zo7WsYV_EeuECYvCWW0yVQ" processName="tests3.module.putFileToS3"/>
+  </sca:component>
+  <sca:component xmi:id="_DUXsQIY_EeutnJ3zZyVGtw" name="ComponentCopyOfputFileToS3222" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_DUXsQYY_EeutnJ3zZyVGtw" processName="tests3.module.CopyOfputFileToS3222"/>
+  </sca:component>
+</sca:composite>

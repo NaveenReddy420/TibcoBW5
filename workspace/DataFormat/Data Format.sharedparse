@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BWSharedResource xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <name>Data Format</name>
+    <resourceType>ae.shared.ParseSharedResource</resourceType>
+    <config xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <FormatType>Fixed format</FormatType>
+        <ColumnSeparator>,;</ColumnSeparator>
+        <ColSeparatorRule>Treat all characters as entered as a single column separator string</ColSeparatorRule>
+        <LineSeparator>
+</LineSeparator>
+        <FillCharacter>Dash</FillCharacter>
+        <OffsetString>firstName(0,8)
+lastName(9,16)</OffsetString>
+        <LineLength>16</LineLength>
+        <DataFormat>
+            <xsd:element name="root">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="firstName" type="xsd:string"/>
+                        <xsd:element name="lastName" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </DataFormat>
+    </config>
+</BWSharedResource>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ae="http://www.tibco.com/xmlns/ae2xsd/2002/05" xmlns:ns3="http://www.tibco.com/xmlns/ae2xsd/2002/05/Ingram/ErrorHandlerEvent" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://www.tibco.com/xmlns/ae2xsd/2002/05/Ingram/ErrorHandlerEvent">
+    <import namespace="http://www.tibco.com/xmlns/ae2xsd/2002/05" schemaLocation="../ae2xsd.xsd"/>
+    <complexType ae:directory="/AESchemas/Ingram/ErrorHandlerEvent.aeschema#class.ErrorHandlerEvent" ae:type="class" ae:typename="/tibco/public/class/Ingram/ErrorHandlerEvent/ErrorHandlerEvent" name="ErrorHandlerEvent">
+        <sequence>
+            <element ae:key="true" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="sourceProcessName" nillable="true" type="ae:string"/>
+            <element ae:key="true" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="sourceActivityName" nillable="true" type="ae:string"/>
+            <element ae:key="true" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="errorCode" nillable="true" type="ae:string"/>
+            <element ae:key="true" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="errorText" nillable="true" type="ae:string"/>
+            <element ae:key="true" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="severityLevel" nillable="true" type="ae:i1"/>
+            <element ae:key="true" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="emailErrorLevel" nillable="true" type="ae:i1"/>
+            <element ae:key="false" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="emailErrorSubject" nillable="true" type="ae:string"/>
+            <element ae:key="false" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="emailErrorAddress" nillable="true" type="ae:string"/>
+            <element ae:default="false()" ae:key="false" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="rethrowErrorFlag" nillable="true" type="ae:boolean"/>
+        </sequence>
+    </complexType>
+    <element name="ErrorHandlerEvent" type="ns3:ErrorHandlerEvent"/>
+</schema>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <pd:name>Asmt11/Fibonacci.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType>
+        <xsd:element name="root">
+            <xsd:complexType>
+                <xsd:sequence>
+                    <xsd:element name="EnterNumber" type="xsd:int"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:element>
+    </pd:startType>
+    <pd:startX>150</pd:startX>
+    <pd:startY>64</pd:startY>
+    <pd:returnBindings/>
+    <pd:endName>End</pd:endName>
+    <pd:endX>450</pd:endX>
+    <pd:endY>64</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1609999604363</pd:targetNamespace>
+    <pd:activity name="Java Code">
+        <pd:type>com.tibco.plugin.java.JavaActivity</pd:type>
+        <pd:resourceType>ae.javapalette.javaActivity</pd:resourceType>
+        <pd:x>303</pd:x>
+        <pd:y>65</pd:y>
+        <config>
+            <fileName>FibonacciJavaCode</fileName>
+            <packageName>Asmt11.Fibonacci</packageName>
+            <fullsource>package Asmt11.Fibonacci;
+import java.util.*;
+import java.io.*;
+public class FibonacciJavaCode{
+/****** START SET/GET METHOD, DO NOT MODIFY *****/
+	protected int EnterNumber = 0;
+	protected int[] fibseries = null;
+	public int getEnterNumber() {
+		return EnterNumber;
+	}
+	public void setEnterNumber(int val) {
+		EnterNumber = val;
+	}
+	public int[] getfibseries() {
+		return fibseries;
+	}
+	public void setfibseries(int[] val) {
+		fibseries = val;
+	}
+/****** END SET/GET METHOD, DO NOT MODIFY *****/
+	public FibonacciJavaCode() {
+	}
+	public void invoke() throws Exception {
+/* Available Variables: DO NOT MODIFY
+	In  : int EnterNumber
+	Out : int[] fibseries
+* Available Variables: DO NOT MODIFY *****/
+
+int n1=0,n2=1,n3,i,count=EnterNumber;  
+		 //System.out.print(n1+" "+n2);
+		 int[] array = new int[count];
+		 array[0]=n1;
+		 array[1]=n2;
+		 for(i=2;i&lt;count;++i)    
+		 {    
+		  n3=n1+n2;    
+		  n1=n2;    
+		  n2=n3;
+		  array[i]=n3;
+		  
+		 }
+		 setfibseries(array);}
+}
+</fullsource>
+            <inputData>
+                <row>
+                    <fieldName>EnterNumber</fieldName>
+                    <fieldType>int</fieldType>
+                    <fieldRequired>optional</fieldRequired>
+                </row>
+            </inputData>
+            <outputData>
+                <row>
+                    <fieldName>fibseries</fieldName>
+                    <fieldType>int</fieldType>
+                    <fieldRequired>repeating</fieldRequired>
+                </row>
+            </outputData>
+            <byteCode>
+                <class>
+                    <name>FibonacciJavaCode</name>
+                    <byteCode>yv66vgAAADQAJgkABQAfCQAFACAKAAYAIQoABQAiBwAjBwAkAQALRW50ZXJOdW1iZXIBAAFJAQAJZmlic2VyaWVzAQACW0kBAA5nZXRFbnRlck51bWJlcgEAAygpSQEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBAA5zZXRFbnRlck51bWJlcgEABChJKVYBAAxnZXRmaWJzZXJpZXMBAAQoKVtJAQAMc2V0Zmlic2VyaWVzAQAFKFtJKVYBAAY8aW5pdD4BAAMoKVYBAAZpbnZva2UBAA1TdGFja01hcFRhYmxlBwAjBwAKAQAKRXhjZXB0aW9ucwcAJQEAClNvdXJjZUZpbGUBABZGaWJvbmFjY2lKYXZhQ29kZS5qYXZhDAAHAAgMAAkACgwAFQAWDAATABQBACJBc210MTEvRmlib25hY2NpL0ZpYm9uYWNjaUphdmFDb2RlAQAQamF2YS9sYW5nL09iamVjdAEAE2phdmEvbGFuZy9FeGNlcHRpb24AIQAFAAYAAAACAAQABwAIAAAABAAJAAoAAAAGAAEACwAMAAEADQAAAB0AAQABAAAABSq0AAGsAAAAAQAOAAAABgABAAAACQABAA8AEAABAA0AAAAiAAIAAgAAAAYqG7UAAbEAAAABAA4AAAAKAAIAAAAMAAUADQABABEAEgABAA0AAAAdAAEAAQAAAAUqtAACsAAAAAEADgAAAAYAAQAAAA8AAQATABQAAQANAAAAIgACAAIAAAAGKiu1AAKxAAAAAQAOAAAACgACAAAAEgAFABMAAQAVABYAAQANAAAAMwACAAEAAAAPKrcAAyoDtQABKgG1AAKxAAAAAQAOAAAAEgAEAAAAFQAEAAYACQAHAA4AFgABABcAFgACAA0AAACaAAMABwAAAD8DPAQ9KrQAATYFFQW8CjoGGQYDG08ZBgQcTwU2BBUEFQWiABcbHGA+HDwdPRkGFQQdT4QEAaf/6CoZBrYABLEAAAACAA4AAAAuAAsAAAAdAAoAHwAQACAAFQAhABoAIgAkACQAKAAlACoAJgAsACcAMgAiADgAKgAYAAAAFQAC/wAdAAcHABkBAQABAQcAGgAAGgAbAAAABAABABwAAQAdAAAAAgAe</byteCode>
+                </class>
+            </byteCode>
+        </config>
+        <pd:inputBindings>
+            <javaCodeActivityInput>
+                <EnterNumber>
+                    <xsl:value-of select="$Start/root/EnterNumber"/>
+                </EnterNumber>
+            </javaCodeActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Java Code</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Java Code</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

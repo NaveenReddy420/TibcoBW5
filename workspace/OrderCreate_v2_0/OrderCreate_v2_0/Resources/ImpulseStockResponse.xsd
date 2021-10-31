@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	 xmlns:pares="http://www.ingrammicro.com/product/PriceAndStock _v2_0_Service/Resources/ImpulseStockResponse.xsd"
+	 targetNamespace="http://www.ingrammicro.com/product/PriceAndStock _v2_0_Service/Resources/ImpulseStockResponse.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<annotation>
+		<documentation>
+            This top level element represents a
+    </documentation>
+	</annotation>
+	<element name="StockResponse">
+		<complexType>
+			<sequence>
+				<element name="manufacturerPartNumber" type="xsd:string" minOccurs="0"/>
+				<element name="warehouseDetails" type="pares:warehouseListType" minOccurs="0" maxOccurs="unbounded"/>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="warehouseListType">
+		<sequence>
+			<element name="AvailableQuantity" type="xsd:decimal"/>
+			<element name="QuantityOnOrder" type="xsd:decimal" minOccurs="0"/>
+			<element name="WarehouseId" type="xsd:string" minOccurs="0"/>
+			<element name="CountryLocale" type="xsd:string" minOccurs="0"/>
+			<element name="WarehouseDescription" type="xsd:string" minOccurs="0"/>
+			<element name="onHoldQuantity" type="xsd:decimal" minOccurs="0"/>
+			<element name="backOrderQuantity" type="xsd:decimal" minOccurs="0"/>
+		</sequence>
+	</complexType>
+</schema>

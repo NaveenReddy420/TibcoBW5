@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+	<annotation>
+		<documentation>
+            This top level element represents a
+    </documentation>
+	</annotation>
+	<import namespace="http://www.w3.org/XML/1998/namespace"/>
+	<element name="ServiceResponse">
+		<complexType>
+			<sequence>
+				<element name="ordercreateresponse">
+					<complexType>
+						<sequence>
+							<element minOccurs="0" name="status" type="xsd:string"/>
+							<element minOccurs="0" name="returnmessage" type="xsd:string"/>
+							<element minOccurs="0" name="numberoflineswithsuccess" type="xsd:string"/>
+							<element minOccurs="0" name="numberoflineswitherror" type="xsd:string"/>
+							<element minOccurs="0" name="numberoflineswithwarning" type="xsd:string"/>
+							<element minOccurs="0" name="ordernumber" type="xsd:string"/>
+							<element minOccurs="0" name="ordertype" type="xsd:string"/>
+							<element minOccurs="0" name="ordertimestamp" type="xsd:string"/>
+							<element minOccurs="0" name="invoicingsystemorderid" type="xsd:string"/>
+							<element minOccurs="0" name="currencycode" type="xsd:string"/>
+							<element minOccurs="0" name="taxamount" type="xsd:string"/>
+							<element minOccurs="0" name="freightamount" type="xsd:string"/>
+							<element maxOccurs="unbounded" minOccurs="0" name="orderdistribution">
+								<complexType>
+									<sequence>
+										<element minOccurs="0" name="resultcode" type="xsd:string"/>
+										<element minOccurs="0" name="shipfrombranchnumber" type="xsd:string"/>
+										<element minOccurs="0" name="ordersuffix" type="xsd:string"/>
+										<element minOccurs="0" name="carriercode" type="xsd:string"/>
+									</sequence>
+								</complexType>
+							</element>
+							<element maxOccurs="unbounded" minOccurs="0" name="lines">
+								<complexType>
+									<sequence>
+										<element minOccurs="0" name="linetype" type="xsd:string"/>
+										<element minOccurs="0" name="globallinenumber" type="xsd:string"/>
+										<element minOccurs="0" name="globalskuid" type="xsd:string"/>
+										<element minOccurs="0" name="partnumber" type="xsd:string"/>
+										<element minOccurs="0" name="requestedquantity" type="xsd:string"/>
+										<element minOccurs="0" name="confirmedquantity" type="xsd:string"/>
+										<element minOccurs="0" name="unitproductprice" type="xsd:string"/>
+										<element minOccurs="0" name="netamount" type="xsd:string"/>
+										<element minOccurs="0" name="taxamount" type="xsd:string"/>
+										<element minOccurs="0" name="freightamount" type="xsd:string"/>
+									</sequence>
+								</complexType>
+							</element>
+							<element maxOccurs="unbounded" minOccurs="0" name="errorlines">
+								<complexType>
+									<sequence>
+										<element minOccurs="0" name="lineerrormessage" type="xsd:string"/>
+										<element minOccurs="0" name="linetype" type="xsd:string"/>
+										<element minOccurs="0" name="globallinenumber" type="xsd:string"/>
+										<element minOccurs="0" name="partnumber" type="xsd:string"/>
+									</sequence>
+								</complexType>
+							</element>
+						</sequence>
+					</complexType>
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

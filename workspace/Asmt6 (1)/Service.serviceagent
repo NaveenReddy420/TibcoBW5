@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serviceResource xmlns:wsdl="http://xmlns.example.com/1609237967711">
+    <ns0:import xmlns:ns0="http://schemas.xmlsoap.org/wsdl/" namespace="http://xmlns.example.com/1609237967711" location="/Asmt6 (1)/WSDL.wsdl"/>
+    <config>
+        <wsdl namespace="http://xmlns.example.com/1609240293572" embedWsdlComponents="true" embedSchemaComponents="true" embedJndiProperties="false"/>
+        <class>com.tibco.bw.service.serviceAgent.ServiceServiceAgent</class>
+        <implType>bw</implType>
+        <groups>
+            <row isDefault="true" groupName="Default"/>
+        </groups>
+        <serviceChange>Tue Jan 12 18:14:19 IST 2021</serviceChange>
+        <name>Service</name>
+        <resourceType>service.definition</resourceType>
+        <isAMXCompliant>false</isAMXCompliant>
+        <interfaceImpl>
+            <tab>
+                <tabName>PortType</tabName>
+                <tabType>bw</tabType>
+                <config>
+                    <wsdlDetail location="/Asmt6 (1)/WSDL.wsdl" portType="PortType" ns="http://xmlns.example.com/1609237967711"/>
+                    <detail>
+                        <tab>
+                            <tabName>service.definition.impl.tab.label</tabName>
+                            <tabType>impl</tabType>
+                            <config>
+                                <operations>
+                                    <row opName="ReadOperation" opImpl="/Asmt6 (1)/ReadOperation.process"/>
+                                    <row opName="DeleteOperation" opImpl="/Asmt6 (1)/DeleteOperation.process"/>
+                                    <row opName="ModifyOperation" opImpl="/Asmt6 (1)/ModifyOperation.process"/>
+                                </operations>
+                            </config>
+                        </tab>
+                        <tab>
+                            <tabName>service.definition.ep.tab.label</tabName>
+                            <tabType>ep</tabType>
+                            <config>
+                                <epBindings>
+                                    <row epName="PortTypeEndpoint1" epType="soap">
+                                        <config>
+                                            <epDetail>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.transport.tab.label</tabName>
+                                                    <tabType>transport</tabType>
+                                                    <config>
+                                                        <sharedChannel>/SharedResources/Connections/HTTP Connection.sharedhttp</sharedChannel>
+                                                        <transport>
+                                                            <config>
+                                                                <useBasicAuthentication>false</useBasicAuthentication>
+                                                                <httpURI>/Asmt6%20(1)/Service.serviceagent/PortTypeEndpoint1</httpURI>
+                                                            </config>
+                                                        </transport>
+                                                    </config>
+                                                </tab>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.details.tab.label</tabName>
+                                                    <tabType>details</tabType>
+                                                    <config>
+                                                        <operationStyle>document</operationStyle>
+                                                        <soapVersion>SOAP 1.1</soapVersion>
+                                                        <soap>
+                                                            <operation name="ReadOperation">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/Asmt6%2520(1)/Service.serviceagent/PortTypeEndpoint1/ReadOperation</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                        <inputNamespace/>
+                                                                        <outputNamespace/>
+                                                                        <faultNamespace/>
+                                                                        <portAddressPrefix/>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                            <operation name="DeleteOperation">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/Asmt6%2520(1)/Service.serviceagent/PortTypeEndpoint1/DeleteOperation</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                            <operation name="ModifyOperation">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/Asmt6%2520(1)/Service.serviceagent/PortTypeEndpoint1/ModifyOperation</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                        </soap>
+                                                    </config>
+                                                </tab>
+                                            </epDetail>
+                                        </config>
+                                    </row>
+                                </epBindings>
+                            </config>
+                        </tab>
+                    </detail>
+                </config>
+            </tab>
+        </interfaceImpl>
+    </config>
+</serviceResource>

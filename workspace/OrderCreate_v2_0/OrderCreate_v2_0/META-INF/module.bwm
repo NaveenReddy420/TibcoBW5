@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:httpconnector="http://xsd.tns.tibco.com/bw/models/sharedresource/httpconnector" xmlns:jdbc="http://xsd.tns.tibco.com/amf/models/sharedresource/jdbc" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmlns:smtp="http://xsd.tns.tibco.com/bw/models/sharedresource/smtp" xmi:id="_L9UeUGrQEeurlrtlMW-pzw" targetNamespace="http://tns.tibco.com/bw/composite/OrderCreate_v2_0" name="OrderCreate_v2_0" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:property xmi:id="_L9ZW0GrQEeurlrtlMW-pzw" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_L9ZW0WrQEeurlrtlMW-pzw" name="BW.APPNODE.NAME" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_L9ZW0mrQEeurlrtlMW-pzw" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_L9ZW02rQEeurlrtlMW-pzw" name="BW.HOST.NAME" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_L9ZW1GrQEeurlrtlMW-pzw" name="BW.DOMAIN.NAME" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_L9ZW1WrQEeurlrtlMW-pzw" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_L9ZW1mrQEeurlrtlMW-pzw" name="BW.APPSPACE.NAME" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_L9ZW12rQEeurlrtlMW-pzw" name="BW.MODULE.VERSION" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_L9ZW2GrQEeurlrtlMW-pzw" name="BW.MODULE.NAME" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_MntfIGrQEeurlrtlMW-pzw" name="HTTPConnection/Port" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_MsIsIGrQEeurlrtlMW-pzw" name="HTTPConnection/Port0" type="XMLSchema:int" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_MsXVoGrQEeurlrtlMW-pzw" name="JDBCConnection/JDBCDriver" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_MsXVoWrQEeurlrtlMW-pzw" name="JDBCConnection/MaxConnections" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_MsXVomrQEeurlrtlMW-pzw" name="JDBCConnection/Timeout" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_MsXVo2rQEeurlrtlMW-pzw" name="JDBCConnection/Url" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_MsXVpGrQEeurlrtlMW-pzw" name="JDBCConnection/Password" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_MsXVpWrQEeurlrtlMW-pzw" name="JDBCConnection/Username" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_MvydEGrQEeurlrtlMW-pzw" name="JDBCConnection/Timeout0" type="XMLSchema:int" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_MvydEWrQEeurlrtlMW-pzw" name="JDBCConnection/MaxConnections0" type="XMLSchema:int" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_M8UdMGrQEeurlrtlMW-pzw" name="RvDaemon" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_M8UdMWrQEeurlrtlMW-pzw" name="RvNetwork" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_M8UdMmrQEeurlrtlMW-pzw" name="RvService" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_NfxIgGrQEeurlrtlMW-pzw" name="CloudBlue/Email/EmailServer" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_N27EQGrQEeurlrtlMW-pzw" name="CloudBlue/URI_Orders" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_N3o18GrQEeurlrtlMW-pzw" name="CloudBlue/Timeout" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_N4XOsGrQEeurlrtlMW-pzw" name="CloudBlue/Username" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_N41v0GrQEeurlrtlMW-pzw" name="CloudBlue/Password" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_N7HAsGrQEeurlrtlMW-pzw" name="CallCloudBlue-Send-Mail-SMTPResource" type="smtp:SmtpConfiguration" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_N_ACMGrQEeurlrtlMW-pzw" name="CloudBlue/Email/EmailFrom" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_OABV4GrQEeurlrtlMW-pzw" name="CloudBlue/Email/EmailToAddressCisco" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_OA774GrQEeurlrtlMW-pzw" name="CloudBlue/Email/EmailToAddressVMWare" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_Oa8XUGrQEeurlrtlMW-pzw" name="CloudBlue/URI_ResellerID" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_OsSmAGrQEeurlrtlMW-pzw" name="CloudBlue/Wait_Time" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_OwH9IGrQEeurlrtlMW-pzw" name="CloudBlue/URI_SubscriptionID" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_PTAAsGrQEeurlrtlMW-pzw" name="CloudBlue/Token_API_Username" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_PTAAsWrQEeurlrtlMW-pzw" name="CloudBlue/Token_API_Password" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_PdMegGrQEeurlrtlMW-pzw" name="CloudBlue/URI_TokenAPI" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_Rg40kGrQEeurlrtlMW-pzw" name="ConnectionsJDBCConnection" type="jdbc:JdbcDataSource" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_RyStoGrQEeurlrtlMW-pzw" name="ImpluseVariables/SOAPTimeout" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_RyStoWrQEeurlrtlMW-pzw" name="SOAPUrl/EndpointUrlImpulse" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_RyStomrQEeurlrtlMW-pzw" name="BW_GLOBAL_TRUSTED_CA_STORE" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_RySto2rQEeurlrtlMW-pzw" name="SOAPUrl/OrderLTLUpdateImpulse" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_RyTUsGrQEeurlrtlMW-pzw" name="SOAPUrl/OrderDeleteImpulse" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_RyTUsWrQEeurlrtlMW-pzw" name="SOAPUrl/OrderDetailImpulse" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_RyTUsmrQEeurlrtlMW-pzw" name="SOAPUrl/OrderModifyImpulse" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_SeKVIGrQEeurlrtlMW-pzw" name="ImpluseVariables/EntryMethod" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_SesgoGrQEeurlrtlMW-pzw" name="OrderCreate/DuplicateCustomerOrderNumber" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_SfJMkGrQEeurlrtlMW-pzw" name="OrderCreate/AddCommentTerms" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_SfoUwGrQEeurlrtlMW-pzw" name="CurrentEnvironment" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_SgLuYGrQEeurlrtlMW-pzw" name="CustomerNumber/ImpulseCustomerNumber" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_SgvIAGrQEeurlrtlMW-pzw" name="SOAPUrl/ImpulseId" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_ShIJkGrQEeurlrtlMW-pzw" name="SOAPUrl/ImpulsePassword" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_S2vNMGrQEeurlrtlMW-pzw" name="ImpluseVariables/ISTDescCount" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_S3cX0GrQEeurlrtlMW-pzw" name="ImpluseVariables/ISTDescIndex1" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_S9vNEGrQEeurlrtlMW-pzw" name="ImpluseVariables/OperId" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_TTh24GrQEeurlrtlMW-pzw" name="ImpluseVariables/LineLevelMessageEntryMethod" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_TaNtsGrQEeurlrtlMW-pzw" name="ImpluseVariables/Country_USCreditCardSwitch" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_T15kIGrQEeurlrtlMW-pzw" name="SAPVariables/SoapTimeout" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_T16LMGrQEeurlrtlMW-pzw" name="SOAPUrl/SalesOrderEndpointUrl" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_ULdkcGrQEeurlrtlMW-pzw" name="Countries/PR1ImlCountriesList" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_UMYKcGrQEeurlrtlMW-pzw" name="Countries/SAPCountriesList" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_UMvW0GrQEeurlrtlMW-pzw" name="Countries/CommonCountriesList" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_UNKNkGrQEeurlrtlMW-pzw" name="SAPVariables/POType" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_UNiBAGrQEeurlrtlMW-pzw" name="SOAPUrl/CredentialsId" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_UN5NYGrQEeurlrtlMW-pzw" name="SOAPUrl/CredentialPassword" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_UORA0GrQEeurlrtlMW-pzw" name="SAPVariables/PR1SystemName" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_UOo0QGrQEeurlrtlMW-pzw" name="SAPVariables/PL2SystemName" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_UwztMGrQEeurlrtlMW-pzw" name="ConnectionsHTTP-Connection" type="httpconnector:HttpConnectorConfiguration" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_VJWwEGrQEeurlrtlMW-pzw" name="ImpluseVariables/MultiCompanyCode" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_VVXy0GrQEeurlrtlMW-pzw" name="CloudBlue/EnableCBFlow" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:component xmi:id="_ReH0cGrQEeurlrtlMW-pzw" name="ActivatorComponent" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_ReJpoGrQEeurlrtlMW-pzw" processName="Activator"/>
+  </sca:component>
+  <sca:component xmi:id="_V0zg0GrQEeurlrtlMW-pzw" name="RESTJSONHTTPReceiverComponent" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_V0zg0WrQEeurlrtlMW-pzw" processName="RESTJSONHTTPReceiver"/>
+  </sca:component>
+</sca:composite>

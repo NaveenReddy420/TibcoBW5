@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:http="http://xsd.tns.tibco.com/bw/models/sharedresource/httpclient" xmlns:id="http://www.tibco.com/ws/2013/11/identity" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:oasis-200401-wss-wssecurity-utility-1.0.xsd="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" xmlns:sca_ext="http://www.tibco.com/ns/sca/201311" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:sslclient="http://xsd.tns.tibco.com/bw/sharedresource/trinity/models/sslclient" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmi:id="_UIwOsGrQEeurlrtlMW-pzw" name="Processes.OrderCreateSAP-SalesOrderCreateEndpointBinding-HttpClientResource" type="http:HttpClientConfiguration" policySets="F-1079306626-ilE-F-sslClient-PolicySet" identitySets="F-1079306626-ilE-F-sslClient-IdentitySet">
+  <policySet xmi:id="_UIyq8GrQEeurlrtlMW-pzw" appliesTo="namedresource" name="F-1079306626-ilE-F-sslClient-PolicySet" provides="confidentiality">
+    <sca:intentMap xmi:id="_UIyq8WrQEeurlrtlMW-pzw" provides="sca:confidentiality">
+      <sca:qualifier xmi:id="_UIyq8mrQEeurlrtlMW-pzw" name="transport">
+        <wsp:Policy xmi:id="_UIyq82rQEeurlrtlMW-pzw" oasis-200401-wss-wssecurity-utility-1.0.xsd:Id="F-1079306626-ilE-F-sslClient">
+          <sp:TransportBinding xmi:id="_UIyq9GrQEeurlrtlMW-pzw">
+            <wsp:Policy xmi:id="_UIyq9WrQEeurlrtlMW-pzw">
+              <sp:TransportToken xmi:id="_UIyq9mrQEeurlrtlMW-pzw">
+                <wsp:Policy xmi:id="_UIyq92rQEeurlrtlMW-pzw">
+                  <sp:HttpsToken xmi:id="_UIyq-GrQEeurlrtlMW-pzw"/>
+                </wsp:Policy>
+              </sp:TransportToken>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:Policy>
+      </sca:qualifier>
+    </sca:intentMap>
+  </policySet>
+  <identitySet xmi:id="_UIyq-WrQEeurlrtlMW-pzw" appliesTo="NamedResource" name="F-1079306626-ilE-F-sslClient-IdentitySet" provides="confidentiality">
+    <sca_ext:intentMap xmi:id="_UIyq-mrQEeurlrtlMW-pzw" provides="sca_ext:confidentiality">
+      <sca_ext:qualifier xmi:id="_UIyq-2rQEeurlrtlMW-pzw" name="transport">
+        <id:IdentityReference xmi:id="_UIyq_GrQEeurlrtlMW-pzw" URI="F-1079306626-ilE-F-sslClient" type="sslclient:SSLClientConfiguration"/>
+      </sca_ext:qualifier>
+    </sca_ext:intentMap>
+  </identitySet>
+  <jndi:configuration xsi:type="http:HttpClientConfiguration" xmi:id="_UIwOsWrQEeurlrtlMW-pzw">
+    <tcpDetails xmi:id="_UIwOsmrQEeurlrtlMW-pzw" port="20219"/>
+  </jndi:configuration>
+</jndi:namedResource>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="/OrderCreate_v2_0/Processes/ParseValidationErrorStackTrace-End-Output.xsd" xmlns:ns="http://www.tibco.com/pe/EngineTypes" xmlns:ns2="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:pfx="http://www.tibco.com/schemas/SplunkEAILoggingLibrary_1_0/LoggingFrameworkResources/LoggingFrameworkSchema/ErrorHandler_V3.0.xsd" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="/OrderCreate_v2_0/Processes/ParseValidationErrorStackTrace-End-Output.xsd">
+    <xsd:element name="ErrorMsg">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element minOccurs="0" name="CausedBy" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Msg" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="OccuredAt" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

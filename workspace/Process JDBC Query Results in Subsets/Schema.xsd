@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/workspace/Process JDBC Query Results in Subsets/Schema.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/workspace/Process JDBC Query Results in Subsets/Schema.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="FILE_NAME" type="xs:string"/>
+	<xs:element name="FILE_SIZE" type="xs:int"/>
+	<xs:element name="Message">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Record" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Record">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="FILE_NAME"/>
+				<xs:element ref="FILE_SIZE"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

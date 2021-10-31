@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/workspace/Expose a Process as Web Service/Schema.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/workspace/Expose a Process as Web Service/Schema.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="Employee">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="EmployeID"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EmployeID" type="xs:int"/>
+	<xs:element name="Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Employee"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="SalaryDetails"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SalaryDetails">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="PayStatus"/>
+				<xs:element ref="PayDate"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="PayStatus" type="xs:string"/>
+	<xs:element name="PayDate" type="xs:date"/>
+	<xs:element name="Root">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Request"/>
+				<xs:element ref="Response"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

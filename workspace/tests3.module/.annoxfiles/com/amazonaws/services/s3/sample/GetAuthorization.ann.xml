@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ASCII"?>
+<annox:class xmlns:annox="http://annox.dev.java.net" xmlns:jaxb="http://annox.dev.java.net/javax.xml.bind.annotation" name="GetAuthorization">
+  <jaxb:XmlAccessorType value="NONE"/>
+  <jaxb:XmlType name="GetAuthorizationType" propOrder=""/>
+  <jaxb:XmlRootElement name="GetAuthorization" namespace="www.tibco.com/plugin/java/xmlSchema/com.amazonaws.services.s3.sample.GetAuthorization"/>
+</annox:class>

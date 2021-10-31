@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/namespaces/tnt/plugins/json" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <pd:name>EmployeeProject/Process Definition.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startX>153</pd:startX>
+    <pd:startY>74</pd:startY>
+    <pd:returnBindings/>
+    <pd:endName>End</pd:endName>
+    <pd:endX>450</pd:endX>
+    <pd:endY>64</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1608015866521</pd:targetNamespace>
+    <pd:activity name="Invoke REST API">
+        <pd:type>com.tibco.plugin.json.activities.RestActivity</pd:type>
+        <pd:resourceType>ae.activities.RestActivity</pd:resourceType>
+        <pd:x>286</pd:x>
+        <pd:y>71</pd:y>
+        <config>
+            <enableProtocolUI>WADL</enableProtocolUI>
+            <restMethodUI>GET</restMethodUI>
+            <restResponseType>Default</restResponseType>
+            <authChoiceUI>No Authentication</authChoiceUI>
+            <WADLPaths/>
+            <WADLBaseURL>http://localhost:8082</WADLBaseURL>
+            <restMethodIDUI>http://localhost:8082</restMethodIDUI>
+            <WADLReference>/EmployeeProject/WADL/InvokeGetEmployee.wadl</WADLReference>
+            <WADLContent>PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KCjxuczA6YXBwbGljYXRpb24geG1sbnM6bnMwPSJodHRwOi8vd2FkbC5kZXYuamF2YS5uZXQvMjAwOS8wMiIgbmFtZT0iQXBwbGljYXRpb24iPgogICAgPG5zMDpyZXNvdXJjZXMgbmFtZT0iR2V0UmVzdFNlcnZpY2UiIGJhc2U9Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MiI+CiAgICAgICAgPG5zMDpyZXNvdXJjZSBpZD0iUmVzb3VyY2UwIj4KICAgICAgICAgICAgPG5zMDptZXRob2QgaWQ9Ik1ldGhvZDAiIG5hbWU9IkdFVCI+CiAgICAgICAgICAgICAgICA8bnMwOmRvYy8+CiAgICAgICAgICAgIDwvbnMwOm1ldGhvZD4KICAgICAgICA8L25zMDpyZXNvdXJjZT4KICAgIDwvbnMwOnJlc291cmNlcz4KPC9uczA6YXBwbGljYXRpb24+</WADLContent>
+            <restInputReferNode>
+                <xsd:element name="Parameters">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="Query" minOccurs="0">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="param" type="xsd:string" minOccurs="0"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="Header" minOccurs="0">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="param" type="xsd:string" minOccurs="0"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="Body" minOccurs="0">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="Form" minOccurs="0">
+                                            <xsd:complexType>
+                                                <xsd:sequence>
+                                                    <xsd:element name="param" type="xsd:string" minOccurs="0"/>
+                                                </xsd:sequence>
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                        <xsd:element name="Text" minOccurs="0">
+                                            <xsd:complexType>
+                                                <xsd:sequence>
+                                                    <xsd:element name="type" type="xsd:string" minOccurs="0"/>
+                                                    <xsd:element name="content" type="xsd:string" minOccurs="0"/>
+                                                </xsd:sequence>
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                        <xsd:element name="Binary" minOccurs="0">
+                                            <xsd:complexType>
+                                                <xsd:sequence>
+                                                    <xsd:element name="type" type="xsd:string" minOccurs="0"/>
+                                                    <xsd:element name="content" type="xsd:base64Binary" minOccurs="0"/>
+                                                </xsd:sequence>
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                        <xsd:element name="Multipart" minOccurs="0" maxOccurs="unbounded">
+                                            <xsd:complexType>
+                                                <xsd:sequence>
+                                                    <xsd:element name="content-disposition" type="xsd:string" minOccurs="0"/>
+                                                    <xsd:element name="name" type="xsd:string" minOccurs="0"/>
+                                                    <xsd:element name="filename" type="xsd:string" minOccurs="0"/>
+                                                    <xsd:element name="content-type" type="xsd:string" minOccurs="0"/>
+                                                    <xsd:element name="content-id" type="xsd:string" minOccurs="0"/>
+                                                    <xsd:element name="content" minOccurs="0">
+                                                        <xsd:complexType>
+                                                            <xsd:choice>
+                                                                <xsd:element name="binary" type="xsd:base64Binary"/>
+                                                                <xsd:element name="text" type="xsd:string"/>
+                                                                <xsd:element name="fileName" type="xsd:string"/>
+                                                            </xsd:choice>
+                                                        </xsd:complexType>
+                                                    </xsd:element>
+                                                </xsd:sequence>
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </restInputReferNode>
+            <restOutputReferNode>
+                <xsd:element name="header">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="Server" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Location" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Allow" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Date" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Set-Cookie" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Pragma" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Content-Type" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Content-Length" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Content-Encoding" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Content-Range" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Last-Modifie" type="xsd:string" minOccurs="0"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </restOutputReferNode>
+        </config>
+        <pd:inputBindings>
+            <ns:ActivityInput/>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Invoke REST API</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Invoke REST API</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

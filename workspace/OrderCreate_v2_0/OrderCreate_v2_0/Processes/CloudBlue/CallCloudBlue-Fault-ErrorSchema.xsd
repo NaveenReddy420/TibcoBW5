@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:tns="http://xmlns.example.com/1498046250560/Processes/CloudBlue/CallCloudBlue/Generate-Error-Fault-ErrorHandlerInput.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://xmlns.example.com/1498046250560/Processes/CloudBlue/CallCloudBlue/Generate-Error-Fault-ErrorHandlerInput.xsd">
+    <xs:element name="ErrorHandlerInput" type="xs:anyType"/>
+</xs:schema>

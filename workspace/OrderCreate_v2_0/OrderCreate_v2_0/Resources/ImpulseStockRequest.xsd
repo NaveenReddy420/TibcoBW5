@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	 xmlns:pareq="http://www.ingrammicro.com/product/PriceAndStock _v2_0_Service/Resources/ImpulseStockRequest.xsd"
+	 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	 targetNamespace="http://www.ingrammicro.com/product/PriceAndStock _v2_0_Service/Resources/ImpulseStockRequest.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<annotation>
+		<documentation>
+
+            This top level element represents a
+    </documentation>
+	</annotation>
+	<element name="ServiceRequest">
+		<complexType>
+			<sequence>
+				<element name="StockRequest" type="pareq:StockRequestType"/>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="StockRequestType">
+		<sequence>
+			<element name="countryCode" type="xsd:string" minOccurs="0"/>
+			<element name="customerNumber" type="xsd:string" minOccurs="0"/>
+			<element name="vendorPartNumber" type="xsd:string" minOccurs="0"/>
+			<element name="warehouseIDList" type="xsd:string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+</schema>

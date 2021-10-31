@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1609308862890" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/workspace/Asmt6/Schema.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.tibco.com/schemas/workspace/Asmt6 (1)/Schema.xsd">
+    <wsdl:import namespace="http://xmlns.example.com/1609308862890" location="/Asmt6 (1) (2)/WSDL.wsdl"/>
+    <pd:name>Asmt6 (1) (2)/Read.process</pd:name>
+    <pd:startName>SOAPEventSource</pd:startName>
+    <pd:startX>0</pd:startX>
+    <pd:startY>0</pd:startY>
+    <pd:returnBindings/>
+    <pd:starter name="SOAPEventSource">
+        <pd:type>com.tibco.plugin.soap.SOAPEventSource</pd:type>
+        <pd:resourceType>ae.activities.SOAPEventSourceUI</pd:resourceType>
+        <pd:x>173</pd:x>
+        <pd:y>50</pd:y>
+        <config>
+            <service>pfx:PortType</service>
+            <wsdlNamespaceRoot>http://xmlns.example.com/1609308862890/ReadOperationImpl</wsdlNamespaceRoot>
+            <operation>ReadOperation</operation>
+            <portAddressPrefix/>
+            <operationStyle>document</operationStyle>
+            <soapUse>literal</soapUse>
+            <embedWsdlComponents>true</embedWsdlComponents>
+            <embedSchemaComponents>true</embedSchemaComponents>
+            <soapAction>/Asmt6%20(1)%20(2)/Read</soapAction>
+            <sharedChannel>/SharedResources/Connections/HTTP Connection.sharedhttp</sharedChannel>
+            <soapVersion>SOAP 1.1</soapVersion>
+            <soapAttachmentStyle>SwA</soapAttachmentStyle>
+            <inputAttachmentBindings/>
+            <outputAttachmentBindings/>
+        </config>
+        <pd:inputBindings/>
+    </pd:starter>
+    <pd:endName>End</pd:endName>
+    <pd:endX>748</pd:endX>
+    <pd:endY>56</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1609309285761</pd:targetNamespace>
+    <pd:activity name="SOAPSendReply">
+        <pd:type>com.tibco.plugin.soap.SOAPSendReplyActivity</pd:type>
+        <pd:resourceType>ae.activities.SOAPSendReplyUI</pd:resourceType>
+        <pd:x>530</pd:x>
+        <pd:y>52</pd:y>
+        <config>
+            <eventSource>SOAPEventSource</eventSource>
+            <sharedChannels>
+                <jmsChannel>
+                    <JMSDeliveryMode>2</JMSDeliveryMode>
+                </jmsChannel>
+            </sharedChannels>
+        </config>
+        <pd:inputBindings>
+            <outputMessage>
+                <ns2:StudentDetails>
+                    <ns2:RollNO>
+                        <xsl:value-of select="$JDBC-Query/resultSet/Record[1]/ROLLNO"/>
+                    </ns2:RollNO>
+                    <ns2:StudentName>
+                        <xsl:value-of select="$JDBC-Query/resultSet/Record[1]/STUDENTNAME"/>
+                    </ns2:StudentName>
+                    <ns2:FatherName>
+                        <xsl:value-of select="$JDBC-Query/resultSet/Record[1]/FATHERNAME"/>
+                    </ns2:FatherName>
+                    <ns2:Branch>
+                        <xsl:value-of select="$JDBC-Query/resultSet/Record[1]/BRANCH"/>
+                    </ns2:Branch>
+                    <ns2:M1>
+                        <xsl:value-of select="$JDBC-Query/resultSet/Record[1]/M1"/>
+                    </ns2:M1>
+                    <ns2:M2>
+                        <xsl:value-of select="$JDBC-Query/resultSet/Record[1]/M2"/>
+                    </ns2:M2>
+                    <ns2:M3>
+                        <xsl:value-of select="$JDBC-Query/resultSet/Record[1]/M3"/>
+                    </ns2:M3>
+                </ns2:StudentDetails>
+            </outputMessage>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="JDBC Query">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>330</pd:x>
+        <pd:y>50</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <statement>select * from studentdetails where rollno=?</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>rollno</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+            <jdbcSharedConfig>/SharedResources/Connections/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>ROLLNO</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR2</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>STUDENTNAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR2</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>FATHERNAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR2</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>BRANCH</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR2</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>M1</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR2</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>M2</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR2</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>M3</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR2</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>RequiredElement</QueryOutputCachedSchemaStatus>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <rollno>
+                    <xsl:value-of select="$SOAPEventSource/inputMessage/ns:RollNo"/>
+                </rollno>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>SOAPEventSource</pd:from>
+        <pd:to>JDBC Query</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>JDBC Query</pd:from>
+        <pd:to>SOAPSendReply</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>SOAPSendReply</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

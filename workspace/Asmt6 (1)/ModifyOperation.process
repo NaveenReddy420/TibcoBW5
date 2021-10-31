@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1609237967711" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/workspace/Asmt6 (1)/Schema.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:import namespace="http://xmlns.example.com/1609237967711" location="/Asmt6 (1)/WSDL.wsdl"/>
+    <pd:name>Asmt6 (1)/ModifyOperation.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType wsMsgRef="pfx:ReqModifyMessage"/>
+    <pd:startX>150</pd:startX>
+    <pd:startY>64</pd:startY>
+    <pd:returnBindings>
+        <pfx:ResModifyMessage>
+            <Response>
+                <xsl:value-of select="$JDBC-Update/jdbcUpdateActivityOutput/noOfUpdates"/>
+            </Response>
+        </pfx:ResModifyMessage>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType wsMsgRef="pfx:ResModifyMessage"/>
+    <pd:endX>450</pd:endX>
+    <pd:endY>64</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1609300569408</pd:targetNamespace>
+    <pd:activity name="JDBC Update">
+        <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
+        <pd:x>298</pd:x>
+        <pd:y>63</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/SharedResources/Connections/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>UPDATE studentdetails
+SET studentname=?, fathername=?, branch=?, m1=?, m2=?, m3=?
+WHERE rollno=?</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>studentname</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>fathername</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>branch</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>m1</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>m2</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>m3</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>rollno</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+        </config>
+        <pd:inputBindings>
+            <jdbcUpdateActivityInput>
+                <studentname>
+                    <xsl:value-of select="$Start/pfx:ReqModifyMessage/Request/ns:StudentDetails/ns:StudentName"/>
+                </studentname>
+                <fathername>
+                    <xsl:value-of select="$Start/pfx:ReqModifyMessage/Request/ns:StudentDetails/ns:FatherName"/>
+                </fathername>
+                <branch>
+                    <xsl:value-of select="$Start/pfx:ReqModifyMessage/Request/ns:StudentDetails/ns:Branch"/>
+                </branch>
+                <m1>
+                    <xsl:value-of select="$Start/pfx:ReqModifyMessage/Request/ns:StudentDetails/ns:M1"/>
+                </m1>
+                <m2>
+                    <xsl:value-of select="$Start/pfx:ReqModifyMessage/Request/ns:StudentDetails/ns:M2"/>
+                </m2>
+                <m3>
+                    <xsl:value-of select="$Start/pfx:ReqModifyMessage/Request/ns:StudentDetails/ns:M3"/>
+                </m3>
+                <rollno>
+                    <xsl:value-of select="$Start/pfx:ReqModifyMessage/Request/ns:StudentDetails/ns:RollNO"/>
+                </rollno>
+            </jdbcUpdateActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>JDBC Update</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>JDBC Update</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

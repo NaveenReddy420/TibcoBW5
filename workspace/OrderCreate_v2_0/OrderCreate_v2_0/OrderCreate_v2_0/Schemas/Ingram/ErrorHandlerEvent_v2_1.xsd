@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ae="http://www.tibco.com/xmlns/ae2xsd/2002/05" xmlns:ns0="http://www.tibco.com/xmlns/ae2xsd/2002/05/Ingram/ErrorHandlerEvent_v2_1" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://www.tibco.com/xmlns/ae2xsd/2002/05/Ingram/ErrorHandlerEvent_v2_1">
+    <import namespace="http://www.tibco.com/xmlns/ae2xsd/2002/05" schemaLocation="../ae2xsd.xsd"/>
+    <complexType ae:directory="/AESchemas/Ingram/ErrorHandlerEvent_v2_1.aeschema#class.ErrorDetailEvent" ae:type="class" ae:typename="/tibco/public/class/Ingram/ErrorHandlerEvent_v2_1/ErrorDetailEvent" name="ErrorDetailEvent">
+        <sequence>
+            <element ae:key="false" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="timeStamp" nillable="true" type="ae:dateTime"/>
+            <element ae:key="false" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="idocNumber" nillable="true" type="ae:string"/>
+            <element ae:key="false" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="queueName" nillable="true" type="ae:string"/>
+            <element ae:key="false" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="clientData" nillable="true" type="ae:string"/>
+            <element ae:key="false" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="transactionID" nillable="true" type="ae:string"/>
+            <element ae:key="false" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="actionRequired" nillable="true" type="ae:string"/>
+            <element ae:key="false" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="dataOnHand" nillable="true" type="ae:string"/>
+            <element ae:key="false" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="stackTrace" nillable="true" type="ae:string"/>
+        </sequence>
+    </complexType>
+    <complexType ae:directory="/AESchemas/Ingram/ErrorHandlerEvent_v2_1.aeschema#class.ErrorHandlerEvent_v2_1" ae:type="class" ae:typename="/tibco/public/class/Ingram/ErrorHandlerEvent_v2_1/ErrorHandlerEvent_v2_1" name="ErrorHandlerEvent__v2__1">
+        <sequence>
+            <element ae:key="true" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="sourceProcessName" nillable="true" type="ae:string"/>
+            <element ae:key="true" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="sourceActivityName" nillable="true" type="ae:string"/>
+            <element ae:key="true" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="errorCode" nillable="true" type="ae:string"/>
+            <element ae:key="true" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="errorText" nillable="true" type="ae:string"/>
+            <element ae:key="true" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="severityLevel" nillable="true" type="ae:i1"/>
+            <element ae:key="true" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="emailErrorLevel" nillable="true" type="ae:i1"/>
+            <element ae:key="false" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="emailErrorSubject" nillable="true" type="ae:string"/>
+            <element ae:key="false" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="emailErrorAddress" nillable="true" type="ae:string"/>
+            <element ae:default="false()" ae:key="false" ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="rethrowErrorFlag" nillable="true" type="ae:boolean"/>
+            <element ae:readable="true" ae:writeable="true" form="unqualified" minOccurs="0" name="ErrorDetails" nillable="true" type="ns0:ErrorDetailEvent"/>
+        </sequence>
+    </complexType>
+    <element name="ErrorDetailEvent" type="ns0:ErrorDetailEvent"/>
+    <element name="ErrorHandlerEvent__v2__1" type="ns0:ErrorHandlerEvent__v2__1"/>
+</schema>

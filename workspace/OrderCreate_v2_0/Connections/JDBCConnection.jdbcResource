@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://xsd.tns.tibco.com/amf/models/sharedresource/jdbc" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmi:id="_NiCfwGrYEeuibc2NIPv6fQ" name="Connections.JDBCConnection" type="jdbc:JdbcDataSource">
+  <jndi:configuration xsi:type="jdbc:JdbcDataSource" xmi:id="_NiCfwWrYEeuibc2NIPv6fQ" username="%%JDBCConnection/Username%%" password="%%JDBCConnection/Password%%">
+    <substitutionBindings xmi:id="_NiCfwmrYEeuibc2NIPv6fQ" template="maxConnections" propName="JDBCConnection/MaxConnections0"/>
+    <substitutionBindings xmi:id="_NiCfw2rYEeuibc2NIPv6fQ" template="maxConnections" propName="Conn"/>
+    <substitutionBindings xmi:id="_NiLpsGrYEeuibc2NIPv6fQ" template="username" propName="JDBCConnection/Username"/>
+    <substitutionBindings xmi:id="_NiLpsWrYEeuibc2NIPv6fQ" template="password" propName="JDBCConnection/Password"/>
+    <connectionConfig xsi:type="jdbc:NonXaConnection" xmi:id="_NiCfxGrYEeuibc2NIPv6fQ" jdbcDriver="%%JDBCConnection/JDBCDriver%%" dbURL="%%JDBCConnection/Url%%">
+      <substitutionBindings xmi:id="_NiCfxWrYEeuibc2NIPv6fQ" template="loginTimeout" propName="JDBCConnection/Timeout0"/>
+      <substitutionBindings xmi:id="_NiCfxmrYEeuibc2NIPv6fQ" template="loginTimeout" propName="Timeout"/>
+      <substitutionBindings xmi:id="_NiGxMGrYEeuibc2NIPv6fQ" template="jdbcDriver" propName="JDBCConnection/JDBCDriver"/>
+      <substitutionBindings xmi:id="_NiGxMWrYEeuibc2NIPv6fQ" template="dbURL" propName="JDBCConnection/Url"/>
+    </connectionConfig>
+  </jndi:configuration>
+</jndi:namedResource>

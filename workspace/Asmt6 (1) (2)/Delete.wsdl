@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created by TIBCO WSDL-->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.example.com/1609308862890/DeleteOperationImpl/Asmt6_sp__lpar_1_rpar__sp__lpar_2_rpar_" xmlns:ns0="http://www.tibco.com/schemas/workspace/Asmt6/Schema.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="Untitled" targetNamespace="http://xmlns.example.com/1609308862890/DeleteOperationImpl/Asmt6_sp__lpar_1_rpar__sp__lpar_2_rpar_">
+    <wsdl:types>
+        <xs:schema xmlns="http://www.tibco.com/schemas/workspace/Asmt6/Schema.xsd" targetNamespace="http://www.tibco.com/schemas/workspace/Asmt6/Schema.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="RollNo" type="xs:string"/>
+            <xs:element name="StudentDetails">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns0:RollNo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:service name="Delete">
+        <wsdl:port name="SOAPEventSource" binding="tns:SOAPEventSourceBinding">
+            <soap:address location="http://localhost:8082/Asmt6%20(1)%20(2)/Delete"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="PortType">
+        <wsdl:operation name="DeleteOperation">
+            <wsdl:input message="tns:ReqDeleteMessage"/>
+            <wsdl:output message="tns:ResDeleteMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SOAPEventSourceBinding" type="tns:PortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="DeleteOperation">
+            <soap:operation style="rpc" soapAction="/Asmt6%20(1)%20(2)/Delete"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="http://InputMessageNamespace" parts="Request"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="http://OutputMessageNamespace" parts="Response"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="ReqDeleteMessage">
+        <wsdl:part name="Request" element="ns0:RollNo"/>
+    </wsdl:message>
+    <wsdl:message name="ResDeleteMessage">
+        <wsdl:part name="Response" type="xs:string"/>
+    </wsdl:message>
+</wsdl:definitions>

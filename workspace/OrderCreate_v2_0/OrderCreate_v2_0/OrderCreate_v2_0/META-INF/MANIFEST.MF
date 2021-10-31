@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OrderCreate_v2_0
+Bundle-SymbolicName: OrderCreate_v2_0
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: TIBCO Software Inc.
+TIBCO-BW-Version: 6.6.0 HF3 V84 2020-04-23
+TIBCO-BW-ConfigProfile: META-INF/default.substvar
+TIBCO-BW-ModuleSharedVariables: META-INF/module.msv
+TIBCO-BW-Edition: bwe
+TIBCO-BW-JobSharedVariables: META-INF/module.jsv
+TIBCO-BW-ApplicationModule: META-INF/module.bwm

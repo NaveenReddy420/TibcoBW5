@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xs:element xmlns:xs="http://www.w3.org/2001/XMLSchema" name="root">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="products">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="subscriptionId" type="xsd:string" minOccurs="0"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xsd:schema>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/workspace/XMLtransform/Schema.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/workspace/XMLtransform/Schema.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="Employee">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="EmployeeDetails"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EmployeeDetails">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Name"/>
+				<xs:element ref="Age"/>
+				<xs:element ref="DOB"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Name" type="xs:string"/>
+	<xs:element name="Age" type="xs:integer"/>
+	<xs:element name="DOB" type="xs:date"/>
+</xs:schema>

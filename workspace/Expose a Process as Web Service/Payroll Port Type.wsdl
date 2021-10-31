@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.example.com/1607675840326" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xmlns.example.com/1607675840326">
+    <message name="PayrollRequest">
+        <part name="Request" type="xsd:string"/>
+    </message>
+    <message name="PayrollResponse">
+        <part name="Response" type="xsd:string"/>
+    </message>
+    <message name="PayrollFault">
+        <part name="Fault" type="xsd:string"/>
+    </message>
+    <portType name="PayrollPortType">
+        <operation name="GetPayInfo">
+            <input message="tns:PayrollRequest"/>
+            <output message="tns:PayrollResponse"/>
+            <fault name="fault1" message="tns:PayrollFault"/>
+        </operation>
+    </portType>
+</definitions>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1607675840326" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/pe/EngineTypes" xmlns:ns1="http://www.tibco.com/schemas/workspace/Expose a Process as Web Service/Schema.xsd">
+    <xs:import xmlns:xs="http://www.w3.org/2001/XMLSchema" namespace="http://www.tibco.com/schemas/workspace/Expose a Process as Web Service/Schema.xsd" schemaLocation="/Expose a Process as Web Service/Schema.xsd"/>
+    <wsdl:import namespace="http://xmlns.example.com/1607675840326" location="/Expose a Process as Web Service/Payroll Port Type.wsdl"/>
+    <pd:name>Expose a Process as Web Service/Process Definition.process</pd:name>
+    <pd:startName>SOAPEventSource</pd:startName>
+    <pd:startX>0</pd:startX>
+    <pd:startY>0</pd:startY>
+    <pd:returnBindings/>
+    <pd:starter name="SOAPEventSource">
+        <pd:type>com.tibco.plugin.soap.SOAPEventSource</pd:type>
+        <pd:resourceType>ae.activities.SOAPEventSourceUI</pd:resourceType>
+        <pd:x>179</pd:x>
+        <pd:y>72</pd:y>
+        <config>
+            <service>pfx:PayrollPortType</service>
+            <wsdlNamespaceRoot>http://xmlns.example.com/1607675840326/GetPayInfoImpl</wsdlNamespaceRoot>
+            <operation>GetPayInfo</operation>
+            <portAddressPrefix/>
+            <operationStyle>rpc</operationStyle>
+            <soapUse>encoded</soapUse>
+            <inputNamespace>http://InputMessageNamespace</inputNamespace>
+            <outputNamespace>http://OutputMessageNamespace</outputNamespace>
+            <faultNamespace>http://FaultMessageNamespace</faultNamespace>
+            <embedWsdlComponents>true</embedWsdlComponents>
+            <embedSchemaComponents>true</embedSchemaComponents>
+            <soapAction>/Expose%20a%20Process%20as%20Web%20Service/Process%20Definition</soapAction>
+            <sharedChannel>/SharedResources/Connections/HTTP Connection.sharedhttp</sharedChannel>
+            <soapVersion>SOAP 1.1</soapVersion>
+            <soapAttachmentStyle>SwA</soapAttachmentStyle>
+            <inputAttachmentBindings/>
+            <outputAttachmentBindings/>
+        </config>
+        <pd:inputBindings/>
+    </pd:starter>
+    <pd:endName>End</pd:endName>
+    <pd:endX>598</pd:endX>
+    <pd:endY>63</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1607676528585</pd:targetNamespace>
+    <pd:activity name="Catch">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>473</pd:x>
+        <pd:y>168</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="SOAPSendFault">
+        <pd:type>com.tibco.plugin.soap.SOAPSendFaultActivity</pd:type>
+        <pd:resourceType>ae.activities.SOAPSendFaultUI</pd:resourceType>
+        <pd:x>633</pd:x>
+        <pd:y>164</pd:y>
+        <config>
+            <faultMessage>&lt;Default&gt;</faultMessage>
+            <eventSource>SOAPEventSource</eventSource>
+            <sharedChannels>
+                <jmsChannel>
+                    <JMSDeliveryMode>2</JMSDeliveryMode>
+                </jmsChannel>
+            </sharedChannels>
+        </config>
+        <pd:inputBindings>
+            <defaultFaultElement>
+                <faultcode>
+                    <xsl:value-of select="$_error/ns:ErrorReport/MsgCode"/>
+                </faultcode>
+                <faultstring>
+                    <xsl:value-of select="$_error/ns:ErrorReport/Msg"/>
+                </faultstring>
+            </defaultFaultElement>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="SOAPSendReply">
+        <pd:type>com.tibco.plugin.soap.SOAPSendReplyActivity</pd:type>
+        <pd:resourceType>ae.activities.SOAPSendReplyUI</pd:resourceType>
+        <pd:x>361</pd:x>
+        <pd:y>70</pd:y>
+        <config>
+            <eventSource>SOAPEventSource</eventSource>
+            <sharedChannels>
+                <jmsChannel>
+                    <JMSDeliveryMode>2</JMSDeliveryMode>
+                </jmsChannel>
+            </sharedChannels>
+        </config>
+        <pd:inputBindings>
+            <GetPayInfoResponse>
+                <Response>
+                    <ns1:SalaryDetails>
+                        <ns1:PayStatus>
+                            <xsl:value-of select="&quot;Success&quot;"/>
+                        </ns1:PayStatus>
+                        <ns1:PayDate>
+                            <xsl:value-of select="current-date()"/>
+                        </ns1:PayDate>
+                    </ns1:SalaryDetails>
+                </Response>
+            </GetPayInfoResponse>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Catch</pd:from>
+        <pd:to>SOAPSendFault</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>SOAPEventSource</pd:from>
+        <pd:to>SOAPSendReply</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>SOAPSendReply</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

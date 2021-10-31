@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/workspace/SharedResources/Schemas/Schema.xsd2"
+	 targetNamespace="http://www.tibco.com/schemas/workspace/SharedResources/Schemas/Schema.xsd2"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="tbl_employee">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="emp_code"/>
+				<xs:element ref="emp_name"/>
+				<xs:element ref="emp_designation"/>
+				<xs:element ref="emp_age"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="emp_code" type="xs:int"/>
+	<xs:element name="emp_name" type="xs:string"/>
+	<xs:element name="emp_designation" type="xs:string"/>
+	<xs:element name="emp_age" type="xs:int"/>
+</xs:schema>

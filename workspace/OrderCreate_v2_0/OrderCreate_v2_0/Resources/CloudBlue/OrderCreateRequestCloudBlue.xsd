@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ocreq="http://www.ingrammicro.com/product/OrderCreate_v2_0_Service/Resources/OrderCreateRequestCloudBlue.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.ingrammicro.com/product/OrderCreate_v2_0_Service/Resources/OrderCreateRequestCloudBlue.xsd">
+	<annotation>
+		<documentation>
+
+            This top level element represents a
+    </documentation>
+	</annotation>
+	<import namespace="http://www.w3.org/XML/1998/namespace"/>
+	<element name="ordercreaterequest">
+		<complexType>
+			<sequence>
+				<element minOccurs="0" name="type" type="xsd:string"/>
+				<element name="customerId" type="xsd:string"/>
+				<element minOccurs="0" name="poNumber" type="xsd:string"/>
+				<element maxOccurs="unbounded" name="products">
+					<complexType>
+						<sequence>
+							<element minOccurs="0" name="id" type="xsd:string"/>
+							<element minOccurs="0" name="quantity" type="xsd:double"/>
+							<element minOccurs="0" name="specialPrice">
+								<complexType>
+									<sequence>
+										<element minOccurs="0" name="amount" type="xsd:string"/>
+									</sequence>
+								</complexType>
+							</element>
+							<element minOccurs="0" name="specialCost">
+								<complexType>
+									<sequence>
+										<element minOccurs="0" name="amount" type="xsd:string"/>
+									</sequence>
+								</complexType>
+							</element>
+							<element minOccurs="0" name="specialProviderCost">
+								<complexType>
+									<sequence>
+										<element minOccurs="0" name="currency" type="xsd:string"/>
+										<element minOccurs="0" name="amount" type="xsd:string"/>
+									</sequence>
+								</complexType>
+							</element>
+							<element maxOccurs="unbounded" minOccurs="0" name="parameters">
+								<complexType>
+									<sequence>
+										<element minOccurs="0" name="name" type="xsd:string"/>
+										<element minOccurs="0" name="value" type="xsd:string"/>
+									</sequence>
+								</complexType>
+							</element>
+						</sequence>
+					</complexType>
+				</element>
+				<element minOccurs="0" name="attributes">
+					<complexType>
+						<sequence>
+							<element minOccurs="0" name="bill_to" type="xsd:string"/>
+							<element minOccurs="0" name="payment_method" type="xsd:string"/>
+	<element minOccurs="0" name="isresellercentric" type="xsd:string"/>
+							<element minOccurs="0" name="payment_token" type="xsd:string"/>
+							<element minOccurs="0" name="auth_code" type="xsd:string"/>
+							<element minOccurs="0" name="cc_four_digits" type="xsd:string"/>
+							<element minOccurs="0" name="cc_type" type="xsd:string"/>
+							<element minOccurs="0" name="deal_id" type="xsd:string"/>
+							<element minOccurs="0" name="reseller_contact_name" type="xsd:string"/>
+							<element minOccurs="0" name="reseller_contact_phone" type="xsd:string"/>
+							<element minOccurs="0" name="reseller_contact_email" type="xsd:string"/>
+							<element minOccurs="0" name="payment_group" type="xsd:string"/>
+							<element minOccurs="0" name="valid_to" type="xsd:string"/>
+							<element minOccurs="0" name="currency" type="xsd:string"/>
+							<element minOccurs="0" name="authorization_amount" type="xsd:string"/>
+							<element minOccurs="0" name="authorization_date" type="xsd:string"/>
+							<element minOccurs="0" name="authorization_time" type="xsd:string"/>
+							<element minOccurs="0" name="merchant_id" type="xsd:string"/>
+							<element minOccurs="0" name="requestid" type="xsd:string"/>
+						</sequence>
+					</complexType>
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

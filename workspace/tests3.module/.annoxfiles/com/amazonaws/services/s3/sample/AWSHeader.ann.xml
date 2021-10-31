@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ASCII"?>
+<annox:class xmlns:annox="http://annox.dev.java.net" xmlns:jaxb="http://annox.dev.java.net/javax.xml.bind.annotation" name="AWSHeader">
+  <jaxb:XmlAccessorType value="NONE"/>
+  <jaxb:XmlType name="AWSHeaderType" propOrder="amzContentSha256 amzDate authorization contentLength host storageClass "/>
+  <jaxb:XmlRootElement name="AWSHeader" namespace="www.tibco.com/plugin/java/xmlSchema/com.amazonaws.services.s3.sample.AWSHeader"/>
+  <annox:field name="amzContentSha256">
+    <jaxb:XmlElement name="amzContentSha256" namespace="www.tibco.com/plugin/java/xmlSchema/com.amazonaws.services.s3.sample.AWSHeader"/>
+  </annox:field>
+  <annox:field name="amzDate">
+    <jaxb:XmlElement name="amzDate" namespace="www.tibco.com/plugin/java/xmlSchema/com.amazonaws.services.s3.sample.AWSHeader"/>
+  </annox:field>
+  <annox:field name="authorization">
+    <jaxb:XmlElement name="authorization" namespace="www.tibco.com/plugin/java/xmlSchema/com.amazonaws.services.s3.sample.AWSHeader"/>
+  </annox:field>
+  <annox:field name="contentLength">
+    <jaxb:XmlElement name="contentLength" namespace="www.tibco.com/plugin/java/xmlSchema/com.amazonaws.services.s3.sample.AWSHeader" required="false" type="java.lang.Integer"/>
+  </annox:field>
+  <annox:field name="host">
+    <jaxb:XmlElement name="host" namespace="www.tibco.com/plugin/java/xmlSchema/com.amazonaws.services.s3.sample.AWSHeader"/>
+  </annox:field>
+  <annox:field name="storageClass">
+    <jaxb:XmlElement name="storageClass" namespace="www.tibco.com/plugin/java/xmlSchema/com.amazonaws.services.s3.sample.AWSHeader"/>
+  </annox:field>
+</annox:class>

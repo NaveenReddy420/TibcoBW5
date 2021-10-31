@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Repository:repository xmlns:Repository="http://www.tibco.com/xmlns/repo/types/2002">
+    <enterpriseArchive>
+        <sharedArchive name="OrderCreateAPIEngineArchive">
+            <resourceType>shared.archive.resource</resourceType>
+            <authorProperty>INCHIS01</authorProperty>
+            <sharedResources>/Resources/ExtendedSpecs.xml,/Resources/CountryRegions.xml,/Resources/ProductExtendedSpecs.xml,/Resources/Miscellaneouscharge.xml,/Resources/CountryCrossRefMapping/cntry_salesorg_cmpnycode_mapping.xml</sharedResources>
+            <sharedFiles/>
+            <sharedJarFiles/>
+        </sharedArchive>
+        <processArchive name="OrderCreate_v2_0">
+            <resourceType>process.archive.resource</resourceType>
+            <authorProperty>inbinm00</authorProperty>
+            <processProperty>/Processes/RESTJSONHTTPReceiver.process,/Processes/Common/CaptureHeartBeat.process,/Processes/Common/Load_OnOffLineTimes.process</processProperty>
+        </processArchive>
+        <versionProperty>233</versionProperty>
+        <authorProperty>inmehk02</authorProperty>
+        <addServiceSettableGvars>true</addServiceSettableGvars>
+        <name>OrderCreate_v2_0</name>
+        <designer>
+            <lockedProperties/>
+            <fixedChildren/>
+            <resourceDescriptions/>
+        </designer>
+        <fileLocationProperty>C:\SVN\OrderCreate\OrderCreate_v2_0.ear</fileLocationProperty>
+    </enterpriseArchive>
+</Repository:repository>

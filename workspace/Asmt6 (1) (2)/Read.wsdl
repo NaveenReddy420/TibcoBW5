@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created by TIBCO WSDL-->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.example.com/1609308862890/ReadOperationImpl/Asmt6_sp__lpar_1_rpar__sp__lpar_2_rpar_" xmlns:ns0="http://www.tibco.com/schemas/workspace/Asmt6/Schema.xsd" xmlns:ns1="http://www.tibco.com/schemas/workspace/Asmt6 (1)/Schema.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="Untitled" targetNamespace="http://xmlns.example.com/1609308862890/ReadOperationImpl/Asmt6_sp__lpar_1_rpar__sp__lpar_2_rpar_">
+    <wsdl:types>
+        <xs:schema xmlns="http://www.tibco.com/schemas/workspace/Asmt6/Schema.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/workspace/Asmt6/Schema.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="RollNo" type="xs:string"/>
+            <xs:element name="StudentDetails">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns0:RollNo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/workspace/Asmt6 (1)/Schema.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tibco.com/schemas/workspace/Asmt6 (1)/Schema.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+            <xs:element name="Branch" type="xs:string"/>
+            <xs:element name="FatherName" type="xs:string"/>
+            <xs:element name="M1" type="xs:string"/>
+            <xs:element name="M2" type="xs:string"/>
+            <xs:element name="M3" type="xs:string"/>
+            <xs:element name="RollNO" type="xs:string"/>
+            <xs:element name="StudentDetails">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ns1:RollNO"/>
+                        <xs:element ref="ns1:StudentName"/>
+                        <xs:element ref="ns1:FatherName"/>
+                        <xs:element ref="ns1:Branch"/>
+                        <xs:element ref="ns1:M1"/>
+                        <xs:element ref="ns1:M2"/>
+                        <xs:element ref="ns1:M3"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="StudentName" type="xs:string"/>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:service name="Read">
+        <wsdl:port name="SOAPEventSource" binding="tns:SOAPEventSourceBinding">
+            <soap:address location="http://localhost:8082/Asmt6%20(1)%20(2)/Read"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="PortType">
+        <wsdl:operation name="ReadOperation">
+            <wsdl:input message="tns:ReqReadMessage"/>
+            <wsdl:output message="tns:ResReadMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SOAPEventSourceBinding" type="tns:PortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="ReadOperation">
+            <soap:operation style="document" soapAction="/Asmt6%20(1)%20(2)/Read"/>
+            <wsdl:input>
+                <soap:body use="literal" parts="Request"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" parts="Response"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="ReqReadMessage">
+        <wsdl:part name="Request" element="ns0:RollNo"/>
+    </wsdl:message>
+    <wsdl:message name="ResReadMessage">
+        <wsdl:part name="Response" element="ns1:StudentDetails"/>
+    </wsdl:message>
+</wsdl:definitions>

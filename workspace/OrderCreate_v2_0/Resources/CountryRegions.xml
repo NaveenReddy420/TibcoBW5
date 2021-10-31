@@ -1,0 +1,14 @@
+<?xml version = "1.0" encoding = "iso-8859-1"?>
+
+<!--
+  * This file contains mappings between company code and country code and values necessary for accessing the
+  * correct data on the mainframe based on those codes.
+  * 
+  * This version of the file is intended for a PRODUCTION environment
+  * May 08, 2004
+-->
+<countries>  
+	<country company_code = "US" currency = "USD" region = "MD"/>  
+	<country company_code = "CA" currency = "CAD" region = "FT"/>
+	<country company_code = "UK" currency = "GBP" region = "UK"/>
+</countries>

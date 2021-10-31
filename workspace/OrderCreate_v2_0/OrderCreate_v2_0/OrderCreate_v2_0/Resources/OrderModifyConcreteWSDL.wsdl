@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:ns0="http://www.ingrammicro.com/common/ServiceRequestHeader_v1_0/types" xmlns:ns1="http://www.ingrammicro.com/common/ServiceResponseHeader_v1_0/types" xmlns:ns2="http://www.ingrammicro.com/order/OrderModifyRequest_v1_0/types" xmlns:ns3="http://www.ingrammicro.com/order/OrderModifyResponse_v1_0/types" xmlns:ns4="http://www.ingrammicro.com/common/SOAPFault_v2_1/types" xmlns:ns5="http://www.ingrammicro.com/common/ResponseMessagePreamble_v1_0/types" xmlns:ns6="http://www.ingrammicro.com/common/RequestMessagePreamble_v1_0/types" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.ingrammicro.com/Processes/OrderModify/OrderModify_Service" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsmex="http://schemas.xmlsoap.org/ws/2004/09/mex" targetNamespace="http://www.ingrammicro.com/Processes/OrderModify/OrderModify_Service">
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:opre="http://www.ingrammicro.com/common/ResponseMessagePreamble_v1_0/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.ingrammicro.com/common/ResponseMessagePreamble_v1_0/types">
+            <annotation>
+                <documentation>            This top level element represents a</documentation>
+            </annotation>
+            <complexType name="ResponsePreambleType">
+                <sequence>
+                    <element name="requestStatus">
+                        <simpleType>
+                            <restriction base="xsd:string">
+                                <enumeration value="SUCCESS"/>
+                                <enumeration value="SUCCESSWITHERROR"/>
+                                <enumeration value="FAILED"/>
+                            </restriction>
+                        </simpleType>
+                    </element>
+                    <element minOccurs="0" name="returnCode" type="xsd:string"/>
+                    <element minOccurs="0" name="returnMessage" type="xsd:string"/>
+                </sequence>
+            </complexType>
+        </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ipre="http://www.ingrammicro.com/common/RequestMessagePreamble_v1_0/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.ingrammicro.com/common/RequestMessagePreamble_v1_0/types">
+            <annotation>
+                <documentation>            This top level element represents a</documentation>
+            </annotation>
+            <complexType name="RequestPreambleType">
+                <sequence>
+                    <choice>
+                        <element name="companyCode" type="xsd:string"/>
+                        <element name="isoCountryCode" type="xsd:string"/>
+                    </choice>
+                    <choice>
+                        <element name="associateID" type="xsd:string"/>
+                        <element name="customerNumber" type="xsd:string"/>
+                        <element name="vendorNumber" type="xsd:string"/>
+                    </choice>
+                </sequence>
+            </complexType>
+        </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ohdr="http://www.ingrammicro.com/common/ServiceResponseHeader_v1_0/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.ingrammicro.com/common/ServiceResponseHeader_v1_0/types">
+            <annotation>
+                <documentation>This schema represents the transport level output header elements for a call to an EBS.</documentation>
+            </annotation>
+            <complexType name="PerformanceDataType">
+                <sequence>
+                    <element name="transactionStartTime" type="xsd:dateTime"/>
+                    <element name="transactionEndTime" type="xsd:dateTime"/>
+                </sequence>
+            </complexType>
+            <element name="serviceResponseHeader">
+                <complexType>
+                    <all>
+                        <element minOccurs="0" name="clientTransactionID" type="xsd:string"/>
+                        <element minOccurs="0" name="performanceData" type="ohdr:PerformanceDataType"/>
+                        <element name="transactionID" type="xsd:string"/>
+                    </all>
+                </complexType>
+            </element>
+        </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:glpfault="http://www.ingrammicro.com/common/SOAPFault_v2_1/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.ingrammicro.com/common/SOAPFault_v2_1/types">
+            <annotation>
+                <documentation>This top level element represents the common response preamble</documentation>
+            </annotation>
+            <element name="ServiceFault">
+                <complexType>
+                    <all>
+                        <element minOccurs="0" name="Code" type="xsd:string"/>
+                        <element minOccurs="0" name="Description" type="xsd:string"/>
+                    </all>
+                </complexType>
+            </element>
+        </schema>
+        <xs:schema xmlns:opre="http://www.ingrammicro.com/common/ResponseMessagePreamble_v1_0/types" xmlns:ormr="http://www.ingrammicro.com/order/OrderModifyResponse_v1_0/types" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.ingrammicro.com/order/OrderModifyResponse_v1_0/types">
+            <xs:import namespace="http://www.ingrammicro.com/common/ResponseMessagePreamble_v1_0/types"/>
+            <xs:complexType name="OrderModifyResponseType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="ResponseFlag" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ErrorType" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ACKTriggered" type="xs:string"/>
+                    <xs:element minOccurs="0" name="WarnCode1" type="xs:string"/>
+                    <xs:element minOccurs="0" name="WarnCode2" type="xs:string"/>
+                    <xs:element minOccurs="0" name="WarnCode3" type="xs:string"/>
+                    <xs:element minOccurs="0" name="WarnCode4" type="xs:string"/>
+                    <xs:element minOccurs="0" name="WarnCode5" type="xs:string"/>
+                    <xs:element minOccurs="0" name="WarnCode6" type="xs:string"/>
+                    <xs:element minOccurs="0" name="WarnCode7" type="xs:string"/>
+                    <xs:element minOccurs="0" name="WarnCode8" type="xs:string"/>
+                    <xs:element minOccurs="0" name="WarnCode9" type="xs:string"/>
+                    <xs:element minOccurs="0" name="WarnCode10" type="xs:string"/>
+                    <xs:element minOccurs="0" name="WarnCode11" type="xs:string"/>
+                    <xs:element minOccurs="0" name="WarnCode12" type="xs:string"/>
+                    <xs:element minOccurs="0" name="WarnCode13" type="xs:string"/>
+                    <xs:element minOccurs="0" name="WarnCode14" type="xs:string"/>
+                    <xs:element minOccurs="0" name="WarnCode15" type="xs:string"/>
+                    <xs:element minOccurs="0" name="HeaderResponse">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element minOccurs="0" name="HeaderResponse" type="xs:string"/>
+                                <xs:element minOccurs="0" name="AddressLine1" type="xs:string"/>
+                                <xs:element minOccurs="0" name="AddressLine2" type="xs:string"/>
+                                <xs:element minOccurs="0" name="AddressLine3" type="xs:string"/>
+                                <xs:element minOccurs="0" name="AddressLine4" type="xs:string"/>
+                                <xs:element minOccurs="0" name="City" type="xs:string"/>
+                                <xs:element minOccurs="0" name="State" type="xs:string"/>
+                                <xs:element minOccurs="0" name="Zip" type="xs:string"/>
+                                <xs:element minOccurs="0" name="PhoneSPL" type="xs:string"/>
+                                <xs:element minOccurs="0" name="FaxSPL" type="xs:string"/>
+                                <xs:element minOccurs="0" name="MobileSPL" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ZipSPL" type="xs:string"/>
+                                <xs:element minOccurs="0" name="CountrySPL" type="xs:string"/>
+                                <xs:element minOccurs="0" name="FillerSPL" type="xs:string"/>
+                                <xs:element minOccurs="0" name="FirmName" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ErrorMessage" type="xs:string"/>
+                                <xs:element minOccurs="0" name="KillonHoldOrderSW" type="xs:string"/>
+                                <xs:element minOccurs="0" name="TriggeredAuthSW" type="xs:string"/>
+                                <xs:element minOccurs="0" name="VoidFailSW" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ShiptoAttn" type="xs:string"/>
+                                <xs:element minOccurs="0" name="NBRBoxesOccur1" type="xs:string"/>
+                                <xs:element minOccurs="0" name="NBRBoxesOccur2" type="xs:string"/>
+                                <xs:element minOccurs="0" name="NBRBoxesOccur3" type="xs:string"/>
+                                <xs:element minOccurs="0" name="NBRBoxesOccur4" type="xs:string"/>
+                                <xs:element minOccurs="0" name="NBRBoxesOccur5" type="xs:string"/>
+                                <xs:element minOccurs="0" name="NBRBoxesOccur6" type="xs:string"/>
+                                <xs:element minOccurs="0" name="NBRBoxesOccur7" type="xs:string"/>
+                                <xs:element minOccurs="0" name="NBRBoxesOccur8" type="xs:string"/>
+                                <xs:element minOccurs="0" name="NBRBoxesOccur9" type="xs:string"/>
+                                <xs:element minOccurs="0" name="NBRWHSETableOccurs" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ErrorCode" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ErrorType" type="xs:string"/>
+                                <xs:element minOccurs="0" name="OrderSuffix" type="xs:string"/>
+                                <xs:element minOccurs="0" name="WHSEASSIGNEDNBR" type="xs:string"/>
+                                <xs:element minOccurs="0" name="TotalHandlingAmount" type="xs:string"/>
+                                <xs:element minOccurs="0" name="EstimatedNBRBoxes" type="xs:string"/>
+                                <xs:element minOccurs="0" name="TotalWeight" type="xs:string"/>
+                                <xs:element minOccurs="0" name="CarrierCode" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ShipVia" type="xs:string"/>
+                                <xs:element minOccurs="0" name="FRTRate" type="xs:string"/>
+                                <xs:element minOccurs="0" name="TransitDays" type="xs:string"/>
+                                <xs:element minOccurs="0" name="CarrierMode" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ESTTaxPic" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ESTFRTAmount" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ESTTaxAmount" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ESTCHGAmount" type="xs:string"/>
+                                <xs:element minOccurs="0" name="DVFee" type="xs:string"/>
+                                <xs:element minOccurs="0" name="DVError" type="xs:string"/>
+                                <xs:element minOccurs="0" name="PromiseDate" type="xs:string"/>
+                                <xs:element minOccurs="0" name="DasSW" type="xs:string"/>
+                                <xs:element minOccurs="0" name="HoldStatus" type="xs:string"/>
+                                <xs:element minOccurs="0" name="HoldReason" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ESDDistSW" type="xs:string"/>
+                                <xs:element minOccurs="0" name="NBRLineTableOccurs" type="xs:string"/>
+                                <xs:element minOccurs="0" name="NBRLineSuffix" type="xs:string"/>
+                                <xs:element minOccurs="0" name="BilltoSuffix" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ExtBoxWeight1" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ExtBoxWeight2" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ExtBoxWeight3" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ExtBoxWeight4" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ExtBoxWeight5" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ExtBoxWeight6" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ExtBoxWeight7" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ExtBoxWeight8" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ExtBoxWeight9" type="xs:string"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="LineResponse">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element minOccurs="0" name="LineLevelResponse" type="xs:string"/>
+                                <xs:element minOccurs="0" name="LineLevelReturnCode" type="xs:string"/>
+                                <xs:element minOccurs="0" name="IngramUnitCost" type="xs:string"/>
+                                <xs:element minOccurs="0" name="IngramOrderNumber" type="xs:string"/>
+                                <xs:element minOccurs="0" name="IngramOrderDist" type="xs:string"/>
+                                <xs:element minOccurs="0" name="IngramOrderShip" type="xs:string"/>
+                                <xs:element minOccurs="0" name="IngramLineNumber" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ResponseMessage" type="xs:string"/>
+                                <xs:element minOccurs="0" name="WHSEAssignedToNumber" type="xs:string"/>
+                                <xs:element minOccurs="0" name="WHSEAssignedToETA" type="xs:string"/>
+                                <xs:element minOccurs="0" name="NextWHSEWithAvail" type="xs:string"/>
+                                <xs:element minOccurs="0" name="QuantityOrdered" type="xs:string"/>
+                                <xs:element minOccurs="0" name="QuantityAllocated" type="xs:string"/>
+                                <xs:element minOccurs="0" name="QuantityBackOrdered" type="xs:string"/>
+                                <xs:element minOccurs="0" name="PriceDerivedFlag" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ForeignUnitCost" type="xs:string"/>
+                                <xs:element minOccurs="0" name="DiscountPCT" type="xs:string"/>
+                                <xs:element minOccurs="0" name="DistributionNumber" type="xs:string"/>
+                                <xs:element minOccurs="0" name="IngramPartNumber" type="xs:string"/>
+                                <xs:element minOccurs="0" name="OrderSuffix" type="xs:string"/>
+                                <xs:element minOccurs="0" name="CarrierCode" type="xs:string"/>
+                                <xs:element minOccurs="0" name="FRTRate" type="xs:string"/>
+                                <xs:element minOccurs="0" name="TransitDays" type="xs:string"/>
+                                <xs:element minOccurs="0" name="CarrierMode" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ESTTax" type="xs:string"/>
+                                <xs:element minOccurs="0" name="BrazilShiptoState" type="xs:string"/>
+                                <xs:element minOccurs="0" name="ICMSTax" type="xs:string"/>
+                                <xs:element minOccurs="0" name="IPIISSTax" type="xs:string"/>
+                                <xs:element minOccurs="0" name="PISCofinsTax" type="xs:string"/>
+                                <xs:element minOccurs="0" name="WHSEWithAvail" type="xs:string"/>
+                                <xs:element minOccurs="0" name="QuantityAvailaibility" type="xs:string"/>
+                                <xs:element minOccurs="0" name="PriceEngineERR" type="xs:string"/>
+                                <xs:element minOccurs="0" name="SKUSizeInd" type="xs:string"/>
+                                <xs:element minOccurs="0" name="LTLHeavyFlag" type="xs:string"/>
+                                <xs:element minOccurs="0" name="PriceOverrideSW" type="xs:string"/>
+                                <xs:element maxOccurs="unbounded" minOccurs="0" name="LineCommentResponse">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element minOccurs="0" name="CommentResponse" type="xs:string"/>
+                                            <xs:element minOccurs="0" name="MultipleLineTable" type="xs:string"/>
+                                            <xs:element minOccurs="0" name="IngramLineNumber" type="xs:string"/>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                                <xs:element minOccurs="0" name="HeaderCaptureCodesResponse">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element minOccurs="0" name="ResponseMessage" type="xs:string"/>
+                                            <xs:element minOccurs="0" name="IngramLineNumber" type="xs:string"/>
+                                            <xs:element minOccurs="0" name="CustomerLineNumber" type="xs:string"/>
+                                            <xs:element minOccurs="0" name="captureCodes" type="xs:string"/>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="ServiceResponse">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element minOccurs="0" name="OrderModifyResponse" type="ormr:OrderModifyResponseType"/>
+                        <xs:element name="responsePreamble" type="opre:ResponsePreambleType"/>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ipre="http://www.ingrammicro.com/common/RequestMessagePreamble_v1_0/types" xmlns:ormr="http://www.ingrammicro.com/order/OrderModifyRequest_v1_0/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.ingrammicro.com/order/OrderModifyRequest_v1_0/types">
+            <import namespace="http://www.ingrammicro.com/common/RequestMessagePreamble_v1_0/types"/>
+            <annotation>
+                <documentation/>
+            </annotation>
+            <complexType name="OrderModifyRequestType">
+                <sequence>
+                    <element minOccurs="0" name="EntryMethod" type="xsd:string"/>
+                    <element minOccurs="0" name="SystemID" type="xsd:string"/>
+                    <element minOccurs="0" name="CompanyName" type="xsd:string"/>
+                    <element minOccurs="0" name="BRNumber" type="xsd:string"/>
+                    <element minOccurs="0" name="CustomerNumber" type="xsd:string"/>
+                    <element minOccurs="0" name="Suffix" type="xsd:string"/>
+                    <element minOccurs="0" name="VersionNumber" type="xsd:string"/>
+                    <element minOccurs="0" name="CustomerTermID" type="xsd:string"/>
+                    <element minOccurs="0" name="CompanyCode" type="xsd:string"/>
+                    <element minOccurs="0" name="IngramOrderBR" type="xsd:string"/>
+                    <element minOccurs="0" name="IngramOrderNumber" type="xsd:string"/>
+                    <element minOccurs="0" name="IngramOrderDist" type="xsd:string"/>
+                    <element minOccurs="0" name="IngramOrderShip" type="xsd:string"/>
+                    <element minOccurs="0" name="CustomerToIngramPO" type="xsd:string"/>
+                    <element minOccurs="0" name="SSEndUserBR" type="xsd:string"/>
+                    <element minOccurs="0" name="SSEndUserNumber" type="xsd:string"/>
+                    <element minOccurs="0" name="OperID" type="xsd:string"/>
+                    <element minOccurs="0" name="HeaderData">
+                        <complexType>
+                            <sequence>
+                                <element minOccurs="0" name="ActionCode" type="xsd:string"/>
+                                <element minOccurs="0" name="ShipViaCode" type="xsd:string"/>
+                                <element minOccurs="0" name="BackOrderFlag" type="xsd:string"/>
+                                <element minOccurs="0" name="ShipToAttn" type="xsd:string"/>
+                                <element minOccurs="0" name="FirmName" type="xsd:string"/>
+                                <element minOccurs="0" name="ShipToAddress1Data">
+                                    <complexType>
+                                        <sequence>
+                                            <element minOccurs="0" name="ShipToAddress1" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShipToAddress2" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShipToAddress3" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShipToCity" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShipToState" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoZip" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoCountryCode" type="xsd:string"/>
+                                        </sequence>
+                                    </complexType>
+                                </element>
+                                <element minOccurs="0" name="ShipToAddress2Data">
+                                    <complexType>
+                                        <sequence>
+                                            <element minOccurs="0" name="ShiptoAttn2BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoName2BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoAddress12BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoAddress22BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoAddress32BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptotAddress42BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoPhone2BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoFax2BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoMobile2BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoZIP2BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoCountry2BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoCNTFil2BY" type="xsd:string"/>
+                                        </sequence>
+                                    </complexType>
+                                </element>
+                                <element minOccurs="0" name="ShipToAddress3Data">
+                                    <complexType>
+                                        <sequence>
+                                            <element minOccurs="0" name="ShiptoAttn3BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoName3BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoAddress13BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoAddress23BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoAddress33BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptotAddress43BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoPhone3BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoFax3BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoMobile3BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoZIP3BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoCountry3BY" type="xsd:string"/>
+                                            <element minOccurs="0" name="ShiptoCNTFil3BY" type="xsd:string"/>
+                                        </sequence>
+                                    </complexType>
+                                </element>
+                                <element minOccurs="0" name="OREMEmailAddress" type="xsd:string"/>
+                                <element minOccurs="0" name="CustomertoIngramPO" type="xsd:string"/>
+                                <element minOccurs="0" name="CustomertoCustomerPO" type="xsd:string"/>
+                                <element minOccurs="0" name="ShipToSuffix" type="xsd:string"/>
+                                <element minOccurs="0" name="ThirdPartyFRTAccount" type="xsd:string"/>
+                                <element minOccurs="0" name="ShiptoFRTFwder" type="xsd:string"/>
+                                <element minOccurs="0" name="SplitINVSW" type="xsd:string"/>
+                                <element minOccurs="0" name="EndCustomerNumber" type="xsd:string"/>
+                                <element minOccurs="0" name="EndCustomerID" type="xsd:string"/>
+                                <element minOccurs="0" name="CarrierSelected" type="xsd:string"/>
+                                <element minOccurs="0" name="TransitDays" type="xsd:string"/>
+                                <element minOccurs="0" name="CarrierMode" type="xsd:string"/>
+                                <element minOccurs="0" name="AddressOverRideFlag" type="xsd:string"/>
+                                <element minOccurs="0" name="DirectShipAltInfo">
+                                    <complexType>
+                                        <sequence>
+                                            <element minOccurs="0" name="EUCNTName" type="xsd:string"/>
+                                            <element minOccurs="0" name="EUCNTPhone" type="xsd:string"/>
+                                            <element minOccurs="0" name="EUCNTExt" type="xsd:string"/>
+                                            <element minOccurs="0" name="EUCNTFax" type="xsd:string"/>
+                                            <element minOccurs="0" name="EUCNTCountryCode" type="xsd:string"/>
+                                            <element minOccurs="0" name="EUCompanyName" type="xsd:string"/>
+                                            <element minOccurs="0" name="EUCompanyVATNumber" type="xsd:string"/>
+                                            <element minOccurs="0" name="EUAgreementID1" type="xsd:string"/>
+                                            <element minOccurs="0" name="EUPricingLVLCD" type="xsd:string"/>
+                                        </sequence>
+                                    </complexType>
+                                </element>
+                                <element minOccurs="0" name="DirectShipInfo">
+                                    <complexType>
+                                        <sequence>
+                                            <element minOccurs="0" name="ConAgrFlag" type="xsd:string"/>
+                                            <element minOccurs="0" name="EndUserID" type="xsd:string"/>
+                                            <element minOccurs="0" name="EndUserAgreementID" type="xsd:string"/>
+                                            <element minOccurs="0" name="EndUserContactID" type="xsd:string"/>
+                                            <element minOccurs="0" name="EndUserAddressID" type="xsd:string"/>
+                                            <element minOccurs="0" name="EndUserVendorOrderCode" type="xsd:string"/>
+                                            <element minOccurs="0" name="EndUserLicenseID" type="xsd:string"/>
+                                        </sequence>
+                                    </complexType>
+                                </element>
+                                <element minOccurs="0" name="CreditCardInfo">
+                                    <complexType>
+                                        <sequence>
+                                            <element minOccurs="0" name="PaymentCode" type="xsd:string"/>
+                                            <element minOccurs="0" name="CardType" type="xsd:string"/>
+                                            <element minOccurs="0" name="CreditCardNumber" type="xsd:string"/>
+                                            <element minOccurs="0" name="ExpirationMonth" type="xsd:string"/>
+                                            <element minOccurs="0" name="ExpirationYear" type="xsd:string"/>
+                                            <element minOccurs="0" name="AuthCoCode" type="xsd:string"/>
+                                            <element minOccurs="0" name="SecurityCode" type="xsd:string"/>
+                                            <element minOccurs="0" name="AuthorizeCode" type="xsd:string"/>
+                                            <element minOccurs="0" name="AuthorizedAMT" type="xsd:string"/>
+                                            <element minOccurs="0" name="LastName" type="xsd:string"/>
+                                            <element minOccurs="0" name="FirstNameInitial" type="xsd:string"/>
+                                            <element minOccurs="0" name="StreetAddress" type="xsd:string"/>
+                                            <element minOccurs="0" name="City" type="xsd:string"/>
+                                            <element minOccurs="0" name="State" type="xsd:string"/>
+                                            <element minOccurs="0" name="Zip" type="xsd:string"/>
+                                            <element minOccurs="0" name="PromiseDate" type="xsd:string"/>
+                                            <element minOccurs="0" name="USCreditCardSwitch" type="xsd:string"/>
+                                        </sequence>
+                                    </complexType>
+                                </element>
+                                <element minOccurs="0" name="Terms" type="xsd:string"/>
+                                <element minOccurs="0" name="CustGroup" type="xsd:string"/>
+                                <element minOccurs="0" name="DVFlag" type="xsd:string"/>
+                                <element minOccurs="0" name="FreightForwarder" type="xsd:string"/>
+                                <element minOccurs="0" name="OSAAgentID" type="xsd:string"/>
+                                <element minOccurs="0" name="OSAAddressSequenceNumber" type="xsd:string"/>
+                                <element minOccurs="0" name="ResidentialSW" type="xsd:string"/>
+                                <element minOccurs="0" name="SHipCTACEmail" type="xsd:string"/>
+                                <element minOccurs="0" name="QuoteNumber" type="xsd:string"/>
+                                <element minOccurs="0" name="FrtOutCode" type="xsd:string"/>
+                                <element minOccurs="0" name="DeliveryParameterInfoType">
+                                    <complexType>
+                                        <sequence>
+                                            <element minOccurs="0" name="Speed" type="xsd:string"/>
+                                            <element minOccurs="0" name="Premium" type="xsd:string"/>
+                                            <element minOccurs="0" name="Consolidation" type="xsd:string"/>
+                                            <element minOccurs="0" name="WareHouseAction" type="xsd:string"/>
+                                            <element minOccurs="0" name="DeliveryDate" type="xsd:string"/>
+                                            <element minOccurs="0" name="TruckTollSwitch" type="xsd:string"/>
+                                        </sequence>
+                                    </complexType>
+                                </element>
+                                <element minOccurs="0" name="OrigActionCode" type="xsd:string"/>
+                                <element minOccurs="0" name="EndUserDist" type="xsd:string"/>
+                                <element minOccurs="0" name="EndUserShip" type="xsd:string"/>
+                                <element minOccurs="0" name="RSLRCTACEmail" type="xsd:string"/>
+                                <element minOccurs="0" name="DeliNotifEmail" type="xsd:string"/>
+                                <element minOccurs="0" name="SMSNumber" type="xsd:string"/>
+                                <element minOccurs="0" name="ShipCTACPhone" type="xsd:string"/>
+                                <element minOccurs="0" name="VendAuthNumber" type="xsd:string"/>
+                                <element minOccurs="0" name="CallFromGSSSwitch" type="xsd:string"/>
+                                <element default="WARN" minOccurs="0" name="DuplicatePOSwitch">
+                                    <simpleType>
+                                        <restriction base="xsd:string">
+                                            <enumeration value="ALLOW"/>
+                                            <enumeration value="ERROR"/>
+                                            <enumeration value="WARN"/>
+                                        </restriction>
+                                    </simpleType>
+                                </element>
+                                <element minOccurs="0" name="EUPONumber" type="xsd:string"/>
+                                <element minOccurs="0" name="EUDEPID" type="xsd:string"/>
+                                <element minOccurs="0" name="DEPOrderNumber" type="xsd:string"/>
+                                <element minOccurs="0" name="RSLRGCTACName" type="xsd:string"/>
+                                <element minOccurs="0" name="RSLRGCTACNbr" type="xsd:string"/>
+                                <element minOccurs="0" name="EUSHIPCTACName" type="xsd:string"/>
+                            </sequence>
+                        </complexType>
+                    </element>
+                    <element maxOccurs="unbounded" minOccurs="0" name="LineData">
+                        <complexType>
+                            <sequence>
+                                <element minOccurs="0" name="AddLineOrUpdateLine" type="xsd:string"/>
+                                <element minOccurs="0" name="CustomerLineNumber" type="xsd:string"/>
+                                <element minOccurs="0" name="IngramLineNumber" type="xsd:string"/>
+                                <element minOccurs="0" name="RecordIDLine" type="xsd:string"/>
+                                <element minOccurs="0" name="CustomerPartNumber" type="xsd:string"/>
+                                <element minOccurs="0" name="IngramPartNumber" type="xsd:string"/>
+                                <element minOccurs="0" name="QuantityOrdered" type="xsd:string"/>
+                                <element minOccurs="0" name="TrackSerialNumberFlag" type="xsd:string"/>
+                                <element minOccurs="0" name="NewWarehouseNumber" type="xsd:string"/>
+                                <element minOccurs="0" name="ConfigID" type="xsd:string"/>
+                                <element minOccurs="0" name="UnitsPerConfig" type="xsd:string"/>
+                                <element minOccurs="0" name="NewBillToSuffix" type="xsd:string"/>
+                                <element minOccurs="0" name="OpenWareHouseSeqFlag" type="xsd:string"/>
+                                <element minOccurs="0" name="AcopPricingSW" type="xsd:string"/>
+                                <element minOccurs="0" name="UnitPriceSW" type="xsd:string"/>
+                                <element minOccurs="0" name="UnitPrice" type="xsd:string"/>
+                                <element minOccurs="0" name="AUCSellPrice" type="xsd:string"/>
+                                <element minOccurs="0" name="AuctionBlockFlag" type="xsd:string"/>
+                                <element minOccurs="0" name="PullRSVInvFlag" type="xsd:string"/>
+                                <element minOccurs="0" name="RSVSequenceNumber" type="xsd:string"/>
+                                <element minOccurs="0" name="RSVTypeCode" type="xsd:string"/>
+                                <element minOccurs="0" name="RSVExcludeType" type="xsd:string"/>
+                                <element minOccurs="0" name="QuanttityOrder1" type="xsd:string"/>
+                                <element minOccurs="0" name="PromiseDate" type="xsd:string"/>
+                                <element minOccurs="0" name="GovtEndUserType2" type="xsd:string"/>
+                                <element minOccurs="0" name="OriginalPrice" type="xsd:string"/>
+                                <element minOccurs="0" name="SSEndUserInfo">
+                                    <complexType>
+                                        <sequence>
+                                            <element minOccurs="0" name="EndUserID" type="xsd:string"/>
+                                            <element minOccurs="0" name="AddrSequenceNumber" type="xsd:string"/>
+                                            <element minOccurs="0" name="CTACID" type="xsd:string"/>
+                                            <element minOccurs="0" name="EUDataAvailableSW" type="xsd:string"/>
+                                            <element minOccurs="0" name="AuthorBIDNumber" type="xsd:string"/>
+                                        </sequence>
+                                    </complexType>
+                                </element>
+                                <element minOccurs="0" name="GovenmentEUPONumber" type="xsd:string"/>
+                                <element minOccurs="0" name="MKTSegmentType" type="xsd:string"/>
+                                <element minOccurs="0" name="GSAFlag" type="xsd:string"/>
+                                <element minOccurs="0" name="CustomerGiftCode" type="xsd:string"/>
+                                <element minOccurs="0" name="LineType" type="xsd:string"/>
+                                <element minOccurs="0" name="AUCSelCost" type="xsd:string"/>
+                                <element minOccurs="0" name="ResellerBasePrice" type="xsd:string"/>
+                                <element minOccurs="0" name="SpecialBidLine" type="xsd:string"/>
+                                <element minOccurs="0" name="SpecialBidNumber" type="xsd:string"/>
+                                <element minOccurs="0" name="BRTaxDiscSW" type="xsd:string"/>
+                                <element minOccurs="0" name="OriginalRSLRPrice" type="xsd:string"/>
+                                <element minOccurs="0" name="CalledProgram" type="xsd:string"/>
+                                <element minOccurs="0" name="UnitPriceOvrdInd" type="xsd:string"/>
+                                <element minOccurs="0" name="NewWarehouseCO" type="xsd:string"/>
+                                <element minOccurs="0" name="GSN" type="xsd:string"/>
+                                <element minOccurs="0" name="PRODMDLNumber" type="xsd:string"/>
+                                <element minOccurs="0" name="LCNSGSRVNumber" type="xsd:string"/>
+                                <element minOccurs="0" name="OverrideTaxAmount" type="xsd:string"/>
+                                <element minOccurs="0" name="LineDescription1" type="xsd:string"/>
+                                <element minOccurs="0" name="LineDescription2" type="xsd:string"/>
+                                <element minOccurs="0" name="BrazilMasterSKUFlag" type="xsd:string"/>
+                                <element minOccurs="0" name="BrazilQuantityAllocated" type="xsd:string"/>
+                                <element minOccurs="0" name="BrazilWarehouseNumber" type="xsd:string"/>
+                                <element maxOccurs="unbounded" minOccurs="0" name="LineComment">
+                                    <complexType>
+                                        <sequence>
+                                            <element minOccurs="0" name="AddCommentOrUpdateComment" type="xsd:string"/>
+                                            <element minOccurs="0" name="RecordIDComment" type="xsd:string"/>
+                                            <element minOccurs="0" name="Comment" type="xsd:string"/>
+                                            <element minOccurs="0" name="CommentTable" type="xsd:string"/>
+                                        </sequence>
+                                    </complexType>
+                                </element>
+                                <element minOccurs="0" name="HeaderCaptureCodes">
+                                    <complexType>
+                                        <sequence>
+                                            <element minOccurs="0" name="AddOrUpdateCapturecode" type="xsd:string"/>
+                                            <element minOccurs="0" name="CustomerLineNumber" type="xsd:string"/>
+                                            <element minOccurs="0" name="IngramLineNumber" type="xsd:string"/>
+                                            <element maxOccurs="unbounded" minOccurs="0" name="LineExtracommentText" type="xsd:string"/>
+                                        </sequence>
+                                    </complexType>
+                                </element>
+                            </sequence>
+                        </complexType>
+                    </element>
+                </sequence>
+            </complexType>
+            <element name="serviceRequest">
+                <complexType>
+                    <all>
+                        <element name="OrderModifyRequest" type="ormr:OrderModifyRequestType"/>
+                        <element name="requestPreamble" type="ipre:RequestPreambleType"/>
+                    </all>
+                </complexType>
+            </element>
+        </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ihdr="http://www.ingrammicro.com/common/ServiceRequestHeader_v1_0/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.ingrammicro.com/common/ServiceRequestHeader_v1_0/types">
+            <annotation>
+                <documentation>This schema represents the transport level input header elements for a call to an EBS.</documentation>
+            </annotation>
+            <complexType name="AsynchronousRequestType">
+                <sequence>
+                    <choice>
+                        <element name="callbackServiceBinding" type="xsd:string"/>
+                        <element fixed="true" name="fireAndForget" type="xsd:boolean"/>
+                        <element fixed="true" name="topicSubscription" type="xsd:boolean"/>
+                    </choice>
+                    <element minOccurs="0" name="messageTTLMinutes" type="xsd:unsignedInt"/>
+                </sequence>
+            </complexType>
+            <complexType name="CredentialType">
+                <sequence>
+                    <element name="ID" type="xsd:string"/>
+                    <element minOccurs="0" name="credential" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <complexType name="TransactionModelType">
+                <choice>
+                    <element fixed="true" minOccurs="0" name="synchronousRequest" type="xsd:boolean"/>
+                    <element ref="ihdr:asynchronousRequest"/>
+                </choice>
+            </complexType>
+            <element name="asynchronousRequest" type="ihdr:AsynchronousRequestType"/>
+            <element name="serviceRequestHeader">
+                <complexType>
+                    <all>
+                        <element name="applicationCredential" type="ihdr:CredentialType"/>
+                        <element minOccurs="0" name="clientTransactionID" type="xsd:string"/>
+                        <element minOccurs="0" name="isoLanguageCode" type="xsd:string"/>
+                        <element minOccurs="0" name="purposeCode" type="xsd:string"/>
+                        <element minOccurs="0" name="transactionID" type="xsd:string"/>
+                        <element name="transactionModel" type="ihdr:TransactionModelType"/>
+                        <element name="userCredential" type="ihdr:CredentialType"/>
+                    </all>
+                </complexType>
+            </element>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="Fault">
+        <wsdl:part element="ns4:ServiceFault" name="Error"/>
+    </wsdl:message>
+    <wsdl:message name="Output">
+        <wsdl:part element="ns3:ServiceResponse" name="Response"/>
+    </wsdl:message>
+    <wsdl:message name="requestHeader">
+        <wsdl:part element="ns0:serviceRequestHeader" name="reqheadpart"/>
+    </wsdl:message>
+    <wsdl:message name="Input">
+        <wsdl:part element="ns2:serviceRequest" name="Request"/>
+    </wsdl:message>
+    <wsdl:message name="responseHeader">
+        <wsdl:part element="ns1:serviceResponseHeader" name="resheadpart"/>
+    </wsdl:message>
+    <wsdl:portType name="OrderModifyPortType_2">
+        <wsdl:operation name="Modify">
+            <wsdl:input message="tns:Input"/>
+            <wsdl:output message="tns:Output"/>
+            <wsdl:fault message="tns:Fault" name="fault1"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="OrderModifyPortType_2" type="tns:OrderModifyPortType_2">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Modify">
+            <soap:operation soapAction="/Processes/OrderModify/OrderModifyEndpoint" style="document"/>
+            <wsdl:input>
+                <soap:body parts="Request" use="literal"/>
+                <soap:header message="tns:requestHeader" part="reqheadpart" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="Response" use="literal"/>
+                <soap:header message="tns:responseHeader" part="resheadpart" use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault1">
+                <soap:fault name="fault1" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="OrderModify_v1_0_vs0">
+        <wsdl:port binding="tns:OrderModifyPortType_2" name="OrderModify_v1_0_vs0_s">
+            <soap:address location="https://uschleai4010v.corporate.ingrammicro.com:9043/OrderModify_v1_0_vs0"/>
+        </wsdl:port>
+        <wsdl:port binding="tns:OrderModifyPortType_2" name="OrderModify_v1_0_vs0">
+            <soap:address location="http://uschleai4010v.corporate.ingrammicro.com:9000/OrderModify_v1_0_vs0"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

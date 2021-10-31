@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Created by TIBCO WSDL--><wsdl:definitions xmlns:ns0="http://www.ingrammicro.com/common/ServiceRequestHeader_v1_0/types" xmlns:ns1="http://www.ingrammicro.com/common/ServiceResponseHeader_v1_0/types" xmlns:ns2="http://www.ingrammicro.com/order/OrderDeleteRequest_v1_0/types" xmlns:ns3="http://www.ingrammicro.com/order/OrderDeleteResponse_v1_0/types" xmlns:ns4="http://www.ingrammicro.com/common/ResponseMessagePreamble_v1_0/types" xmlns:ns5="http://www.ingrammicro.com/common/RequestMessagePreamble_v1_0/types" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.ingrammicro.com/order/OrderDelete_v1_0/DeleteImpl/Processes/OrderDelete" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="Untitled" targetNamespace="http://www.ingrammicro.com/order/OrderDelete_v1_0/DeleteImpl/Processes/OrderDelete">
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:opre="http://www.ingrammicro.com/common/ResponseMessagePreamble_v1_0/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.ingrammicro.com/common/ResponseMessagePreamble_v1_0/types">
+            <annotation>
+                <documentation>
+
+            This top level element represents a
+		
+		
+		
+		
+		</documentation>
+            </annotation>
+            <complexType name="ResponsePreambleType">
+                <sequence>
+                    <element name="requestStatus">
+                        <simpleType>
+                            <restriction base="xsd:string">
+                                <enumeration value="SUCCESS"/>
+                                <enumeration value="SUCCESSWITHERROR"/>
+                                <enumeration value="FAILED"/>
+                            </restriction>
+                        </simpleType>
+                    </element>
+                    <element minOccurs="0" name="returnCode" type="xsd:string"/>
+                    <element minOccurs="0" name="returnMessage" type="xsd:string"/>
+                </sequence>
+            </complexType>
+        </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ipre="http://www.ingrammicro.com/common/RequestMessagePreamble_v1_0/types" xmlns:odreq="http://www.ingrammicro.com/order/OrderDeleteRequest_v1_0/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.ingrammicro.com/order/OrderDeleteRequest_v1_0/types">
+            <import namespace="http://www.ingrammicro.com/common/RequestMessagePreamble_v1_0/types"/>
+            <annotation>
+                <documentation>
+		</documentation>
+            </annotation>
+            <complexType name="CustomerOrderNumberType">
+                <sequence>
+                    <element minOccurs="0" name="entryDate" type="xsd:date"/>
+                    <element name="customerOrderNumber" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <complexType name="OrderDeleteRequestType">
+                <sequence>
+                    <element name="operatorID" type="xsd:string"/>
+                    <choice>
+                        <element name="customerOrderNumber" type="odreq:CustomerOrderNumberType"/>
+                        <element name="orderNumber" type="odreq:OrderNumberType"/>
+                    </choice>
+                </sequence>
+            </complexType>
+            <complexType name="OrderNumberType">
+                <sequence>
+                    <element name="entryDate" type="xsd:date"/>
+                    <element name="orderBranch" type="xsd:string"/>
+                    <element name="orderNumber" type="xsd:string"/>
+                    <element minOccurs="0" name="rejectionCode" type="xsd:string"/>
+                    <element minOccurs="0" name="distributionNumber" type="xsd:string"/>
+                    <element minOccurs="0" name="shipmentNumber" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <element name="serviceRequest">
+                <complexType>
+                    <all>
+                        <element name="OrderDeleteRequest" type="odreq:OrderDeleteRequestType"/>
+                        <element name="requestPreamble" type="ipre:RequestPreambleType"/>
+                    </all>
+                </complexType>
+            </element>
+        </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ihdr="http://www.ingrammicro.com/common/ServiceRequestHeader_v1_0/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.ingrammicro.com/common/ServiceRequestHeader_v1_0/types">
+            <annotation>
+                <documentation>
+			This schema represents the transport level input header elements for a call to an EBS.
+		
+		
+		
+		
+		
+		</documentation>
+            </annotation>
+            <complexType name="AsynchronousRequestType">
+                <sequence>
+                    <choice>
+                        <element name="callbackServiceBinding" type="xsd:string"/>
+                        <element fixed="true" name="fireAndForget" type="xsd:boolean"/>
+                        <element fixed="true" name="topicSubscription" type="xsd:boolean"/>
+                    </choice>
+                    <element minOccurs="0" name="messageTTLMinutes" type="xsd:unsignedInt"/>
+                </sequence>
+            </complexType>
+            <complexType name="CredentialType">
+                <sequence>
+                    <element name="ID" type="xsd:string"/>
+                    <element minOccurs="0" name="credential" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <complexType name="TransactionModelType">
+                <choice>
+                    <element fixed="true" minOccurs="0" name="synchronousRequest" type="xsd:boolean"/>
+                    <element ref="ihdr:asynchronousRequest"/>
+                </choice>
+            </complexType>
+            <element name="asynchronousRequest" type="ihdr:AsynchronousRequestType"/>
+            <element name="serviceRequestHeader">
+                <complexType>
+                    <all>
+                        <element name="applicationCredential" type="ihdr:CredentialType"/>
+                        <element minOccurs="0" name="clientTransactionID" type="xsd:string"/>
+                        <element minOccurs="0" name="isoLanguageCode" type="xsd:string"/>
+                        <element minOccurs="0" name="purposeCode" type="xsd:string"/>
+                        <element minOccurs="0" name="transactionID" type="xsd:string"/>
+                        <element name="transactionModel" type="ihdr:TransactionModelType"/>
+                        <element name="userCredential" type="ihdr:CredentialType"/>
+                    </all>
+                </complexType>
+            </element>
+        </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:odres="http://www.ingrammicro.com/order/OrderDeleteResponse_v1_0/types" xmlns:opre="http://www.ingrammicro.com/common/ResponseMessagePreamble_v1_0/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.ingrammicro.com/order/OrderDeleteResponse_v1_0/types">
+            <import namespace="http://www.ingrammicro.com/common/ResponseMessagePreamble_v1_0/types"/>
+            <annotation>
+                <documentation>
+		
+		
+		</documentation>
+            </annotation>
+            <element name="serviceResponse">
+                <complexType>
+                    <sequence>
+                        <element name="responsePreamble" type="opre:ResponsePreambleType"/>
+                    </sequence>
+                </complexType>
+            </element>
+        </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ohdr="http://www.ingrammicro.com/common/ServiceResponseHeader_v1_0/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.ingrammicro.com/common/ServiceResponseHeader_v1_0/types">
+            <annotation>
+                <documentation>
+			This schema represents the transport level output header elements for a call to an EBS.
+		
+		
+		
+		
+		
+		</documentation>
+            </annotation>
+            <complexType name="PerformanceDataType">
+                <sequence>
+                    <element name="transactionStartTime" type="xsd:dateTime"/>
+                    <element name="transactionEndTime" type="xsd:dateTime"/>
+                </sequence>
+            </complexType>
+            <element name="serviceResponseHeader">
+                <complexType>
+                    <all>
+                        <element minOccurs="0" name="clientTransactionID" type="xsd:string"/>
+                        <element minOccurs="0" name="performanceData" type="ohdr:PerformanceDataType"/>
+                        <element name="transactionID" type="xsd:string"/>
+                    </all>
+                </complexType>
+            </element>
+        </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ipre="http://www.ingrammicro.com/common/RequestMessagePreamble_v1_0/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.ingrammicro.com/common/RequestMessagePreamble_v1_0/types">
+            <annotation>
+                <documentation>
+
+            This top level element represents a
+		
+		
+		
+		
+		
+		</documentation>
+            </annotation>
+            <complexType name="RequestPreambleType">
+                <sequence>
+                    <choice>
+                        <element name="companyCode" type="xsd:string"/>
+                        <element name="isoCountryCode" type="xsd:string"/>
+                    </choice>
+                    <choice>
+                        <element name="associateID" type="xsd:string"/>
+                        <element name="customerNumber" type="xsd:string"/>
+                        <element name="vendorNumber" type="xsd:string"/>
+                    </choice>
+                </sequence>
+            </complexType>
+        </schema>
+    </wsdl:types>
+    <wsdl:service name="OrderDelete__v1__0">
+        <wsdl:port binding="tns:SOAPEventSourceBinding" name="SOAPEventSource">
+            <soap:address location="http://localhost:10037/Processes/OrderDelete/OrderDelete_v1_0"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="OrderDeletePortType">
+        <wsdl:operation name="Delete">
+            <wsdl:input message="tns:OrderDeleteInputMessage"/>
+            <wsdl:output message="tns:OrderDeleteOutputMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SOAPEventSourceBinding" type="tns:OrderDeletePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Delete">
+            <soap:operation soapAction="/Processes/OrderDelete/OrderDelete_v1_0" style="document"/>
+            <wsdl:input>
+                <soap:body parts="part1" use="literal"/>
+                <soap:header message="tns:requestHeader" part="reqheadpart" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="part1" use="literal"/>
+                <soap:header message="tns:responseHeader" part="resheadpart" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="requestHeader">
+        <wsdl:part element="ns0:serviceRequestHeader" name="reqheadpart"/>
+    </wsdl:message>
+    <wsdl:message name="responseHeader">
+        <wsdl:part element="ns1:serviceResponseHeader" name="resheadpart"/>
+    </wsdl:message>
+    <wsdl:message name="OrderDeleteInputMessage">
+        <wsdl:part element="ns2:serviceRequest" name="part1"/>
+    </wsdl:message>
+    <wsdl:message name="OrderDeleteOutputMessage">
+        <wsdl:part element="ns3:serviceResponse" name="part1"/>
+    </wsdl:message>
+</wsdl:definitions>

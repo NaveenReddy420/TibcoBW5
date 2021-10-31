@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Created by TIBCO WSDL--><wsdl:definitions xmlns:ns0="http://www.ingrammicro.com/common/ServiceRequestHeader_v1_0/types" xmlns:ns1="http://www.ingrammicro.com/common/ServiceResponseHeader_v1_0/types" xmlns:ns2="http://www.tibco.com/schemas/OrderLTLUpdate_v1_0/Resources/Schema.xsd" xmlns:ns3="http://www.ingrammicro.com/OrderLTLUpdate_v1_1/Resources/OrderLTLUpdateResponse/types" xmlns:ns4="http://www.ingrammicro.com/common/SOAPFault_v2_0/types" xmlns:ns5="http://www.ingrammicro.com/common/RequestMessagePreamble_v2_0/types" xmlns:ns6="http://www.ingrammicro.com/common/ResponseMessagePreamble_v2_0/types" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://xmlns.example.com/1517917744445" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="Untitled" targetNamespace="http://xmlns.example.com/1517917744445">
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ipre="http://www.ingrammicro.com/common/RequestMessagePreamble_v2_0/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.ingrammicro.com/common/RequestMessagePreamble_v2_0/types">
+            <annotation>
+                <documentation> This top level element represents the common request preamble</documentation>
+            </annotation>
+            <complexType name="RequestPreambleType">
+                <sequence>
+                    <choice>
+                        <element name="CompanyCode" type="xsd:string"/>
+                        <element name="ISOCountryCode" type="xsd:string"/>
+                    </choice>
+                    <choice>
+                        <element name="AssociateID" type="xsd:string"/>
+                        <element name="CustomerNumber" type="xsd:string"/>
+                        <element name="PurchasingOrganization" type="xsd:string"/>
+                        <element name="SalesOrganization" type="xsd:string"/>
+                        <element name="VendorNumber" type="xsd:string"/>
+                    </choice>
+                </sequence>
+            </complexType>
+        </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:opre="http://www.ingrammicro.com/common/ResponseMessagePreamble_v2_0/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.ingrammicro.com/common/ResponseMessagePreamble_v2_0/types">
+            <annotation>
+                <documentation>This top level element represents the common response preamble</documentation>
+            </annotation>
+            <complexType name="ResponsePreambleType">
+                <sequence>
+                    <element name="RequestStatus">
+                        <simpleType>
+                            <restriction base="xsd:string">
+                                <enumeration value="SUCCESS"/>
+                                <enumeration value="SUCCESSWITHERROR"/>
+                                <enumeration value="FAILED"/>
+                            </restriction>
+                        </simpleType>
+                    </element>
+                    <element minOccurs="0" name="ReturnCode" type="xsd:string"/>
+                    <element minOccurs="0" name="ReturnMessage" type="xsd:string"/>
+                </sequence>
+            </complexType>
+        </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ihdr="http://www.ingrammicro.com/common/ServiceRequestHeader_v1_0/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.ingrammicro.com/common/ServiceRequestHeader_v1_0/types">
+            <annotation>
+                <documentation>This schema represents the transport level input header elements for a call to an EBS.</documentation>
+            </annotation>
+            <complexType name="AsynchronousRequestType">
+                <sequence>
+                    <choice>
+                        <element name="callbackServiceBinding" type="xsd:string"/>
+                        <element fixed="true" name="fireAndForget" type="xsd:boolean"/>
+                        <element fixed="true" name="topicSubscription" type="xsd:boolean"/>
+                    </choice>
+                    <element minOccurs="0" name="messageTTLMinutes" type="xsd:unsignedInt"/>
+                </sequence>
+            </complexType>
+            <complexType name="CredentialType">
+                <sequence>
+                    <element name="ID" type="xsd:string"/>
+                    <element minOccurs="0" name="credential" type="xsd:string"/>
+                </sequence>
+            </complexType>
+            <complexType name="TransactionModelType">
+                <choice>
+                    <element fixed="true" minOccurs="0" name="synchronousRequest" type="xsd:boolean"/>
+                    <element ref="ihdr:asynchronousRequest"/>
+                </choice>
+            </complexType>
+            <element name="asynchronousRequest" type="ihdr:AsynchronousRequestType"/>
+            <element name="serviceRequestHeader">
+                <complexType>
+                    <all>
+                        <element name="applicationCredential" type="ihdr:CredentialType"/>
+                        <element minOccurs="0" name="clientTransactionID" type="xsd:string"/>
+                        <element minOccurs="0" name="isoLanguageCode" type="xsd:string"/>
+                        <element minOccurs="0" name="purposeCode" type="xsd:string"/>
+                        <element minOccurs="0" name="transactionID" type="xsd:string"/>
+                        <element name="transactionModel" type="ihdr:TransactionModelType"/>
+                        <element name="userCredential" type="ihdr:CredentialType"/>
+                    </all>
+                </complexType>
+            </element>
+        </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ohdr="http://www.ingrammicro.com/common/ServiceResponseHeader_v1_0/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.ingrammicro.com/common/ServiceResponseHeader_v1_0/types">
+            <annotation>
+                <documentation>This schema represents the transport level output header elements for a call to an EBS.</documentation>
+            </annotation>
+            <complexType name="PerformanceDataType">
+                <sequence>
+                    <element name="transactionStartTime" type="xsd:dateTime"/>
+                    <element name="transactionEndTime" type="xsd:dateTime"/>
+                </sequence>
+            </complexType>
+            <element name="serviceResponseHeader">
+                <complexType>
+                    <all>
+                        <element minOccurs="0" name="clientTransactionID" type="xsd:string"/>
+                        <element minOccurs="0" name="performanceData" type="ohdr:PerformanceDataType"/>
+                        <element name="transactionID" type="xsd:string"/>
+                    </all>
+                </complexType>
+            </element>
+        </schema>
+        <xs:schema xmlns="http://www.tibco.com/schemas/OrderLTLUpdate_v1_0/Resources/Schema.xsd" xmlns:ipre="http://www.ingrammicro.com/common/RequestMessagePreamble_v2_0/types" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.tibco.com/schemas/OrderLTLUpdate_v1_0/Resources/Schema.xsd">
+            <xs:import namespace="http://www.ingrammicro.com/common/RequestMessagePreamble_v2_0/types"/>
+            <xs:complexType name="lineType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="distributionNumber" type="xs:string"/>
+                    <xs:element minOccurs="0" name="shipmentNumber" type="xs:string"/>
+                    <xs:element minOccurs="0" name="taxStatus" type="xs:string"/>
+                    <xs:element minOccurs="0" name="quantityOrdered" type="xs:string"/>
+                    <xs:element name="actionFlag" type="xs:string"/>
+                    <xs:element minOccurs="0" name="lineDescription1" type="xs:string"/>
+                    <xs:element minOccurs="0" name="lineDescription2" type="xs:string"/>
+                    <xs:element minOccurs="0" name="unitPrice" type="xs:string"/>
+                    <xs:element minOccurs="0" name="warehouseID" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="orderLTLUpdateRequestType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="orderBranchNumber" type="xs:string"/>
+                    <xs:element minOccurs="0" name="orderNumber" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" name="lines" type="ns2:lineType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="serviceRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="requestPreamble" type="ipre:RequestPreambleType"/>
+                        <xs:element name="orderLTLUpdateRequest" type="ns2:orderLTLUpdateRequestType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns="http://www.ingrammicro.com/OrderLTLUpdate_v1_1/Resources/OrderLTLUpdateResponse/types" xmlns:opre="http://www.ingrammicro.com/common/ResponseMessagePreamble_v2_0/types" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.ingrammicro.com/OrderLTLUpdate_v1_1/Resources/OrderLTLUpdateResponse/types">
+            <xs:import namespace="http://www.ingrammicro.com/common/ResponseMessagePreamble_v2_0/types"/>
+            <xs:complexType name="LineType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="lineNumber" type="xs:string"/>
+                    <xs:element minOccurs="0" name="responseFlag" type="xs:string"/>
+                    <xs:element minOccurs="0" name="errorType" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="serviceResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="responsePreamble" type="opre:ResponsePreambleType"/>
+                        <xs:element minOccurs="0" name="OrderLTLUpdateResponse">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element maxOccurs="10" name="lines" type="ns3:LineType"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:eucfault="http://www.ingrammicro.com/common/SOAPFault_v2_0/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.ingrammicro.com/common/SOAPFault_v2_0/types">
+            <annotation>
+                <documentation>This top level element represents the common response preamble</documentation>
+            </annotation>
+            <element name="ServiceFault">
+                <complexType>
+                    <all>
+                        <element minOccurs="0" name="Code" type="xsd:string"/>
+                        <element minOccurs="0" name="Description" type="xsd:string"/>
+                    </all>
+                </complexType>
+            </element>
+        </schema>
+    </wsdl:types>
+    <wsdl:service name="OrderLTLUpdate_v1_0">
+        <wsdl:port binding="tns:OrderLTLUpdateBinding" name="OrderLTLUpdate">
+            <soap:address location="http://localhost:39661/Resources/OrderLTLUpdate_v1_0.serviceagent/OrderLTLUpdate"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:portType name="OrderLTLUpdatePortType">
+        <wsdl:operation name="Update">
+            <wsdl:input message="tns:OrderLTLUpdateInput"/>
+            <wsdl:output message="tns:OrderLTLUpdateOutput"/>
+            <wsdl:fault message="tns:OrderLTLUpdateFault" name="fault1"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="OrderLTLUpdateBinding" type="tns:OrderLTLUpdatePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Update">
+            <soap:operation soapAction="/Resources/OrderLTLUpdate_v1_0.serviceagent/OrderLTLUpdate/Update" style="document"/>
+            <wsdl:input>
+                <soap:body parts="request" use="literal"/>
+                <soap:header message="tns:requestHeader" part="reqheadpart" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="response" use="literal"/>
+                <soap:header message="tns:responseHeader" part="resheadpart" use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault1">
+                <soap:fault name="fault1" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:message name="requestHeader">
+        <wsdl:part element="ns0:serviceRequestHeader" name="reqheadpart"/>
+    </wsdl:message>
+    <wsdl:message name="responseHeader">
+        <wsdl:part element="ns1:serviceResponseHeader" name="resheadpart"/>
+    </wsdl:message>
+    <wsdl:message name="OrderLTLUpdateInput">
+        <wsdl:part element="ns2:serviceRequest" name="request"/>
+    </wsdl:message>
+    <wsdl:message name="OrderLTLUpdateOutput">
+        <wsdl:part element="ns3:serviceResponse" name="response"/>
+    </wsdl:message>
+    <wsdl:message name="OrderLTLUpdateFault">
+        <wsdl:part element="ns4:ServiceFault" name="fault"/>
+    </wsdl:message>
+</wsdl:definitions>

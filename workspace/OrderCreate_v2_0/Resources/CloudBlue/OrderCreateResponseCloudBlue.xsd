@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ocreq="http://www.ingrammicro.com/product/OrderCreate_v2_0_Service/Resources/OrderCreateResponseCloudBlue.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.ingrammicro.com/product/OrderCreate_v2_0_Service/Resources/OrderCreateResponseCloudBlue.xsd">
+	<annotation>
+		<documentation>
+
+            This top level element represents a
+    </documentation>
+	</annotation>
+	<import namespace="http://www.w3.org/XML/1998/namespace"/>
+	<element name="ordercreateresponse">
+		<complexType>
+			<sequence>
+				<element minOccurs="0" name="id" type="xsd:string"/>
+				<element minOccurs="0" name="type" type="xsd:string"/>
+				<element minOccurs="0" name="customerId" type="xsd:string"/>
+				<element minOccurs="0" name="creationDate" type="xsd:string"/>
+				<element name="status" type="xsd:string"/>
+				<element minOccurs="0" name="attributes">
+					<complexType>
+						<sequence>
+							<element minOccurs="0" name="PONumber" type="xsd:string"/>
+						</sequence>
+					</complexType>
+				</element>
+				<element minOccurs="0" name="message" type="xsd:string"/>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

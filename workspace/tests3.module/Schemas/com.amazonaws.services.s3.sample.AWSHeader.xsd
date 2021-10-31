@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="www.tibco.com/plugin/java/xmlSchema/com.amazonaws.services.s3.sample.AWSHeader" xmlns:tns="www.tibco.com/plugin/java/xmlSchema/com.amazonaws.services.s3.sample.AWSHeader" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="AWSHeader" type="tns:AWSHeaderType"/>
+
+  <xs:complexType name="AWSHeaderType">
+    <xs:sequence>
+      <xs:element name="amzContentSha256" type="xs:string" minOccurs="0"/>
+      <xs:element name="amzDate" type="xs:string" minOccurs="0"/>
+      <xs:element name="authorization" type="xs:string" minOccurs="0"/>
+      <xs:element name="contentLength" type="xs:int" minOccurs="0"/>
+      <xs:element name="host" type="xs:string" minOccurs="0"/>
+      <xs:element name="storageClass" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

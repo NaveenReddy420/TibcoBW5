@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ocreq="http://www.ingrammicro.com/product/OrderCreate_v2_0_Service/Resources/ResellerIDResponse.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.ingrammicro.com/product/OrderCreate_v2_0_Service/Resources/ResellerIDResponse.xsd">
+	<annotation>
+		<documentation>
+
+            This top level element represents a
+    </documentation>
+	</annotation>
+	<import namespace="http://www.w3.org/XML/1998/namespace"/>
+	<element name="resellerIDResponse">
+		<complexType>
+			<sequence>
+				<element name="id" type="xsd:string"/>
+</sequence>
+		</complexType>
+	</element>
+</schema>

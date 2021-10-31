@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.tibco.com/schemas/workspace/15-12-2020/Schema.xsd"
+	 targetNamespace="http://www.tibco.com/schemas/workspace/15-12-2020/Schema.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="StudentDetails">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="AccountNo"/>
+				<xs:element ref="RoolNo"/>
+				<xs:element ref="Name"/>
+				<xs:element ref="FatherName"/>
+				<xs:element ref="Branch"/>
+				<xs:element ref="M1"/>
+				<xs:element ref="M2"/>
+				<xs:element ref="M3"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AccountNo" type="xs:int"/>
+	<xs:element name="RoolNo" type="xs:int"/>
+	<xs:element name="Name" type="xs:string"/>
+	<xs:element name="FatherName" type="xs:string"/>
+	<xs:element name="Branch" type="xs:string"/>
+	<xs:element name="M1" type="xs:int"/>
+	<xs:element name="M2" type="xs:int"/>
+	<xs:element name="M3" type="xs:int"/>
+</xs:schema>

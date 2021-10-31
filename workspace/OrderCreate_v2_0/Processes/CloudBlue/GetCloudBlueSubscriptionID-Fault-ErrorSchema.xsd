@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns="http://xmlns.example.com/1586848743442/Processes/CloudBlue/GetCloudBlueSubscriptionID/Generate-Error-Fault-ErrorHandlerInput.xsd" xmlns:tns="http://xmlns.example.com/1586848743442/Processes/CloudBlue/GetCloudBlueSubscriptionID/Generate-Error-Fault-ErrorHandlerInput.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.example.com/1586848743442/Processes/CloudBlue/GetCloudBlueSubscriptionID/Generate-Error-Fault-ErrorHandlerInput.xsd">
+    <xs:element name="ErrorHandlerInput">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="SourceProcessName" type="xs:string"/>
+                <xs:element minOccurs="0" name="SourceActivityName" type="xs:string"/>
+                <xs:element minOccurs="0" name="ErrorCode" type="xs:string"/>
+                <xs:element minOccurs="0" name="ErrorText" type="xs:string"/>
+                <xs:element minOccurs="0" name="RethrowErrorFlag" type="xs:boolean"/>
+                <xs:element minOccurs="0" name="ErrorDetails">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="TimeStamp" type="xs:dateTime"/>
+                            <xs:element minOccurs="0" name="EndSystemTransactionName" type="xs:string"/>
+                            <xs:element minOccurs="0" name="QueueName" type="xs:string"/>
+                            <xs:element minOccurs="0" name="ClientData" type="xs:string"/>
+                            <xs:element minOccurs="0" name="TransactionId" type="xs:string"/>
+                            <xs:element minOccurs="0" name="ActionRequired" type="xs:string"/>
+                            <xs:element minOccurs="0" name="DataOnHand" type="xs:string"/>
+                            <xs:element minOccurs="0" name="StackTrace" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

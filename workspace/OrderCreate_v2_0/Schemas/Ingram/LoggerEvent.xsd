@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ae="http://www.tibco.com/xmlns/ae2xsd/2002/05" xmlns:ns3="http://www.tibco.com/xmlns/ae2xsd/2002/05/Ingram/LoggerEvent" targetNamespace="http://www.tibco.com/xmlns/ae2xsd/2002/05/Ingram/LoggerEvent" elementFormDefault="qualified" attributeFormDefault="qualified">
+    <import namespace="http://www.tibco.com/xmlns/ae2xsd/2002/05" schemaLocation="../ae2xsd.xsd"/>
+    <complexType ae:typename="/tibco/public/class/Ingram/LoggerEvent/LoggerEvent" ae:directory="/AESchemas/Ingram/LoggerEvent.aeschema#class.LoggerEvent" ae:type="class" name="LoggerEvent">
+        <sequence>
+            <element ae:readable="true" ae:key="true" ae:writeable="true" name="sourceProcessName" form="unqualified" nillable="true" type="ae:string" minOccurs="0"/>
+            <element ae:readable="true" ae:key="false" ae:writeable="true" name="sourceActivityName" form="unqualified" nillable="true" type="ae:string" minOccurs="0"/>
+            <element ae:readable="true" ae:key="false" ae:writeable="true" name="logLevel" form="unqualified" nillable="true" type="ae:i1" minOccurs="0"/>
+            <element ae:readable="true" ae:key="false" ae:writeable="true" name="logText" form="unqualified" nillable="true" type="ae:string" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <element name="LoggerEvent" type="ns3:LoggerEvent"/>
+</schema>

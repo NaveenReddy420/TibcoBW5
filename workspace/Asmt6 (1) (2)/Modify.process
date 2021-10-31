@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://xmlns.example.com/1609308862890" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/schemas/workspace/Asmt6 (1)/Schema.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:import namespace="http://xmlns.example.com/1609308862890" location="/Asmt6 (1) (2)/WSDL.wsdl"/>
+    <pd:name>Asmt6 (1) (2)/Modify.process</pd:name>
+    <pd:startName>SOAPEventSource</pd:startName>
+    <pd:startX>0</pd:startX>
+    <pd:startY>0</pd:startY>
+    <pd:returnBindings/>
+    <pd:starter name="SOAPEventSource">
+        <pd:type>com.tibco.plugin.soap.SOAPEventSource</pd:type>
+        <pd:resourceType>ae.activities.SOAPEventSourceUI</pd:resourceType>
+        <pd:x>145</pd:x>
+        <pd:y>50</pd:y>
+        <config>
+            <service>pfx:PortType</service>
+            <wsdlNamespaceRoot>http://xmlns.example.com/1609308862890/ModifyOperationImpl</wsdlNamespaceRoot>
+            <operation>ModifyOperation</operation>
+            <portAddressPrefix/>
+            <operationStyle>rpc</operationStyle>
+            <soapUse>literal</soapUse>
+            <inputNamespace>http://InputMessageNamespace</inputNamespace>
+            <outputNamespace>http://OutputMessageNamespace</outputNamespace>
+            <faultNamespace>http://FaultMessageNamespace</faultNamespace>
+            <embedWsdlComponents>true</embedWsdlComponents>
+            <embedSchemaComponents>true</embedSchemaComponents>
+            <soapAction>/Asmt6%20(1)%20(2)/Modify</soapAction>
+            <sharedChannel>/SharedResources/Connections/HTTP Connection.sharedhttp</sharedChannel>
+            <soapVersion>SOAP 1.1</soapVersion>
+            <soapAttachmentStyle>SwA</soapAttachmentStyle>
+        </config>
+        <pd:inputBindings/>
+    </pd:starter>
+    <pd:endName>End</pd:endName>
+    <pd:endX>723</pd:endX>
+    <pd:endY>58</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1609309685029</pd:targetNamespace>
+    <pd:activity name="SOAPSendReply">
+        <pd:type>com.tibco.plugin.soap.SOAPSendReplyActivity</pd:type>
+        <pd:resourceType>ae.activities.SOAPSendReplyUI</pd:resourceType>
+        <pd:x>511</pd:x>
+        <pd:y>51</pd:y>
+        <config>
+            <eventSource>SOAPEventSource</eventSource>
+            <sharedChannels>
+                <jmsChannel>
+                    <JMSDeliveryMode>2</JMSDeliveryMode>
+                </jmsChannel>
+            </sharedChannels>
+        </config>
+        <pd:inputBindings>
+            <ModifyOperationResponse>
+                <Response>
+                    <xsl:value-of select="$JDBC-Update/jdbcUpdateActivityOutput/noOfUpdates"/>
+                </Response>
+            </ModifyOperationResponse>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="JDBC Update">
+        <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
+        <pd:x>318</pd:x>
+        <pd:y>48</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/SharedResources/Connections/JDBC Connection.sharedjdbc</jdbcSharedConfig>
+            <statement>UPDATE studentdetails
+SET studentname=?, fathername=?, branch=?, m1=?, m2=?, m3=?
+WHERE rollno=?</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>studentname</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>fathername</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>branch</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>m1</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>m2</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>m3</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>rollno</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+        </config>
+        <pd:inputBindings>
+            <jdbcUpdateActivityInput>
+                <studentname>
+                    <xsl:value-of select="$SOAPEventSource/ModifyOperation/Request/ns:StudentDetails/ns:StudentName"/>
+                </studentname>
+                <fathername>
+                    <xsl:value-of select="$SOAPEventSource/ModifyOperation/Request/ns:StudentDetails/ns:FatherName"/>
+                </fathername>
+                <branch>
+                    <xsl:value-of select="$SOAPEventSource/ModifyOperation/Request/ns:StudentDetails/ns:Branch"/>
+                </branch>
+                <m1>
+                    <xsl:value-of select="$SOAPEventSource/ModifyOperation/Request/ns:StudentDetails/ns:M1"/>
+                </m1>
+                <m2>
+                    <xsl:value-of select="$SOAPEventSource/ModifyOperation/Request/ns:StudentDetails/ns:M2"/>
+                </m2>
+                <m3>
+                    <xsl:value-of select="$SOAPEventSource/ModifyOperation/Request/ns:StudentDetails/ns:M3"/>
+                </m3>
+                <rollno>
+                    <xsl:value-of select="$SOAPEventSource/ModifyOperation/Request/ns:StudentDetails/ns:RollNO"/>
+                </rollno>
+            </jdbcUpdateActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>SOAPEventSource</pd:from>
+        <pd:to>JDBC Update</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>JDBC Update</pd:from>
+        <pd:to>SOAPSendReply</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>SOAPSendReply</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

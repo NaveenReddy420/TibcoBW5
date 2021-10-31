@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BWSharedResource xmlns:pfx="http://www.tibco.com/schemas/workspace/15-12-2020/Schema.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <import namespace="http://www.tibco.com/schemas/workspace/15-12-2020/Schema.xsd" schemaLocation="/15-12-2020/StudentSchema.xsd"/>
+    <name>Data Format</name>
+    <resourceType>ae.shared.ParseSharedResource</resourceType>
+    <config xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <FormatType>Delimiter separated</FormatType>
+        <ColumnSeparator>,</ColumnSeparator>
+        <ColSeparatorRule>Treat all characters as entered as a single column separator string</ColSeparatorRule>
+        <LineSeparator>
+</LineSeparator>
+        <FillCharacter>Space</FillCharacter>
+        <DataFormat>
+            <xsd:element name="StudentDetails">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="RollNo" type="xsd:int"/>
+                        <xsd:element name="Name" type="xsd:string"/>
+                        <xsd:element name="FatherName" type="xsd:string"/>
+                        <xsd:element name="Branch" type="xsd:string"/>
+                        <xsd:element name="M1" type="xsd:int"/>
+                        <xsd:element name="M2" type="xsd:int"/>
+                        <xsd:element name="M3" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </DataFormat>
+    </config>
+</BWSharedResource>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="/OrderCreate_v2_0/Processes/ValidateRequest-Start-Input.xsd" xmlns:ns="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:ns1="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns2="http://www.tibco.com/pe/EngineTypes" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:pfx="http://www.ingrammicro.com/product/OrderCreate_v2_0_Service/Resources/OrderCreateRequest.xsd" xmlns:pfx2="http://www.tibco.com/xmlns/ae2xsd/2002/05/Ingram/ErrorHandlerEvent_v2_1" xmlns:pfx3="http://www.tibco.com/xmlns/ae2xsd/2002/05/Ingram/ErrorHandlerEvent_v2_2" xmlns:pfx4="http://www.tibco.com/xmlns/ae2xsd/2002/05/Ingram/ErrorHandlerEvent" xmlns:pfx5="http://www.tibco.com/schemas/SplunkEAILoggingLibrary_1_0/LoggingFrameworkResources/LoggingFrameworkSchema/ErrorHandler_V3.0.xsd" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="/OrderCreate_v2_0/Processes/ValidateRequest-Start-Input.xsd">
+    <xsd:element name="ordercreaterequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="requestpreamble">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element minOccurs="0" name="isocountrycode" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="customernumber" type="xsd:string"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="ordercreatedetails">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element minOccurs="0" name="systemid" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="customerponumber" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="ompordernumber" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="ordertype" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="enduserordernumber" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="billtosuffix" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="shiptosuffix" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="shiptoaddress">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element minOccurs="0" name="attention" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="name1" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="name2" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="addressline1" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="addressline2" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="addressline3" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="city" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="state" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="postalcode" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="countrycode" type="xsd:string"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element minOccurs="0" name="carriercode" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="freightamount" type="xsd:decimal"/>
+                            <xsd:element minOccurs="0" name="thirdpartyfreightaccountnumber" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="specialbidnumber" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="programtype" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="endusertype" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="solicitationnumber" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="enduserdata" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="enduserpostalcode" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="publicprivatecode" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="requesteddeliverydate" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="requestedshipbydate" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="requestedcancelbydate" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="emailaddress" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="placeoncustomerhold" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="promisedate" type="xsd:date"/>
+                            <xsd:element minOccurs="0" name="currencycode" type="xsd:string"/>
+                            <xsd:element minOccurs="0" name="enduser">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element minOccurs="0" name="id" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="title" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="name1" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="name2" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="name3" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="name4" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="addressline1" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="addressline2" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="addressline3" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="addressline4" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="city" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="state" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="postalcode" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="countrycode" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="phonenumber" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="extensionnumber" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="faxnumber" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="companyname" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="companyvatnumber" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="pricinglevelcode" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="email" type="xsd:string"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element minOccurs="0" name="creditcardinfo">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element minOccurs="0" name="paymentcode" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="cardtype" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="creditcardnumber" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="expirationmonth" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="expirationyear" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="authorizationprovider" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="securecode" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="authorizationcode" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="authorizationamount" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="city" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="state" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="postalcode" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="lastname" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="firstnameinitial" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="address" type="xsd:string"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element maxOccurs="unbounded" name="lines">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element minOccurs="0" name="linetype" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="linenumber" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="globalskuid" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="quantity" type="xsd:decimal"/>
+                                        <xsd:element minOccurs="0" name="ingrampartnumber" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="manufacturerpartnumber" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="vendornumber" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="enduserponumber" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="productdescription" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="specialprice" type="xsd:double"/>
+                                        <xsd:element minOccurs="0" name="sellingprice" type="xsd:decimal"/>
+                                        <xsd:element minOccurs="0" name="enduserprice" type="xsd:decimal"/>
+                                        <xsd:element minOccurs="0" name="warehouseid" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="unitprice" type="xsd:decimal"/>
+                                        <xsd:element minOccurs="0" name="netamount" type="xsd:decimal"/>
+                                        <xsd:element minOccurs="0" name="taxamount" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="freightamount" type="xsd:string"/>
+                                        <xsd:element minOccurs="0" name="enduser">
+                                            <xsd:complexType>
+                                                <xsd:sequence>
+                                                    <xsd:element minOccurs="0" name="id" type="xsd:string"/>
+                                                    <xsd:element minOccurs="0" name="title" type="xsd:string"/>
+                                                    <xsd:element minOccurs="0" name="name1" type="xsd:string"/>
+                                                    <xsd:element minOccurs="0" name="name2" type="xsd:string"/>
+                                                    <xsd:element minOccurs="0" name="name3" type="xsd:string"/>
+                                                    <xsd:element minOccurs="0" name="name4" type="xsd:string"/>
+                                                    <xsd:element minOccurs="0" name="addressline1" type="xsd:string"/>
+                                                    <xsd:element minOccurs="0" name="addressline2" type="xsd:string"/>
+                                                    <xsd:element minOccurs="0" name="addressline3" type="xsd:string"/>
+                                                    <xsd:element minOccurs="0" name="addressline4" type="xsd:string"/>
+                                                    <xsd:element minOccurs="0" name="city" type="xsd:string"/>
+                                                    <xsd:element minOccurs="0" name="state" type="xsd:string"/>
+                                                    <xsd:element minOccurs="0" name="postalcode" type="xsd:string"/>
+                                                    <xsd:element minOccurs="0" name="countrycode" type="xsd:string"/>
+                                                    <xsd:element minOccurs="0" name="phonenumber" type="xsd:string"/>
+                                                    <xsd:element minOccurs="0" name="extensionnumber" type="xsd:string"/>
+                                                    <xsd:element minOccurs="0" name="faxnumber" type="xsd:string"/>
+                                                    <xsd:element minOccurs="0" name="companyname" type="xsd:string"/>
+                                                    <xsd:element minOccurs="0" name="companyvatnumber" type="xsd:string"/>
+                                                    <xsd:element minOccurs="0" name="pricinglevelcode" type="xsd:string"/>
+                                                    <xsd:element minOccurs="0" name="email" type="xsd:string"/>
+                                                </xsd:sequence>
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="productextendedspecs">
+                                            <xsd:complexType>
+                                                <xsd:sequence>
+                                                    <xsd:element name="attributename" type="xsd:string"/>
+                                                    <xsd:element name="attributevalue" type="xsd:string"/>
+                                                </xsd:sequence>
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                        <xsd:element maxOccurs="unbounded" minOccurs="0" name="serviceextendedspecs">
+                                            <xsd:complexType>
+                                                <xsd:sequence>
+                                                    <xsd:element name="attributename" type="xsd:string"/>
+                                                    <xsd:element name="attributevalue" type="xsd:string"/>
+                                                </xsd:sequence>
+                                            </xsd:complexType>
+                                        </xsd:element>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element maxOccurs="unbounded" minOccurs="0" name="extendedspecs">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element name="attributename" type="xsd:string"/>
+                                        <xsd:element name="attributevalue" type="xsd:string"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

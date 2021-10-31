@@ -1,0 +1,8 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<Employee xmlns = "http://www.tibco.com/schemas/workspace/XMLtransform/Schema.xsd" xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation = "http://www.tibco.com/schemas/workspace/XMLtransform/Schema.xsd EmployeeSchema.xsd">
+	<EmployeeDetails>
+		<Name>"Ramu"</Name>
+		<Age>22</Age>
+		<DOB>1997-26-06</DOB>
+	</EmployeeDetails>
+</Employee>

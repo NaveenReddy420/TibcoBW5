@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ocauthreq="http://www.ingrammicro.com/product/OrderCreate_v2_0_Service/Resources/OrderCreateAuthRequest.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.ingrammicro.com/product/OrderCreate_v2_0_Service/Resources/OrderCreateAuthRequest.xsd">
+	<annotation>
+		<documentation>
+
+            This top level element represents a
+    </documentation>
+	</annotation>
+	<import namespace="http://www.w3.org/XML/1998/namespace"/>
+	<element name="ServiceRequest">
+		<complexType>
+			<sequence>
+				<element name="OrderCreateAuthRequest" type="ocauthreq:OrderCreateAuthRequestType"/>
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="OrderCreateAuthRequestType">
+		<sequence>
+			<element minOccurs="0" name="CustomerNumber" type="xsd:string"/>
+			<element minOccurs="0" name="CustomerPONumber" type="xsd:string"/>
+			<element minOccurs="0" name="CountryCode" type="xsd:string"/>
+			<element minOccurs="0" name="OrderType" type="xsd:string"/>
+			<element minOccurs="0" name="endUserOrderNumber" type="xsd:string"/>
+			<element minOccurs="0" name="billToSuffix">
+				<simpleType>
+					<restriction base="xsd:string">
+						<length value="3"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="shipToSuffix">
+				<simpleType>
+					<restriction base="xsd:string">
+						<length value="3"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element minOccurs="0" name="currencyCode" type="xsd:string"/>
+			<element minOccurs="0" name="shipToAddress" type="ocauthreq:AddressType"/>
+			<element minOccurs="0" name="carrierCode" type="xsd:string"/>
+			<element minOccurs="0" name="ThirdPartyFrieghtAccountNumber" type="xsd:string"/>
+			<element minOccurs="0" name="specialBidNumber" type="xsd:string"/>
+			<element minOccurs="0" name="terms" type="xsd:string"/>
+			<element minOccurs="0" name="promiseDate" type="xsd:date"/>
+			<element maxOccurs="unbounded" minOccurs="0" name="Lines">
+				<complexType>
+					<sequence>
+						<element minOccurs="0" name="linetype" type="xsd:string"/>
+						<element minOccurs="0" name="LineNumber" type="xsd:string"/>
+						<element minOccurs="0" name="GlobalSKUID" type="xsd:string"/>
+						<element minOccurs="0" name="Quantity" type="xsd:string"/>
+						<element minOccurs="0" name="IngramPartNumber" type="xsd:string"/>
+						<element minOccurs="0" name="ManufacturerPartNumber" type="xsd:string"/>
+						<element minOccurs="0" name="VendorNumber" type="xsd:string"/>
+						<element minOccurs="0" name="productdescription" type="xsd:string"/>
+						<element minOccurs="0" name="SellingPrice" type="xsd:decimal"/>
+						<element minOccurs="0" name="EndUserPrice" type="xsd:decimal"/>
+						<element minOccurs="0" name="WarehouseID" type="xsd:string"/>
+						<element minOccurs="0" name="UnitPrice" type="xsd:decimal"/>
+						<element minOccurs="0" name="EndUserPONumber" type="xsd:string"/>
+						<element maxOccurs="unbounded" minOccurs="0" name="ProductExtendedSpecs">
+							<complexType>
+								<sequence>
+									<element name="AttributeName" type="xsd:string"/>
+									<element name="AttributeValue" type="xsd:string"/>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+			<element minOccurs="0" name="EndUser" type="ocauthreq:EndUserType"/>
+			<element maxOccurs="unbounded" minOccurs="0" name="ExtendedSpecs">
+				<complexType>
+					<sequence>
+						<element name="AttributeName" type="xsd:string"/>
+						<element name="AttributeValue" type="xsd:string"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="AddressType">
+		<sequence>
+			<element minOccurs="0" name="attention" type="xsd:string"/>
+			<element minOccurs="0" name="addressLine1" type="xsd:string"/>
+			<element minOccurs="0" name="addressLine2" type="xsd:string"/>
+			<element minOccurs="0" name="addressLine3" type="xsd:string"/>
+			<element minOccurs="0" name="city" type="xsd:string"/>
+			<element minOccurs="0" name="state" type="xsd:string"/>
+			<element minOccurs="0" name="postalCode" type="xsd:string"/>
+			<element minOccurs="0" name="countryCode" type="xsd:string"/>
+		</sequence>
+	</complexType>
+	<complexType name="EndUserType">
+		<sequence>
+			<element minOccurs="0" name="ID" type="xsd:string"/>
+			<element minOccurs="0" name="Title" type="xsd:string"/>
+			<element minOccurs="0" name="Name1" type="xsd:string"/>
+			<element minOccurs="0" name="Name2" type="xsd:string"/>
+			<element minOccurs="0" name="Name3" type="xsd:string"/>
+			<element minOccurs="0" name="Name4" type="xsd:string"/>
+			<element minOccurs="0" name="AddressLine1" type="xsd:string"/>
+			<element minOccurs="0" name="AddressLine2" type="xsd:string"/>
+			<element minOccurs="0" name="AddressLine3" type="xsd:string"/>
+			<element minOccurs="0" name="AddressLine4" type="xsd:string"/>
+			<element minOccurs="0" name="City" type="xsd:string"/>
+			<element minOccurs="0" name="State" type="xsd:string"/>
+			<element minOccurs="0" name="PostalCode" type="xsd:string"/>
+			<element minOccurs="0" name="CountryCode" type="xsd:string"/>
+			<element minOccurs="0" name="PhoneNumber" type="xsd:string"/>
+			<element minOccurs="0" name="ExtensionNumber" type="xsd:string"/>
+			<element minOccurs="0" name="FaxNumber" type="xsd:string"/>
+			<element minOccurs="0" name="Email" type="xsd:string"/>
+		</sequence>
+	</complexType>
+</schema>

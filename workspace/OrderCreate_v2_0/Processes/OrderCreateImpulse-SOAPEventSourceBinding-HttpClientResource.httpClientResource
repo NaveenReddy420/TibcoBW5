@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:http="http://xsd.tns.tibco.com/bw/models/sharedresource/httpclient" xmlns:id="http://www.tibco.com/ws/2013/11/identity" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:oasis-200401-wss-wssecurity-utility-1.0.xsd="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" xmlns:sca_ext="http://www.tibco.com/ns/sca/201311" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:sslclient="http://xsd.tns.tibco.com/bw/sharedresource/trinity/models/sslclient" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmi:id="_SwdFYGrYEeuibc2NIPv6fQ" name="Processes.OrderCreateImpulse-SOAPEventSourceBinding-HttpClientResource" type="http:HttpClientConfiguration" policySets="F-1079306626-ilE-F-sslClient-PolicySet" identitySets="F-1079306626-ilE-F-sslClient-IdentitySet">
+  <policySet xmi:id="_SwjzEGrYEeuibc2NIPv6fQ" appliesTo="namedresource" name="F-1079306626-ilE-F-sslClient-PolicySet" provides="confidentiality">
+    <sca:intentMap xmi:id="_SwjzEWrYEeuibc2NIPv6fQ" provides="sca:confidentiality">
+      <sca:qualifier xmi:id="_SwjzEmrYEeuibc2NIPv6fQ" name="transport">
+        <wsp:Policy xmi:id="_SwjzE2rYEeuibc2NIPv6fQ" oasis-200401-wss-wssecurity-utility-1.0.xsd:Id="F-1079306626-ilE-F-sslClient">
+          <sp:TransportBinding xmi:id="_SwjzFGrYEeuibc2NIPv6fQ">
+            <wsp:Policy xmi:id="_SwjzFWrYEeuibc2NIPv6fQ">
+              <sp:TransportToken xmi:id="_SwjzFmrYEeuibc2NIPv6fQ">
+                <wsp:Policy xmi:id="_SwjzF2rYEeuibc2NIPv6fQ">
+                  <sp:HttpsToken xmi:id="_SwjzGGrYEeuibc2NIPv6fQ"/>
+                </wsp:Policy>
+              </sp:TransportToken>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:Policy>
+      </sca:qualifier>
+    </sca:intentMap>
+  </policySet>
+  <policySet xmi:id="_TPCe0GrYEeuibc2NIPv6fQ" appliesTo="namedresource" name="F-1079306626-ilE-F-sslClient-PolicySet" provides="confidentiality">
+    <sca:intentMap xmi:id="_TPCe0WrYEeuibc2NIPv6fQ" provides="sca:confidentiality">
+      <sca:qualifier xmi:id="_TPCe0mrYEeuibc2NIPv6fQ" name="transport">
+        <wsp:Policy xmi:id="_TPCe02rYEeuibc2NIPv6fQ" oasis-200401-wss-wssecurity-utility-1.0.xsd:Id="F-1079306626-ilE-F-sslClient">
+          <sp:TransportBinding xmi:id="_TPCe1GrYEeuibc2NIPv6fQ">
+            <wsp:Policy xmi:id="_TPCe1WrYEeuibc2NIPv6fQ">
+              <sp:TransportToken xmi:id="_TPCe1mrYEeuibc2NIPv6fQ">
+                <wsp:Policy xmi:id="_TPCe12rYEeuibc2NIPv6fQ">
+                  <sp:HttpsToken xmi:id="_TPCe2GrYEeuibc2NIPv6fQ"/>
+                </wsp:Policy>
+              </sp:TransportToken>
+            </wsp:Policy>
+          </sp:TransportBinding>
+        </wsp:Policy>
+      </sca:qualifier>
+    </sca:intentMap>
+  </policySet>
+  <identitySet xmi:id="_SwjzGWrYEeuibc2NIPv6fQ" appliesTo="NamedResource" name="F-1079306626-ilE-F-sslClient-IdentitySet" provides="confidentiality">
+    <sca_ext:intentMap xmi:id="_SwjzGmrYEeuibc2NIPv6fQ" provides="sca_ext:confidentiality">
+      <sca_ext:qualifier xmi:id="_SwjzG2rYEeuibc2NIPv6fQ" name="transport">
+        <id:IdentityReference xmi:id="_SwjzHGrYEeuibc2NIPv6fQ" URI="F-1079306626-ilE-F-sslClient" type="sslclient:SSLClientConfiguration"/>
+      </sca_ext:qualifier>
+    </sca_ext:intentMap>
+  </identitySet>
+  <identitySet xmi:id="_TPCe2WrYEeuibc2NIPv6fQ" appliesTo="NamedResource" name="F-1079306626-ilE-F-sslClient-IdentitySet" provides="confidentiality">
+    <sca_ext:intentMap xmi:id="_TPCe2mrYEeuibc2NIPv6fQ" provides="sca_ext:confidentiality">
+      <sca_ext:qualifier xmi:id="_TPCe22rYEeuibc2NIPv6fQ" name="transport">
+        <id:IdentityReference xmi:id="_TPCe3GrYEeuibc2NIPv6fQ" URI="F-1079306626-ilE-F-sslClient" type="sslclient:SSLClientConfiguration"/>
+      </sca_ext:qualifier>
+    </sca_ext:intentMap>
+  </identitySet>
+  <jndi:configuration xsi:type="http:HttpClientConfiguration" xmi:id="_SwdFYWrYEeuibc2NIPv6fQ">
+    <tcpDetails xmi:id="_SwdFYmrYEeuibc2NIPv6fQ" port="10037"/>
+  </jndi:configuration>
+</jndi:namedResource>

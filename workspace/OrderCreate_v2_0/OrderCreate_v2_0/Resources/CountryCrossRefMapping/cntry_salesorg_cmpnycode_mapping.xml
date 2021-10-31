@@ -1,0 +1,51 @@
+<?xml version = "1.0" encoding = "iso-8859-1"?>
+
+<!--   * This file contains mappings between ISO company code and Impulse company code and SAP sales organisation
+       *    
+       * Namita Dabholkar Dec 17, 2016 
+-->
+
+<!-- The following values can be used in any environment -->
+<countries>
+	<country company_code = "MD" date_format = "MMddyy" entityid = "A300" iso_country_code = "US" region = "IMPA" sales_org = "8190" sales_org_iml = "L801"/>
+	<country company_code = "FT" date_format = "MMddyy" entityid = "A300" iso_country_code = "CA" region = "IMPA" sales_org = "8040" sales_org_iml = "L802"/>
+	<country company_code = "UK" date_format = "ddMMyy" entityid = "A308" iso_country_code = "UK" region = "IMPB" sales_org = "" sales_org_iml = "L401"/>
+	<country company_code = "FR" date_format = "ddMMyy" entityid = "A304" iso_country_code = "FR" region = "IMPB" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "SE" date_format = "ddMMyy" entityid = "A303" iso_country_code = "SE" region = "IMPB" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "HU" date_format = "ddMMyy" iso_country_code = "HU" region = "IMPB" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "DE" date_format = "ddMMyy" entityid = "A302" iso_country_code = "DE" region = "IMPB" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "NL" date_format = "ddMMyy" iso_country_code = "NL" region = "IMPB" sales_org = "4500" sales_org_iml = ""/>
+	<country company_code = "SE" date_format = "ddMMyy" iso_country_code = "NO" region = "IMPB" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "IT" date_format = "ddMMyy" entityid = "A305" iso_country_code = "IT" region = "IMPB" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "ES" date_format = "ddMMyy" entityid = "A306" iso_country_code = "ES" region = "IMPB" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "BE" date_format = "ddMMyy" iso_country_code = "BE" region = "IMPB" sales_org = "4440" sales_org_iml = ""/>
+	<country company_code = "SE" date_format = "ddMMyy" entityid = "A303" iso_country_code = "DK" region = "IMPB" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "FI" date_format = "ddMMyy" iso_country_code = "FI" region = "IMPB" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "CP" date_format = "ddMMyy" entityid = "A307" iso_country_code = "CP" region = "IMPB" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "SG" date_format = "ddMMyy" iso_country_code = "SG" region = "IMPB" sales_org = "2030" sales_org_iml = ""/>
+	<country company_code = "AU" date_format = "ddMMyy" iso_country_code = "AU" region = "IMPB" sales_org = "2210" sales_org_iml = ""/>
+	<country company_code = "NZ" date_format = "ddMMyy" iso_country_code = "NZ" region = "IMPB" sales_org = "2320" sales_org_iml = ""/>
+	<country company_code = "PE" date_format = "ddMMyy" iso_country_code = "PE" region = "IMPB" sales_org = "6460" sales_org_iml = ""/>
+	<country company_code = "CL" date_format = "ddMMyy" iso_country_code = "CL" region = "IMPB" sales_org = "6310" sales_org_iml = ""/>
+	<country company_code = "CO" date_format = "ddMMyy" iso_country_code = "CO" region = "IMPB" sales_org = "6410" sales_org_iml = ""/>
+	<country company_code = "MY" date_format = "ddMMyy" iso_country_code = "MY" region = "IMPB" sales_org = "2090" sales_org_iml = ""/>
+	<country company_code = "MX" date_format = "ddMMyy" entityid = "A310" iso_country_code = "MX" region = "" sales_org = "" sales_org_iml = "L803"/>
+	<country company_code = "EH" date_format = "ddMMyy" iso_country_code = "CN" region = "" sales_org = "" sales_org_iml = "L204"/>
+	<country company_code = "IA" date_format = "ddMMyy" entityid = "A312" iso_country_code = "IN" region = "" sales_org = "" sales_org_iml = "L202"/>
+	<country company_code = "AT" date_format = "ddMMyy" entityid = "A302" iso_country_code = "AT" region = "" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "CH" date_format = "ddMMyy" entityid = "A302" iso_country_code = "CH" region = "" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "PT" date_format = "ddMMyy" entityid = "A306" iso_country_code = "PT" region = "" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "BR" date_format = "ddMMyy" entityid = "A309" iso_country_code = "BR" region = "" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "EH" date_format = "ddMMyy" entityid = "A311" iso_country_code = "EH" region = "IMPB" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "YM" date_format = "ddMMyy" entityid = "A311" iso_country_code = "YM" region = "IMPB" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "TW" date_format = "ddMMyy" entityid = "A311" iso_country_code = "TW" region = "IMPB" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "TH" date_format = "ddMMyy" entityid = "A311" iso_country_code = "TH" region = "IMPB" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "HK" date_format = "ddMMyy" entityid = "A311" iso_country_code = "HK" region = "IMPB" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "BR" date_format = "ddMMyy" iso_country_code = "LA" region = "IMPB" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "BI" date_format = "ddMMyy" entityid = "A312" iso_country_code = "BI" region = "IMPB" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "IA" date_format = "ddMMyy" entityid = "A312" iso_country_code = "IA" region = "IMPB" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "DC" date_format = "ddMMyy" iso_country_code = "DC" region = "IMPB" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "BR" date_format = "ddMMyy" iso_country_code = "BP" region = "IMPB" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "B2" date_format = "ddMMyy" entityid = "A309" iso_country_code = "B2" region = "" sales_org = "" sales_org_iml = ""/>
+	<country company_code = "FT" date_format = "MMddyy" entityid = "A300" iso_country_code = "C2" region = "IMPA" sales_org = "8040" sales_org_iml = ""/>
+</countries>

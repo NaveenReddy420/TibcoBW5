@@ -1,0 +1,2073 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpws:process exitOnStandardFault="no" name="Common.ErrorHandler_v3_0"
+    suppressJoinFailure="yes"
+    targetNamespace="http://xmlns.example.com/1363748760420"
+    xmlns:bpws="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+    xmlns:bw="http://www.tibco.com/bw/xpath/bw-custom-functions"
+    xmlns:info="http://www.tibco.com/bw/process/info"
+    xmlns:ns="http://www.tibco.com/pe/EngineTypes"
+    xmlns:ns0="/SplunkEAILoggingLibrary/Processes/Common/ErrorHandler_v3_0-Start-Input.xsd"
+    xmlns:ns1="http://www.tibco.com/schemas/SplunkEAILoggingLibrary_v1_0/Resources/Common/JobSharedVariables/Schema.xsd"
+    xmlns:ns10="http://tns.tibco.com/bw/palette/internal/activityerror+com.tibco.bw.core.design.process.editor.Activity_4002_Throw"
+    xmlns:ns11="http://www.tibco.com/namespaces/tnt/plugins/jms+16d94e15-95a3-4147-95fc-2b430710f3df+input"
+    xmlns:ns12="http://www.tibco.com/namespaces/tnt/plugins/jms"
+    xmlns:ns13="http://tns.tibco.com/bw/palette/internal/activityerror+bw.jms.send"
+    xmlns:ns2="/SplunkEAILoggingLibrary/Processes/Common/ExecutionStatsFramework_v1_0-Start-Input.xsd"
+    xmlns:ns3="http://tns.tibco.com/bw/activity/sendmail/xsd/input+269a3c85-b20b-4705-a122-9f301fab3406+input"
+    xmlns:ns4="http://tns.tibco.com/bw/palette/internal/activityerror+bw.mail.send"
+    xmlns:ns5="http://www.tibco.com/schemas/EAILoggingFramework_1_0/Resources/Schema/LoggingFrameworkCDM.xsd"
+    xmlns:ns6="http://tns.tibco.com/bw/rv/publish/xsd/input+tns.tibco.com/bw/rv/publish/xsd/input;ActivityInput;XSDElementDeclaration+ActivityInput+6992013f-2614-4632-9137-63dc69740a88+input"
+    xmlns:ns7="http://tns.tibco.com/bw/palette/internal/activityerror+bw.rv.publishRVMessage"
+    xmlns:ns8="http://www.tibco.com/pe/WriteToLogActivitySchema"
+    xmlns:ns9="http://schemas.tibco.com/bw/plugins/basic/6.0/Exceptions"
+    xmlns:pfx21="http://www.tibco.com/schemas/SplunkEAILoggingLibrary_1_0/LoggingFrameworkResources/LoggingFrameworkSchema/ErrorHandler_V3.0.xsd"
+    xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+    xmlns:sca-bpel="http://docs.oasis-open.org/ns/opencsa/sca-bpel/200801"
+    xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions"
+    xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"
+    xmlns:tibprop="http://ns.tibco.com/bw/property" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <tibex:Types>
+        <xs:schema attributeFormDefault="unqualified"
+            elementFormDefault="qualified"
+            targetNamespace="http://www.tibco.com/pe/EngineTypes"
+            xmlns:tns="http://www.tibco.com/pe/EngineTypes" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:complexType block="extension restriction"
+                final="extension restriction" name="ErrorReport">
+                <xs:sequence>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="StackTrace" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="Msg" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="FullClass" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="Class" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="ProcessStack" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="MsgCode" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="Data" type="tns:anydata"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType block="extension restriction"
+                final="extension restriction" name="OptionalErrorReport">
+                <xs:sequence>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0"
+                        name="StackTrace" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="Msg" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0"
+                        name="FullClass" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="Class" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0"
+                        name="ProcessStack" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="MsgCode" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="Data" type="tns:anydata"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType block="extension restriction"
+                final="extension restriction" name="FaultDetail">
+                <xs:sequence>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="ActivityName" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="Data" type="tns:anydata"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="Msg" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="MsgCode" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="ProcessStack" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="StackTrace" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="FullClass" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="Class" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType block="extension restriction"
+                final="extension restriction" name="ProcessContext">
+                <xs:sequence>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="JobId" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="ApplicationName" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="EngineName" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="ProcessInstanceId" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0"
+                        name="CustomJobId" type="xs:string"/>
+                    <!--xs:element name="RestartedFromCheckpoint" form="unqualified" block="extension restriction substitution" type="xs:boolean"/-->
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" maxOccurs="unbounded"
+                        minOccurs="0" name="TrackingInfo" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType block="extension restriction"
+                final="extension restriction" name="anydata">
+                <xs:sequence>
+                    <xs:any namespace="##any" processContents="lax"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element block="extension restriction substitution"
+                final="extension restriction" name="OptionalErrorReport" type="tns:OptionalErrorReport"/>
+            <xs:element block="extension restriction substitution"
+                final="extension restriction" name="ErrorReport" type="tns:ErrorReport"/>
+            <xs:element block="extension restriction substitution"
+                final="extension restriction" name="FaultDetail" type="tns:FaultDetail"/>
+            <xs:element block="extension restriction substitution"
+                final="extension restriction" name="ProcessContext" type="tns:ProcessContext"/>
+            <xs:element block="extension restriction substitution"
+                final="extension restriction" name="CorrelationValue" type="xs:string"/>
+        </xs:schema>
+        <schema attributeFormDefault="unqualified"
+            elementFormDefault="unqualified"
+            targetNamespace="http://schemas.tibco.com/bw/pe/plugin/5.0/exceptions"
+            version="" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.tibco.com/bw/pe/plugin/5.0/exceptions">
+            <complexType name="ActivityExceptionType">
+                <sequence>
+                    <element name="msg" type="string"/>
+                    <element minOccurs="0" name="msgCode" type="string"/>
+                </sequence>
+            </complexType>
+            <element name="ActivityException" type="tns:ActivityExceptionType"/>
+            <complexType name="ActivityTimedOutExceptionType">
+                <complexContent>
+                    <extension base="tns:ActivityExceptionType"/>
+                </complexContent>
+            </complexType>
+            <element name="ActivityTimedOutException" type="tns:ActivityTimedOutExceptionType"/>
+            <complexType name="DuplicateKeyExceptionType">
+                <complexContent>
+                    <extension base="tns:ActivityExceptionType">
+                        <sequence>
+                            <element name="duplicateKey" type="string"/>
+                            <element minOccurs="0" name="previousJobID" type="string"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="DuplicateKeyException" type="tns:DuplicateKeyExceptionType"/>
+        </schema>
+        <xs:schema attributeFormDefault="unqualified"
+            elementFormDefault="qualified"
+            targetNamespace="http://xmlns.tibco.com/encodings/mimefile"
+            xmlns:tns="http://xmlns.tibco.com/encodings/mimefile" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:complexType name="mimeEnvelopeSuperSetType">
+                <xs:sequence>
+                    <xs:element form="unqualified" maxOccurs="unbounded"
+                        minOccurs="0" name="mimePart" type="tns:partSuperSetType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="mimeHeadersType">
+                <xs:sequence>
+                    <xs:element form="unqualified" minOccurs="0"
+                        name="content-disposition" type="xs:string"/>
+                    <xs:element form="unqualified" name="content-type" type="xs:string"/>
+                    <xs:element form="unqualified" minOccurs="0"
+                        name="content-transfer-encoding" type="xs:string"/>
+                    <xs:element form="unqualified" minOccurs="0"
+                        name="content-id" type="xs:string"/>
+                    <xs:any maxOccurs="unbounded" minOccurs="0"
+                        namespace="##local" processContents="skip"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="partSuperSetType">
+                <xs:sequence>
+                    <xs:element form="unqualified" name="mimeHeaders" type="tns:mimeHeadersType"/>
+                    <xs:choice>
+                        <xs:element form="unqualified"
+                            name="binaryContent" type="xs:base64Binary"/>
+                        <xs:element form="unqualified" name="fileName" type="xs:string"/>
+                        <xs:element form="unqualified"
+                            name="textContent" type="xs:string"/>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="mimeEnvelopeElement" type="tns:mimeEnvelopeSuperSetType"/>
+        </xs:schema>
+        <schema elementFormDefault="qualified"
+            targetNamespace="http://tns.tibco.com/bw/activity/sendmail/xsd/input+269a3c85-b20b-4705-a122-9f301fab3406+input"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:tns="http://tns.tibco.com/bw/activity/sendmail/xsd/input+269a3c85-b20b-4705-a122-9f301fab3406+input" xmlns:tns1="http://xmlns.tibco.com/encodings/mimefile">
+            <import namespace="http://xmlns.tibco.com/encodings/mimefile"/>
+            <complexType name="SendMailParametersType">
+                <sequence>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="username" type="string"/>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="password" type="string"/>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="1" name="from" type="string"/>
+                    <element form="unqualified" maxOccurs="unbounded"
+                        minOccurs="0" name="to" type="string"/>
+                    <element form="unqualified" maxOccurs="unbounded"
+                        minOccurs="0" name="cc" type="string"/>
+                    <element form="unqualified" maxOccurs="unbounded"
+                        minOccurs="0" name="bcc" type="string"/>
+                    <element form="unqualified" maxOccurs="unbounded"
+                        minOccurs="0" name="replyTo" type="string"/>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="subject" type="string"/>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="sentdate" type="string"/>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="bodyElement" type="tns:bodyType"/>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="Headers" type="tns:headersType"/>
+                    <element minOccurs="0" ref="tns1:mimeEnvelopeElement"/>
+                </sequence>
+            </complexType>
+            <complexType name="headersType">
+                <sequence>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="Content-Type" type="string"/>
+                </sequence>
+            </complexType>
+            <complexType name="bodyType">
+                <choice>
+                    <element form="unqualified" minOccurs="0"
+                        name="bodyText" type="string"/>
+                    <element form="unqualified" minOccurs="0"
+                        name="fileName" type="string"/>
+                </choice>
+            </complexType>
+            <element name="mailActivityInput" type="tns:SendMailParametersType"/>
+        </schema>
+        <schema attributeFormDefault="unqualified"
+            elementFormDefault="qualified"
+            targetNamespace="http://tns.tibco.com/bw/activity/sendmail/xsd/exception"
+            xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://tns.tibco.com/bw/activity/sendmail/xsd/exception">
+            <complexType name="InvalidInputExceptionType">
+                <sequence>
+                    <element form="unqualified" name="msg" type="string"/>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="msgCode" type="string"/>
+                </sequence>
+            </complexType>
+            <complexType name="UnknownHostExceptionType">
+                <sequence>
+                    <element form="unqualified" name="msg" type="string"/>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="msgCode" type="string"/>
+                    <element form="unqualified" name="hostName" type="string"/>
+                </sequence>
+            </complexType>
+            <complexType name="SendFailedExceptionType">
+                <complexContent>
+                    <extension base="tns:InvalidInputExceptionType"/>
+                </complexContent>
+            </complexType>
+            <element name="SendFailedException" type="tns:SendFailedExceptionType"/>
+            <element name="InvalidInputException" type="tns:InvalidInputExceptionType"/>
+            <element name="UnknownHostException" type="tns:UnknownHostExceptionType"/>
+        </schema>
+        <xsd:schema attributeFormDefault="unqualified"
+            elementFormDefault="unqualified"
+            targetNamespace="http://tns.tibco.com/bw/rv/-756366949"
+            xmlns:BW="java://com.tibco.pe.core.JavaCustomXPATHFunctions"
+            xmlns:ns="http://xmlns.tibco.com/body"
+            xmlns:ns1="http://www.tibco.com/schemas/SplunkEAILoggingLibrary_v1_0/Resources/Common/JobSharedVariables/Schema.xsd"
+            xmlns:ns2="http://xmlns.tibco.com/encodings/mime"
+            xmlns:pd="http://xmlns.tibco.com/bw/process/2003"
+            xmlns:pfx="http://www.ingrammicro.com/eai/utilities/errorhandler"
+            xmlns:pfx10="http://www.w3.org/2001/12/xquery-functions"
+            xmlns:pfx11="www.tibco.com/pe/WriteToLogActivitySchema"
+            xmlns:pfx12="mail"
+            xmlns:pfx13="www.tibco.com/pe/GenerateErrorActivity/InputSchema"
+            xmlns:pfx14="http://www.tibco.com/pe/EngineTypes"
+            xmlns:pfx15="http://www.tibco.com/pe/DeployedVarsType"
+            xmlns:pfx16="http://www.tibco.com/pe/WriteToLogActivitySchema"
+            xmlns:pfx17="http://www.tibco.com/namespaces/tnt/plugins/mail"
+            xmlns:pfx18="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema"
+            xmlns:pfx19="http://www.tibco.com/xmlns/ae2xsd/2002/05/Ingram/ErrorHandlerEvent"
+            xmlns:pfx2="http://www.tibco.com/xmlns/ae2xsd/2002/05/ae/ErrorHandlerEvent"
+            xmlns:pfx20="http://www.tibco.com/xmlns/ae2xsd/2002/05/Ingram/ErrorHandlerEvent_v2_1"
+            xmlns:pfx21="http://www.tibco.com/schemas/SplunkEAILoggingLibrary_1_0/LoggingFrameworkResources/LoggingFrameworkSchema/ErrorHandler_V3.0.xsd"
+            xmlns:pfx22="http://www.tibco.com/schemas/EAILoggingFramework_1_0/Resources/Schema/SchemaCDM.xsd"
+            xmlns:pfx23="http://www.tibco.com/schemas/EAILoggingFramework_1_0/Resources/Schema/LoggingFrameworkCDM.xsd"
+            xmlns:pfx3="http://www.tibco.com/TNT/pe/activityschemas/ProcessDefinitions/ErrorHandlerProcessDefinition/AlertEvent/PublishRendezvousMessage"
+            xmlns:pfx4="http://www.tibco.com/TNT/pe/activityschemas/ProcessDefinitions/ErrorHandlerProcessDefinition/AlertEvent/PublishAlertRVMessage"
+            xmlns:pfx5="http://www.tibco.com/TNT/pe/activityschemas/ProcessDefinitions/ErrorHandlerProcessDefinition/PublishAlertRVMessage"
+            xmlns:pfx6="http://www.tibco.com/tnt/utilitySchema"
+            xmlns:pfx7="http://www.tibco.com/TNT/pe/activityschemas/ProcessDefinitions/ErrorHandlerProcessDefinition/JavaCodeinput"
+            xmlns:pfx8="http://www.tibco.com/TNT/pe/activityschemas/ProcessDefinitions/ErrorHandlerProcessDefinition/JavaStaticFloodCheckingCodeinput"
+            xmlns:pfx9="http://www.tibco.com/namespaces/tnt/plugins/file"
+            xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+            <xsd:import
+                namespace="http://www.tibco.com/schemas/SplunkEAILoggingLibrary_1_0/LoggingFrameworkResources/LoggingFrameworkSchema/ErrorHandler_V3.0.xsd" schemaLocation="../../Schemas/Common/LoggingFrameworkSchema/ErrorHandler_V3.0.xsd"/>
+            <xsd:element name="body">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="sourceProject" type="xsd:string"/>
+                        <xsd:element name="sourceEngineName" type="xsd:string"/>
+                        <xsd:element minOccurs="0" ref="pfx21:ErrorHandlerInput"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+        <schema
+            targetNamespace="http://tns.tibco.com/bw/rv/publish/xsd/input+tns.tibco.com/bw/rv/publish/xsd/input;ActivityInput;XSDElementDeclaration+ActivityInput+6992013f-2614-4632-9137-63dc69740a88+input"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:Q1="http://tns.tibco.com/bw/rv/-756366949" xmlns:tns="http://tns.tibco.com/bw/rv/publish/xsd/input+tns.tibco.com/bw/rv/publish/xsd/input;ActivityInput;XSDElementDeclaration+ActivityInput+6992013f-2614-4632-9137-63dc69740a88+input">
+            <import namespace="http://tns.tibco.com/bw/rv/-756366949"/>
+            <element name="ActivityInput" type="tns:PublishRVParametersType"/>
+            <complexType name="PublishRVParametersType">
+                <sequence>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="subject" type="string"/>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="replySubject" type="string"/>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="preRegisterListener" type="string"/>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:body"/>
+                </sequence>
+            </complexType>
+        </schema>
+        <schema attributeFormDefault="unqualified"
+            elementFormDefault="unqualified"
+            targetNamespace="http://schemas.tibco.com/bw/plugins/tibrv/5.0/tibrvExceptions"
+            version="" xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:tns="http://schemas.tibco.com/bw/pluginapi/5.0/pluginException"
+            xmlns:tns2="http://schemas.tibco.com/bw/plugins/tibrv/5.0/tibrvExceptions" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <complexType name="RVPluginExceptionType">
+                <sequence>
+                    <element name="msg" type="string"/>
+                    <element minOccurs="0" name="msgCode" type="string"/>
+                </sequence>
+            </complexType>
+            <complexType name="SerializationExceptionType">
+                <complexContent>
+                    <extension base="tns2:RVPluginExceptionType"/>
+                </complexContent>
+            </complexType>
+            <complexType name="TransportExceptionType">
+                <complexContent>
+                    <extension base="tns2:RVPluginExceptionType"/>
+                </complexContent>
+            </complexType>
+            <element name="RVPluginException" type="tns2:RVPluginExceptionType"/>
+            <element name="SerializationException" type="tns2:SerializationExceptionType"/>
+            <element name="TransportException" type="tns2:TransportExceptionType"/>
+        </schema>
+        <xs:schema attributeFormDefault="unqualified"
+            elementFormDefault="qualified"
+            targetNamespace="http://www.tibco.com/pe/WriteToLogActivitySchema"
+            xmlns:tns="http://www.tibco.com/pe/WriteToLogActivitySchema" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:complexType name="LogParametersType">
+                <xs:sequence>
+                    <xs:element form="unqualified" minOccurs="0"
+                        name="msgCode" type="xs:string"/>
+                    <xs:element form="unqualified" minOccurs="0"
+                        name="loggerName" type="xs:string"/>
+                    <xs:element form="unqualified" minOccurs="0"
+                        name="logLevel" type="xs:string"/>
+                    <xs:element form="unqualified" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="ActivityInput" type="tns:LogParametersType"/>
+        </xs:schema>
+        <schema elementFormDefault="unqualified"
+            targetNamespace="http://tns.tibco.com/bw/palette/internal/activityerror+bw.mail.send"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:Q1="http://tns.tibco.com/bw/activity/sendmail/xsd/exception" xmlns:tns="http://tns.tibco.com/bw/palette/internal/activityerror+bw.mail.send">
+            <import namespace="http://tns.tibco.com/bw/activity/sendmail/xsd/exception"/>
+            <element name="ActivityErrorData" type="tns:ActivityErrorDataType"/>
+            <complexType name="ActivityErrorDataType">
+                <choice>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:InvalidInputException"/>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:UnknownHostException"/>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:SendFailedException"/>
+                </choice>
+            </complexType>
+        </schema>
+        <schema elementFormDefault="unqualified"
+            targetNamespace="http://tns.tibco.com/bw/palette/internal/activityerror+bw.rv.publishRVMessage"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:Q1="http://schemas.tibco.com/bw/plugins/tibrv/5.0/tibrvExceptions" xmlns:tns="http://tns.tibco.com/bw/palette/internal/activityerror+bw.rv.publishRVMessage">
+            <import namespace="http://schemas.tibco.com/bw/plugins/tibrv/5.0/tibrvExceptions"/>
+            <element name="ActivityErrorData" type="tns:ActivityErrorDataType"/>
+            <complexType name="ActivityErrorDataType">
+                <choice>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:TransportException"/>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:SerializationException"/>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:RVPluginException"/>
+                </choice>
+            </complexType>
+        </schema>
+        <schema
+            targetNamespace="http://schemas.tibco.com/bw/plugins/basic/6.0/Exceptions"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:tibex="http://www.tibco.com/bpel/2007/extensions" xmlns:tns="http://schemas.tibco.com/bw/plugins/basic/6.0/Exceptions">
+            <element name="DefaultFault">
+                <complexType>
+                    <sequence>
+                        <element maxOccurs="1" minOccurs="0"
+                            name="message" type="string"/>
+                        <element maxOccurs="1" minOccurs="0"
+                            name="msgCode" type="string"/>
+                    </sequence>
+                </complexType>
+            </element>
+        </schema>
+        <schema elementFormDefault="unqualified"
+            targetNamespace="http://tns.tibco.com/bw/palette/internal/activityerror+com.tibco.bw.core.design.process.editor.Activity_4002_Throw"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:Q1="http://schemas.tibco.com/bw/plugins/basic/6.0/Exceptions" xmlns:tns="http://tns.tibco.com/bw/palette/internal/activityerror+com.tibco.bw.core.design.process.editor.Activity_4002_Throw">
+            <import namespace="http://schemas.tibco.com/bw/plugins/basic/6.0/Exceptions"/>
+            <element name="ActivityErrorData" type="tns:ActivityErrorDataType"/>
+            <complexType name="ActivityErrorDataType">
+                <choice>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:DefaultFault"/>
+                </choice>
+            </complexType>
+        </schema>
+        <xsd:schema attributeFormDefault="unqualified"
+            elementFormDefault="qualified"
+            targetNamespace="http://www.tibco.com/namespaces/tnt/plugins/jms+16d94e15-95a3-4147-95fc-2b430710f3df+input"
+            version="0.1"
+            xmlns="http://www.tibco.com/namespaces/tnt/plugins/jms+16d94e15-95a3-4147-95fc-2b430710f3df+input"
+            xmlns:Q1="/SplunkEAILoggingLibrary/Processes/Common/ErrorHandler_v3_0-Start-Input.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="/SplunkEAILoggingLibrary/Processes/Common/ErrorHandler_v3_0-Start-Input.xsd"/>
+            <xsd:complexType name="ActivityOutput">
+                <xsd:sequence>
+                    <xsd:element name="MessageID" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <!-- awagle addition -->
+            <xsd:complexType name="JMSTransmitInputSchemaType">
+                <xsd:sequence>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="destination" type="xsd:string"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="replyTo" type="xsd:string"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="JMSExpiration" type="xsd:int"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="JMSPriority" type="xsd:int"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="JMSDeliveryMode" type="xsd:string"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="JMSCorrelationID" type="xsd:string"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="JMSType" type="xsd:string"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="JMSProperties" type="JmsTransmitProperties"/>
+                    <xsd:element form="unqualified" minOccurs="1" name="Body">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element ref="Q1:root"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="DynamicProperties" type="JmsDynamicProperties"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="JmsTransmitProperties">
+                <xsd:sequence>
+                    <!-- these two are actually useful and used (but group seq can't be set) -->
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSXGroupID" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSXGroupSeq" type="xsd:int"/>
+                    <!-- tibco specific
+      <xsd:element name="JMS_TIBCO_MSG_EXT" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+      <xsd:element name="JMS_TIBCO_COMPRESS" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+      <! these two are TNT-specific, supporting the XML decoding
+      <xsd:element name="TIBCO_TNT_schema_reference" type="xsd:string" minOccurs="0" maxOccurs="1" />
+      <xsd:element name="TIBCO_TNT_root_element" type="xsd:string" minOccurs="0" maxOccurs="1" />
+      -->
+                    <!-- all other properties, vendor or application defined, in a standard format -->
+                    <!-- <xsd:element name="JMS_VendorDefined" type="typed-name-value-pair" minOccurs="0" maxOccurs="unbounded" />  -->
+                    <!-- <xsd:element name="JMS_ApplicationDefined" type="typed-name-value-pair" minOccurs="0" maxOccurs="unbounded" />  -->
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="JmsHeaders">
+                <xsd:sequence>
+                    <!-- NOTE: a destination is actually an object.  We are able to treat is as a string
+           because the other items that define a destination (topic vs queue, server/connection)
+           are already defined in the config element.  We do the same for the ReplyTo -->
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSDestination" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSReplyTo" type="xsd:string"/>
+                    <!-- PROBLEM: this is actually an int, but we're representing it here as a string enumeration,
+  meaning that the app must then translate from the constants in JMS to the 'constants' in the enumeration -->
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSDeliveryMode" type="JmsDeliveryMode"/>
+                    <!-- actually an int ... -->
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSMessageID" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSTimestamp" type="xsd:long"/>
+                    <!-- Java timestamp, millis from era -->
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSExpiration" type="xsd:long"/>
+                    <!-- Java timestamp, millis from era -->
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSRedelivered" type="xsd:boolean"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSPriority" type="JmsPriority"/>
+                    <!-- PROBLEM: correlation id can also be retrieved as a stream of bytes -->
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSCorrelationID" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSType" type="xsd:string"/>
+                    <!-- <xsd:element name="EventSource" type="xsd:string" minOccurs="0" maxOccurs="1" /> -->
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="JmsProperties">
+                <xsd:sequence>
+                    <!-- most of these are not really accessible, easily, but appear on incoming messages -->
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSXUserID" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSXAppID" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSXProducerTXID" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSXConsumerTXID" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSXRcvTimestamp" type="xsd:long"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSXDeliveryCount" type="xsd:int"/>
+                    <!-- these two are actually useful and used (but group seq can't be set) -->
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSXGroupID" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSXGroupSeq" type="xsd:int"/>
+                    <!-- tibco specific -->
+                    <!--<xsd:element name="JMS_TIBCO_MSG_EXT" type="xsd:boolean" minOccurs="0" maxOccurs="1" /> -->
+                    <!--<xsd:element name="JMS_TIBCO_COMPRESS" type="xsd:boolean" minOccurs="0" maxOccurs="1" /> -->
+                    <!-- these two are TNT-specific, supporting the XML decoding -->
+                    <!--<xsd:element name="TIBCO_TNT_schema_reference" type="xsd:string" minOccurs="0" maxOccurs="1" /> -->
+                    <!--<xsd:element name="TIBCO_TNT_root_element" type="xsd:string" minOccurs="0" maxOccurs="1" /> -->
+                    <!-- all other properties, vendor or application defined, in a standard format -->
+                    <!-- <xsd:element name="JMS_VendorDefined" type="typed-name-value-pair" minOccurs="0" maxOccurs="unbounded" />  -->
+                    <!-- <xsd:element name="JMS_ApplicationDefined" type="typed-name-value-pair" minOccurs="0" maxOccurs="unbounded" />  -->
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="JmsDynamicProperties">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0"
+                        name="property" type="JmsDynamicProperty"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="JmsDynamicProperty">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="name"
+                        nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1"
+                        name="value" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="type"
+                        nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="JmsMessage">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1"
+                        name="MessageHeaders" type="JmsHeaders"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="MessageProperties" type="JmsProperties"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="JMSReceiveSchema">
+                <xsd:sequence>
+                    <xsd:element form="unqualified" name="JMSHeaders" type="JmsHeaders"/>
+                    <xsd:element form="unqualified" name="JMSProperties" type="JmsProperties"/>
+                    <!-- <xsd:element name="OtherProperties" form="unqualified" type="tns:OtherProperties" minOccurs="0"/>-->
+                    <xsd:element form="unqualified" name="Body" type="xsd:string"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="DynamicProperties" type="JmsDynamicProperties"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="ActivityOutput" type="JMSReceiveSchema"/>
+            <!-- enumerations for various constants -->
+            <xsd:simpleType name="JmsDeliveryMode">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="PERSISTENT"/>
+                    <xsd:enumeration value="NON_PERSISTENT"/>
+                    <xsd:enumeration value="RELIABLE_DELIVERY"/>
+                    <!-- Tibco Enterprise for JMS defined (TibjmsxConst) -->
+                    <!-- <xsd:enumeration value="NO_ACKNOWLEDGE" /> -->
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="JmsPriority">
+                <xsd:restriction base="xsd:int">
+                    <xsd:minInclusive value="0"/>
+                    <xsd:maxInclusive value="9"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:element name="aEmptyOutputClass" type="ActivityOutput"/>
+            <xsd:element name="ActivityInput" type="JMSTransmitInputSchemaType"/>
+            <xsd:complexType name="JMSQueueGetMessageInputSchema">
+                <xsd:sequence>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="destinationQueue" type="xsd:string"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="timeout" type="xsd:long"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="selector" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="GetJMSActivityInput" type="JMSQueueGetMessageInputSchema"/>
+        </xsd:schema>
+        <xsd:schema attributeFormDefault="unqualified"
+            elementFormDefault="qualified"
+            targetNamespace="http://www.tibco.com/namespaces/tnt/plugins/jms"
+            version="0.1"
+            xmlns="http://www.tibco.com/namespaces/tnt/plugins/jms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:complexType name="ActivityOutput">
+                <xsd:sequence>
+                    <xsd:element name="MessageID" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <!-- awagle addition -->
+            <xsd:complexType name="JMSTransmitInputSchemaType">
+                <xsd:sequence>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="destination" type="xsd:string"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="replyTo" type="xsd:string"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="JMSExpiration" type="xsd:int"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="JMSPriority" type="xsd:int"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="JMSDeliveryMode" type="xsd:string"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="JMSCorrelationID" type="xsd:string"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="JMSType" type="xsd:string"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="JMSProperties" type="JmsTransmitProperties"/>
+                    <xsd:element form="unqualified" minOccurs="1"
+                        name="Body" type="xsd:string"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="DynamicProperties" type="JmsDynamicProperties"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="JmsTransmitProperties">
+                <xsd:sequence>
+                    <!-- these two are actually useful and used (but group seq can't be set) -->
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSXGroupID" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSXGroupSeq" type="xsd:int"/>
+                    <!-- tibco specific
+      <xsd:element name="JMS_TIBCO_MSG_EXT" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+      <xsd:element name="JMS_TIBCO_COMPRESS" type="xsd:boolean" minOccurs="0" maxOccurs="1" />
+      <! these two are TNT-specific, supporting the XML decoding
+      <xsd:element name="TIBCO_TNT_schema_reference" type="xsd:string" minOccurs="0" maxOccurs="1" />
+      <xsd:element name="TIBCO_TNT_root_element" type="xsd:string" minOccurs="0" maxOccurs="1" />
+      -->
+                    <!-- all other properties, vendor or application defined, in a standard format -->
+                    <!-- <xsd:element name="JMS_VendorDefined" type="typed-name-value-pair" minOccurs="0" maxOccurs="unbounded" />  -->
+                    <!-- <xsd:element name="JMS_ApplicationDefined" type="typed-name-value-pair" minOccurs="0" maxOccurs="unbounded" />  -->
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="JmsHeaders">
+                <xsd:sequence>
+                    <!-- NOTE: a destination is actually an object.  We are able to treat is as a string
+           because the other items that define a destination (topic vs queue, server/connection)
+           are already defined in the config element.  We do the same for the ReplyTo -->
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSDestination" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSReplyTo" type="xsd:string"/>
+                    <!-- PROBLEM: this is actually an int, but we're representing it here as a string enumeration,
+  meaning that the app must then translate from the constants in JMS to the 'constants' in the enumeration -->
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSDeliveryMode" type="JmsDeliveryMode"/>
+                    <!-- actually an int ... -->
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSMessageID" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSTimestamp" type="xsd:long"/>
+                    <!-- Java timestamp, millis from era -->
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSExpiration" type="xsd:long"/>
+                    <!-- Java timestamp, millis from era -->
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSRedelivered" type="xsd:boolean"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSPriority" type="JmsPriority"/>
+                    <!-- PROBLEM: correlation id can also be retrieved as a stream of bytes -->
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSCorrelationID" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSType" type="xsd:string"/>
+                    <!-- <xsd:element name="EventSource" type="xsd:string" minOccurs="0" maxOccurs="1" /> -->
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="JmsProperties">
+                <xsd:sequence>
+                    <!-- most of these are not really accessible, easily, but appear on incoming messages -->
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSXUserID" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSXAppID" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSXProducerTXID" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSXConsumerTXID" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSXRcvTimestamp" type="xsd:long"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSXDeliveryCount" type="xsd:int"/>
+                    <!-- these two are actually useful and used (but group seq can't be set) -->
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSXGroupID" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="JMSXGroupSeq" type="xsd:int"/>
+                    <!-- tibco specific -->
+                    <!--<xsd:element name="JMS_TIBCO_MSG_EXT" type="xsd:boolean" minOccurs="0" maxOccurs="1" /> -->
+                    <!--<xsd:element name="JMS_TIBCO_COMPRESS" type="xsd:boolean" minOccurs="0" maxOccurs="1" /> -->
+                    <!-- these two are TNT-specific, supporting the XML decoding -->
+                    <!--<xsd:element name="TIBCO_TNT_schema_reference" type="xsd:string" minOccurs="0" maxOccurs="1" /> -->
+                    <!--<xsd:element name="TIBCO_TNT_root_element" type="xsd:string" minOccurs="0" maxOccurs="1" /> -->
+                    <!-- all other properties, vendor or application defined, in a standard format -->
+                    <!-- <xsd:element name="JMS_VendorDefined" type="typed-name-value-pair" minOccurs="0" maxOccurs="unbounded" />  -->
+                    <!-- <xsd:element name="JMS_ApplicationDefined" type="typed-name-value-pair" minOccurs="0" maxOccurs="unbounded" />  -->
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="JmsDynamicProperties">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0"
+                        name="property" type="JmsDynamicProperty"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="JmsDynamicProperty">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="name"
+                        nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1"
+                        name="value" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="type"
+                        nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="JmsMessage">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1"
+                        name="MessageHeaders" type="JmsHeaders"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="MessageProperties" type="JmsProperties"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="JMSReceiveSchema">
+                <xsd:sequence>
+                    <xsd:element form="unqualified" name="JMSHeaders" type="JmsHeaders"/>
+                    <xsd:element form="unqualified" name="JMSProperties" type="JmsProperties"/>
+                    <!-- <xsd:element name="OtherProperties" form="unqualified" type="tns:OtherProperties" minOccurs="0"/>-->
+                    <xsd:element form="unqualified" name="Body" type="xsd:string"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="DynamicProperties" type="JmsDynamicProperties"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="ActivityOutput" type="JMSReceiveSchema"/>
+            <!-- enumerations for various constants -->
+            <xsd:simpleType name="JmsDeliveryMode">
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="PERSISTENT"/>
+                    <xsd:enumeration value="NON_PERSISTENT"/>
+                    <xsd:enumeration value="RELIABLE_DELIVERY"/>
+                    <!-- Tibco Enterprise for JMS defined (TibjmsxConst) -->
+                    <!-- <xsd:enumeration value="NO_ACKNOWLEDGE" /> -->
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:simpleType name="JmsPriority">
+                <xsd:restriction base="xsd:int">
+                    <xsd:minInclusive value="0"/>
+                    <xsd:maxInclusive value="9"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:element name="aEmptyOutputClass" type="ActivityOutput"/>
+            <xsd:element name="ActivityInput" type="JMSTransmitInputSchemaType"/>
+            <xsd:complexType name="JMSQueueGetMessageInputSchema">
+                <xsd:sequence>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="destinationQueue" type="xsd:string"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="timeout" type="xsd:long"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="selector" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="GetJMSActivityInput" type="JMSQueueGetMessageInputSchema"/>
+        </xsd:schema>
+        <schema elementFormDefault="unqualified"
+            targetNamespace="http://schemas.tibco.com/bw/plugins/jms/5.0/jmsExceptions"
+            version="0.1" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.tibco.com/bw/plugins/jms/5.0/jmsExceptions">
+            <complexType name="ActivityExceptionType">
+                <sequence>
+                    <element name="msg" type="string"/>
+                    <element minOccurs="0" name="msgCode" type="string"/>
+                </sequence>
+            </complexType>
+            <complexType name="PluginExceptionType">
+                <complexContent>
+                    <extension base="tns:ActivityExceptionType"/>
+                </complexContent>
+            </complexType>
+            <complexType name="JMSPluginExceptionType">
+                <complexContent>
+                    <extension base="tns:PluginExceptionType"/>
+                </complexContent>
+            </complexType>
+            <complexType name="JMSInvalidInputExceptionType">
+                <complexContent>
+                    <extension base="tns:JMSPluginExceptionType"/>
+                </complexContent>
+            </complexType>
+            <complexType name="JMSMessageCreateExceptionType">
+                <complexContent>
+                    <extension base="tns:JMSPluginExceptionType"/>
+                </complexContent>
+            </complexType>
+            <complexType name="JMSReceiveExceptionExceptionType">
+                <complexContent>
+                    <extension base="tns:JMSPluginExceptionType"/>
+                </complexContent>
+            </complexType>
+            <complexType name="JMSSessionCreateExceptionType">
+                <complexContent>
+                    <extension base="tns:JMSPluginExceptionType">
+                        <sequence>
+                            <element name="connectionKey" type="string"/>
+                            <element name="transacted" type="boolean"/>
+                            <element name="ackMode" type="int"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <complexType name="JMSSendExceptionType">
+                <complexContent>
+                    <extension base="tns:JMSPluginExceptionType"/>
+                </complexContent>
+            </complexType>
+            <element name="JMSPluginException" type="tns:JMSPluginExceptionType"/>
+            <element name="JMSInvalidInputException" type="tns:JMSInvalidInputExceptionType"/>
+            <element name="JMSMessageCreateException" type="tns:JMSMessageCreateExceptionType"/>
+            <element name="JMSReceiveException" type="tns:JMSReceiveExceptionExceptionType"/>
+            <element name="JMSSessionCreateException" type="tns:JMSSessionCreateExceptionType"/>
+            <element name="JMSSendException" type="tns:JMSSendExceptionType"/>
+        </schema>
+        <schema elementFormDefault="unqualified"
+            targetNamespace="http://tns.tibco.com/bw/palette/internal/activityerror+bw.jms.send"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:Q1="http://schemas.tibco.com/bw/plugins/jms/5.0/jmsExceptions" xmlns:tns="http://tns.tibco.com/bw/palette/internal/activityerror+bw.jms.send">
+            <import namespace="http://schemas.tibco.com/bw/plugins/jms/5.0/jmsExceptions"/>
+            <import namespace="http://schemas.tibco.com/bw/plugins/jms/5.0/jmsExceptions"/>
+            <import namespace="http://schemas.tibco.com/bw/plugins/jms/5.0/jmsExceptions"/>
+            <import namespace="http://schemas.tibco.com/bw/plugins/jms/5.0/jmsExceptions"/>
+            <element name="ActivityErrorData" type="tns:ActivityErrorDataType"/>
+            <complexType name="ActivityErrorDataType">
+                <choice>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:JMSInvalidInputException"/>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:JMSMessageCreateException"/>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:JMSSessionCreateException"/>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:JMSSendException"/>
+                </choice>
+            </complexType>
+        </schema>
+        <wsdl:definitions
+            targetNamespace="http://xmlns.example.com/1363748760420"
+            xmlns:tns="http://xmlns.example.com/1363748760420"
+            xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop"
+            xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+    </tibex:Types>
+    <tibex:ProcessInfo callable="true" createdBy="dnemade"
+        createdOn="Wed Jan 22 19:22:45 IST 2020" description=""
+        extraErrorVars="true" modifiers="public"
+        productVersion="6.5.1 HF2 V45 2019-07-19" scalable="true"
+        singleton="true" stateless="false" type="IT"/>
+    <tibex:ProcessInterface context=""
+        input="{/SplunkEAILoggingLibrary/Processes/Common/ErrorHandler_v3_0-Start-Input.xsd}root" output=""/>
+    <tibex:ProcessTemplateConfigurations/>
+    <tibex:NamespaceRegistry enabled="true">
+        <tibex:namespaceItem
+            namespace="http://www.tibco.com/bw/xslt/custom-functions" prefix="tib"/>
+        <tibex:namespaceItem
+            namespace="http://www.tibco.com/schemas/SplunkEAILoggingLibrary_v1_0/Resources/Common/JobSharedVariables/Schema.xsd" prefix="ns1"/>
+        <tibex:namespaceItem
+            namespace="http://www.tibco.com/schemas/SplunkEAILoggingLibrary_1_0/LoggingFrameworkResources/LoggingFrameworkSchema/ErrorHandler_V3.0.xsd" prefix="pfx21"/>
+        <tibex:namespaceItem
+            namespace="/SplunkEAILoggingLibrary/Processes/Common/ExecutionStatsFramework_v1_0-Start-Input.xsd" prefix="ansbw6"/>
+        <tibex:namespaceItem
+            namespace="http://www.w3.org/2001/XMLSchema-instance" prefix="xsi"/>
+        <tibex:namespaceItem
+            namespace="http://www.w3.org/2001/XMLSchema" prefix="xsd"/>
+        <tibex:namespaceItem
+            namespace="http://www.tibco.com/schemas/EAILoggingFramework_1_0/Resources/Schema/LoggingFrameworkCDM.xsd" prefix="pfx23"/>
+        <tibex:namespaceItem
+            namespace="http://www.tibco.com/namespaces/tnt/plugins/jms+16d94e15-95a3-4147-95fc-2b430710f3df+input" prefix="tns"/>
+        <tibex:namespaceItem
+            namespace="/SplunkEAILoggingLibrary/Processes/Common/ErrorHandler_v3_0-Start-Input.xsd" prefix="ns"/>
+        <tibex:namespaceItem namespace="http://xmlns.tibco.com/body" prefix="ns3"/>
+    </tibex:NamespaceRegistry>
+    <notation:Diagram measurementUnit="Pixel" type="BWProcess"
+        xmlns:bwnotation="http://tns.tibco.com/bw/runtime/BWNotation"
+        xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <children type="2001">
+            <children type="5001"/>
+            <children type="3002">
+                <styles xsi:type="notation:SortingStyle"/>
+                <styles xsi:type="notation:FilteringStyle"/>
+            </children>
+            <children type="3003">
+                <styles xsi:type="notation:SortingStyle"/>
+                <styles xsi:type="notation:FilteringStyle"/>
+            </children>
+            <children type="3004">
+                <children type="4018">
+                    <children type="3018">
+                        <children type="4020">
+                            <children type="3020">
+                                <children type="4005">
+                                    <children type="3007">
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.0"/>
+                                    <layoutConstraint x="70"
+                                    xsi:type="notation:Bounds" y="203"/>
+                                    </children>
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.1"/>
+                                    <layoutConstraint x="271"
+                                    xsi:type="notation:Bounds" y="203"/>
+                                    </children>
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.2"/>
+                                    <layoutConstraint x="271"
+                                    xsi:type="notation:Bounds" y="355"/>
+                                    </children>
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.3"/>
+                                    <layoutConstraint x="605"
+                                    xsi:type="notation:Bounds" y="203"/>
+                                    </children>
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.4"/>
+                                    <layoutConstraint x="605"
+                                    xsi:type="notation:Bounds" y="348"/>
+                                    </children>
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.5"/>
+                                    <layoutConstraint x="814"
+                                    xsi:type="notation:Bounds" y="209"/>
+                                    </children>
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.6"/>
+                                    <layoutConstraint x="1103"
+                                    xsi:type="notation:Bounds" y="209"/>
+                                    </children>
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.7"/>
+                                    <layoutConstraint x="814"
+                                    xsi:type="notation:Bounds" y="362"/>
+                                    </children>
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.8"/>
+                                    <layoutConstraint x="814"
+                                    xsi:type="notation:Bounds" y="503"/>
+                                    </children>
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.9"/>
+                                    <layoutConstraint x="1111"
+                                    xsi:type="notation:Bounds" y="362"/>
+                                    </children>
+                                    <children
+                                    description="TIBCO Error Handler Version 3.0"
+                                    fillColor="13369343"
+                                    lineColor="6737151"
+                                    lineWidth="1"
+                                    transparency="0" type="Note" xsi:type="notation:Shape">
+                                    <children type="DiagramName" xsi:type="notation:BasicDecorationNode">
+                                    <element xsi:nil="true"/>
+                                    </children>
+                                    <children type="Description" xsi:type="notation:BasicDecorationNode">
+                                    <element xsi:nil="true"/>
+                                    </children>
+                                    <styles xsi:type="notation:TextStyle"/>
+                                    <styles xsi:type="notation:LineTypeStyle"/>
+                                    <element xsi:nil="true"/>
+                                    <layoutConstraint
+                                    height="45" width="578"
+                                    x="325"
+                                    xsi:type="notation:Bounds" y="37"/>
+                                    </children>
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.10"/>
+                                    <layoutConstraint x="70"
+                                    xsi:type="notation:Bounds" y="348"/>
+                                    </children>
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.11"/>
+                                    <layoutConstraint x="424"
+                                    xsi:type="notation:Bounds" y="203"/>
+                                    </children>
+                                    <styles xsi:type="notation:DrawerStyle"/>
+                                    <styles xsi:type="notation:SortingStyle"/>
+                                    <styles xsi:type="notation:FilteringStyle"/>
+                                    <element href="//0/@process/@activity/@activity"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <styles xsi:type="bwnotation:ResizingStyle"/>
+                                    <element href="//0/@process/@activity/@activity"/>
+                                    <layoutConstraint height="916"
+                                    width="1431" xsi:type="notation:Bounds"/>
+                                </children>
+                                <styles xsi:type="notation:SortingStyle"/>
+                                <styles xsi:type="notation:FilteringStyle"/>
+                            </children>
+                            <styles fontName="Segoe UI" lineColor="0" xsi:type="notation:ShapeStyle"/>
+                            <styles xsi:type="bwnotation:BackgroundStyle"/>
+                            <styles xsi:type="bwnotation:ResizingStyle"/>
+                            <element href="//0/@process/@activity"/>
+                            <layoutConstraint height="365" width="444"
+                                x="30" xsi:type="notation:Bounds" y="20"/>
+                        </children>
+                        <styles xsi:type="notation:SortingStyle"/>
+                        <styles xsi:type="notation:FilteringStyle"/>
+                        <element href="//0/@process/@activity"/>
+                    </children>
+                    <styles fontName="Segoe UI" lineColor="0" xsi:type="notation:ShapeStyle"/>
+                    <styles xsi:type="bwnotation:BackgroundStyle"/>
+                    <styles xsi:type="bwnotation:ResizingStyle"/>
+                    <element href="//0/@process/@activity"/>
+                    <layoutConstraint height="409" width="519" xsi:type="notation:Bounds"/>
+                </children>
+                <styles xsi:type="notation:SortingStyle"/>
+                <styles xsi:type="notation:FilteringStyle"/>
+                <element href="//0/@process"/>
+            </children>
+            <styles fontName="Segoe UI" lineColor="0" xsi:type="notation:ShapeStyle"/>
+            <element href="//0/@process"/>
+            <layoutConstraint height="992" width="1776" xsi:type="notation:Bounds"/>
+        </children>
+        <styles xsi:type="notation:DiagramStyle"/>
+        <element href="//0"/>
+        <edges
+            source="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.5"
+            target="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.7" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.0"/>
+            <bendpoints points="[0, 25, 0, -128]$[0, 129, 0, -24]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.3"
+            target="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.5" type="4006">
+            <children type="6002">
+                <layoutConstraint x="-5" xsi:type="notation:Location" y="-20"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.1"/>
+            <bendpoints points="[0, 0, 0, 0]$[0, 0, 0, 0]" xsi:type="notation:RelativeBendpoints"/>
+            <targetAnchor id="(0.5365853658536586,0.17333333333333334)" xsi:type="notation:IdentityAnchor"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0"
+            target="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1" type="4006">
+            <children type="6002">
+                <layoutConstraint x="-14" xsi:type="notation:Location" y="-13"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.2"/>
+            <bendpoints points="[0, 0, 0, 0]$[0, 0, 0, 0]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.7"
+            target="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.8" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.3"/>
+            <bendpoints points="[0, 0, 0, 0]$[0, 0, 0, 0]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.7"
+            target="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.9" type="4006">
+            <children type="6002">
+                <layoutConstraint x="59" xsi:type="notation:Location" y="-14"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.4"/>
+            <bendpoints points="[0, 0, 0, 0]$[0, 0, 0, 0]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.5"
+            target="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.6" type="4006">
+            <children type="6002">
+                <layoutConstraint x="-47" xsi:type="notation:Location" y="-18"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.5"/>
+            <bendpoints points="[0, 0, 0, 0]$[0, 0, 0, 0]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.6"
+            target="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.7" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.6"/>
+            <bendpoints points="[0, 0, 0, 0]$[0, 0, 0, 0]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.3"
+            target="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.4" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.7"/>
+            <bendpoints points="[0, 0, 0, 0]$[0, 0, 0, 0]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.4"
+            target="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.5" type="4006">
+            <children type="6002">
+                <layoutConstraint x="-25" xsi:type="notation:Location" y="-34"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.8"/>
+            <bendpoints
+                points="[25, 4, -184, 143]$[103, 4, -106, 143]$[103, -145, -106, -6]$[185, -145, -24, -6]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.4"
+            target="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.8" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.9"/>
+            <bendpoints
+                points="[25, 0, -184, -147]$[104, 0, -105, -147]$[104, 147, -105, 0]$[185, 147, -24, 0]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2"
+            target="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.12" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.10"/>
+            <bendpoints
+                points="[25, 0, -128, 152]$[68, 0, -85, 152]$[68, -152, -85, 0]$[129, -152, -24, 0]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1"
+            target="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.11"/>
+            <bendpoints points="[0, 0, 0, 0]$[0, 0, 0, 0]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0"
+            target="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.11" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.12"/>
+            <bendpoints points="[0, 0, 0, 0]$[0, 0, 0, 0]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.11"
+            target="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.13"/>
+            <bendpoints
+                points="[25, -18, -176, 127]$[177, -127, -24, 18]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.12"
+            target="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.3" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.14"/>
+            <bendpoints points="[25, 0, -156, 0]$[157, 0, -24, 0]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+    </notation:Diagram>
+    <bpws:documentation>Process to handle error thrown by various processes</bpws:documentation>
+    <bpws:import importType="http://www.w3.org/2001/XMLSchema"
+        location="../../Schemas/Common/LoggingFrameworkSchema/ErrorHandler_V3.0.xsd" namespace="http://www.tibco.com/schemas/SplunkEAILoggingLibrary_1_0/LoggingFrameworkResources/LoggingFrameworkSchema/ErrorHandler_V3.0.xsd"/>
+    <bpws:import importType="http://www.w3.org/2001/XMLSchema"
+        location="../../Schemas/Common/LoggingFrameworkSchema/LoggingFrameworkCDM.xsd" namespace="http://www.tibco.com/schemas/EAILoggingFramework_1_0/Resources/Schema/LoggingFrameworkCDM.xsd"/>
+    <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://www.tibco.com/schemas/SplunkEAILoggingLibrary_v1_0/Resources/Common/JobSharedVariables/Schema.xsd"/>
+    <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="/SplunkEAILoggingLibrary/Processes/Common/ErrorHandler_v3_0-Start-Input.xsd"/>
+    <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="/SplunkEAILoggingLibrary/Processes/Common/ExecutionStatsFramework_v1_0-Start-Input.xsd"/>
+    <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://www.tibco.com/schemas/EAILoggingFramework_1_0/Resources/Schema/LoggingFrameworkCDM.xsd"/>
+    <bpws:variables>
+        <bpws:variable element="ns:ProcessContext"
+            name="_processContext" sca-bpel:internal="true"/>
+        <bpws:variable
+            name="EAIErrorHandler-HawkErrorAlertPublistSubject"
+            sca-bpel:hotUpdate="false" sca-bpel:privateProperty="true"
+            sca-bpel:property="yes"
+            tibex:propertySource="EAIErrorHandler/HawkErrorAlertPublistSubject" type="xsd:string"/>
+        <bpws:variable name="EAIErrorHandler-EmailServer"
+            sca-bpel:hotUpdate="false" sca-bpel:privateProperty="true"
+            sca-bpel:property="yes"
+            tibex:propertySource="EAIErrorHandler/EmailServer" type="xsd:string"/>
+        <bpws:variable element="ns0:root" name="Start"
+            sca-bpel:internal="true" tibex:parameter="in"/>
+        <bpws:variable element="ns1:ProcessExecutionStats"
+            name="Get-ExecutionStats" sca-bpel:internal="true"/>
+        <bpws:variable element="ns2:ProcessExecutionStats"
+            name="ExecutionStatsFramework_v1_0-input" sca-bpel:internal="true"/>
+        <bpws:variable
+            name="ErrorHandler_v3_0-SendErrorMail-SMTPResource"
+            sca-bpel:hotUpdate="false" sca-bpel:privateProperty="true"
+            sca-bpel:property="yes"
+            sca-bpel:sharedResourceType="{http://xsd.tns.tibco.com/bw/models/sharedresource/smtp}SmtpConfiguration"
+            tibex:propertySource="ErrorHandler_v3_0-SendErrorMail-SMTPResource" type="xsd:string"/>
+        <bpws:variable element="ns3:mailActivityInput"
+            name="SendErrorMail-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns4:ActivityErrorData"
+            name="_error_SendErrorMail" sca-bpel:internal="true"/>
+        <bpws:variable element="ns:ErrorReport" name="_error" sca-bpel:internal="true"/>
+        <bpws:variable name="EAIErrorHandler-EmailToAddress"
+            sca-bpel:hotUpdate="false" sca-bpel:privateProperty="true"
+            sca-bpel:property="yes"
+            tibex:propertySource="EAIErrorHandler/EmailToAddress" type="xsd:string"/>
+        <bpws:variable name="EAIErrorHandler-EmailSubject"
+            sca-bpel:hotUpdate="false" sca-bpel:privateProperty="true"
+            sca-bpel:property="yes"
+            tibex:propertySource="EAIErrorHandler/EmailSubject" type="xsd:string"/>
+        <bpws:variable name="EAIErrorHandler-CurrentEnvironment"
+            sca-bpel:hotUpdate="false" sca-bpel:privateProperty="true"
+            sca-bpel:property="yes"
+            tibex:propertySource="EAIErrorHandler/CurrentEnvironment" type="xsd:string"/>
+        <bpws:variable name="ResourcesTransportsRVReliableTransport"
+            sca-bpel:hotUpdate="false" sca-bpel:privateProperty="true"
+            sca-bpel:property="yes"
+            sca-bpel:sharedResourceType="{http://ns.tibco.com/bw/palette/rvsharedresource}RVResource"
+            tibex:propertySource="ResourcesTransportsRVReliableTransport" type="xsd:string"/>
+        <bpws:variable element="ns6:ActivityInput"
+            name="Publish-Alert-RV-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns7:ActivityErrorData"
+            name="_error_Publish-Alert-RV" sca-bpel:internal="true"/>
+        <bpws:variable element="ns8:ActivityInput"
+            name="RV-Send-Failed-Log-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns9:DefaultFault"
+            name="Rethrow-Error-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns10:ActivityErrorData"
+            name="_error_Rethrow-Error" sca-bpel:internal="true"/>
+        <bpws:variable name="FaultName" sca-bpel:internal="true" type="xsd:string"/>
+        <bpws:variable element="ns:OptionalErrorReport"
+            name="_errorOptional" sca-bpel:internal="true"/>
+        <bpws:variable name="EAIErrorHandler-Constants-SendErrorEmail"
+            sca-bpel:hotUpdate="false" sca-bpel:privateProperty="true"
+            sca-bpel:property="yes"
+            tibex:propertySource="EAIErrorHandler/Constants/SendErrorEmail" type="xsd:string"/>
+        <bpws:variable element="ns11:ActivityInput"
+            name="JMSSendMessage-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns12:aEmptyOutputClass"
+            name="JMSSendMessage" sca-bpel:internal="true"/>
+        <bpws:variable element="ns13:ActivityErrorData"
+            name="_error_JMSSendMessage" sca-bpel:internal="true"/>
+        <bpws:variable name="jmsConnection" sca-bpel:hotUpdate="false"
+            sca-bpel:privateProperty="true" sca-bpel:property="yes"
+            sca-bpel:sharedResourceType="{http://xsd.tns.tibco.com/bw/models/sharedresource/jms}JMSConnectionFactory" type="xsd:string">
+            <bpws:from>
+                <bpws:literal>Transports.JMSConnectionResource</bpws:literal>
+            </bpws:from>
+        </bpws:variable>
+        <bpws:variable name="ReportErrorQueue"
+            sca-bpel:hotUpdate="false" sca-bpel:privateProperty="true"
+            sca-bpel:property="yes"
+            tibex:propertySource="EAIErrorHandler/Constants/ReportErrorQueue" type="xsd:string"/>
+        <bpws:variable element="ns5:LogPayload" name="LogError-input" sca-bpel:internal="true"/>
+    </bpws:variables>
+    <bpws:extensions>
+        <bpws:extension mustUnderstand="no" namespace="http://www.eclipse.org/gmf/runtime/1.0.2/notation"/>
+        <bpws:extension mustUnderstand="no" namespace="http://www.tibco.com/bw/process/info"/>
+        <bpws:extension mustUnderstand="no" namespace="http://docs.oasis-open.org/ns/opencsa/sca-bpel/200801"/>
+        <bpws:extension mustUnderstand="no" namespace="http://docs.oasis-open.org/ns/opencsa/sca/200912"/>
+        <bpws:extension mustUnderstand="no" namespace="http://ns.tibco.com/bw/property"/>
+        <bpws:extension mustUnderstand="no" namespace="http://www.tibco.com/bpel/2007/extensions"/>
+    </bpws:extensions>
+    <bpws:scope name="ErrorHandler_v3_0">
+        <bpws:flow name="ErrorHandler_v3_0">
+            <bpws:links>
+                <bpws:link name="Publish-Alert-RV-to-RethrowErrorCheck"
+                    tibex:label="" tibex:linkType="SUCCESS"/>
+                <bpws:link name="SendEmailErrorCheckToPublish-Alert-RV"
+                    tibex:label="No Email" tibex:linkType="SUCCESSWITHNOCONDITION"/>
+                <bpws:link name="Start-to-Get-ExecutionStats_Otherwise"
+                    tibex:label="Otherwise" tibex:linkType="SUCCESSWITHNOCONDITION"/>
+                <bpws:link name="RethrowErrorCheck-to-End"
+                    tibex:label="NO" tibex:linkType="SUCCESSWITHNOCONDITION"/>
+                <bpws:link name="RethrowErrorCheck-to-Rethrow-Error"
+                    tibex:label="Rethrow Error" tibex:linkType="SUCCESSWITHCONDITION"/>
+                <bpws:link name="Publish-Alert-RV-to-RV-Send-Failed-Log"
+                    tibex:label="Error" tibex:linkType="ERROR"/>
+                <bpws:link
+                    name="RV-Send-Failed-Log-to-RethrowErrorCheck" tibex:linkType="SUCCESS"/>
+                <bpws:link name="SendEmailErrorCheck-to-SendErrorMail"
+                    tibex:label="Send Email" tibex:linkType="SUCCESSWITHCONDITION"/>
+                <bpws:link name="SendErrorMailToPublish-Alert-RV"
+                    tibex:label="TraceLog" tibex:linkType="SUCCESS"/>
+                <bpws:link name="SendErrorMail-to-End"
+                    tibex:label="Error" tibex:linkType="ERROR"/>
+                <bpws:link name="ExecutionStatsFramework_v1_0ToLogError" tibex:linkType="SUCCESS"/>
+                <bpws:link
+                    name="Get-ExecutionStats-to-ExecutionStatsFramework_v1_0"
+                    tibex:label="" tibex:linkType="SUCCESS"/>
+                <bpws:link name="StartToJMSSendMessage_ReportError"
+                    tibex:label="ReportError" tibex:linkType="SUCCESSWITHCONDITION"/>
+                <bpws:link name="JMSSendMessageToGet-ExecutionStats" tibex:linkType="SUCCESS"/>
+                <bpws:link name="LogErrorToSendEmailErrorCheck" tibex:linkType="SUCCESS"/>
+            </bpws:links>
+            <bpws:extensionActivity>
+                <tibex:receiveEvent createInstance="yes"
+                    eventTimeout="0" name="Start"
+                    tibex:xpdlId="e95a3ac0-1237-46f4-876d-d99aa74f812b"
+                    variable="Start" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                    <bpws:sources>
+                        <bpws:source linkName="Start-to-Get-ExecutionStats_Otherwise">
+                            <tibex:DesignExpression>
+                                <tibex:expression
+                                    expression="##otherwise##" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0"/>
+                            </tibex:DesignExpression>
+                            <bpws:transitionCondition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0"><![CDATA[##otherwise##]]></bpws:transitionCondition>
+                        </bpws:source>
+                        <bpws:source linkName="StartToJMSSendMessage_ReportError">
+                            <tibex:DesignExpression>
+                                <tibex:expression
+                                    expression="upper-case($Start/ns5:LogPayload/ns5:ExtendedSpecs[upper-case(ns5:Key)=&quot;REPORTERROR&quot;]/ns5:Value)=&quot;TRUE&quot; or upper-case($Start/ns5:LogPayload/ns5:ExtendedSpecs[upper-case(ns5:Key)=&quot;REPORT_ERROR&quot;]/ns5:Value)=&quot;TRUE&quot;" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0"/>
+                            </tibex:DesignExpression>
+                            <bpws:transitionCondition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0"><![CDATA[upper-case($Start/ns5:LogPayload/ns5:ExtendedSpecs[upper-case(ns5:Key)="REPORTERROR"]/ns5:Value)="TRUE" or upper-case($Start/ns5:LogPayload/ns5:ExtendedSpecs[upper-case(ns5:Key)="REPORT_ERROR"]/ns5:Value)="TRUE"]]></bpws:transitionCondition>
+                        </bpws:source>
+                    </bpws:sources>
+                    <tibex:eventSource>
+                        <tibex:StartEvent xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"/>
+                    </tibex:eventSource>
+                </tibex:receiveEvent>
+            </bpws:extensionActivity>
+            <bpws:extensionActivity>
+                <tibex:extActivity name="Get-ExecutionStats"
+                    outputVariable="Get-ExecutionStats"
+                    tibex:xpdlId="a85c91b3-014e-4e82-aed4-41a1908913ac"
+                    type="bw.internal.getSharedVariable" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                    <bpws:targets>
+                        <bpws:target linkName="Start-to-Get-ExecutionStats_Otherwise"/>
+                        <bpws:target linkName="JMSSendMessageToGet-ExecutionStats"/>
+                    </bpws:targets>
+                    <bpws:sources>
+                        <bpws:source linkName="Get-ExecutionStats-to-ExecutionStatsFramework_v1_0"/>
+                    </bpws:sources>
+                    <tibex:GetSharedVariable inline="true"
+                        variableName="Schemas.Common.JobSharedVariables.JS-ExecutionStats" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"/>
+                </tibex:extActivity>
+            </bpws:extensionActivity>
+            <bpws:extensionActivity>
+                <tibex:extActivity
+                    inputVariable="ExecutionStatsFramework_v1_0-input"
+                    name="ExecutionStatsFramework_v1_0"
+                    tibex:xpdlId="7a66df44-44c4-4da6-a68b-2df42f6ae28a"
+                    type="bw.generalactivities.callprocess" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                    <bpws:targets>
+                        <bpws:target linkName="Get-ExecutionStats-to-ExecutionStatsFramework_v1_0"/>
+                    </bpws:targets>
+                    <bpws:sources>
+                        <bpws:source linkName="ExecutionStatsFramework_v1_0ToLogError"/>
+                    </bpws:sources>
+                    <tibex:inputBindings>
+                        <tibex:inputBinding
+                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:ns1=&quot;http://www.tibco.com/schemas/SplunkEAILoggingLibrary_v1_0/Resources/Common/JobSharedVariables/Schema.xsd&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:ansbw6=&quot;/SplunkEAILoggingLibrary/Processes/Common/ExecutionStatsFramework_v1_0-Start-Input.xsd&quot; xmlns:pfx23=&quot;http://www.tibco.com/schemas/EAILoggingFramework_1_0/Resources/Schema/LoggingFrameworkCDM.xsd&quot; xmlns:pfx21=&quot;http://www.tibco.com/schemas/SplunkEAILoggingLibrary_1_0/LoggingFrameworkResources/LoggingFrameworkSchema/ErrorHandler_V3.0.xsd&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;Start&quot;/>&#xa;    &lt;xsl:param name=&quot;Get-ExecutionStats&quot;/>&#xa;    &lt;xsl:template name=&quot;ExecutionStatsFramework_v1_0-input&quot; match=&quot;/&quot;>&#xa;        &lt;ansbw6:ProcessExecutionStats>&#xa;            &lt;xsl:if test=&quot;$Get-ExecutionStats/ns1:StartTimestamp&quot;>&#xa;                &lt;StartTimestamp>&#xa;                    &lt;xsl:value-of select=&quot;$Get-ExecutionStats/ns1:StartTimestamp&quot;/>&#xa;                &lt;/StartTimestamp>&#xa;            &lt;/xsl:if>&#xa;            &lt;xsl:if test=&quot;$Get-ExecutionStats/ns1:StartDateTime&quot;>&#xa;                &lt;StartDateTime>&#xa;                    &lt;xsl:value-of select=&quot;$Get-ExecutionStats/ns1:StartDateTime&quot;/>&#xa;                &lt;/StartDateTime>&#xa;            &lt;/xsl:if>&#xa;            &lt;xsl:if test=&quot;$Get-ExecutionStats/ns1:CorrelationId&quot;>&#xa;                &lt;CorrelationId>&#xa;                    &lt;xsl:value-of select=&quot;$Get-ExecutionStats/ns1:CorrelationId&quot;/>&#xa;                &lt;/CorrelationId>&#xa;            &lt;/xsl:if>&#xa;            &lt;xsl:if test=&quot;$Get-ExecutionStats/ns1:JobId&quot;>&#xa;                &lt;JobId>&#xa;                    &lt;xsl:value-of select=&quot;$Get-ExecutionStats/ns1:JobId&quot;/>&#xa;                &lt;/JobId>&#xa;            &lt;/xsl:if>&#xa;            &lt;TransactionStatus>&#xa;                &lt;xsl:value-of select=&quot;&amp;quot;FAILED&amp;quot;&quot;/>&#xa;            &lt;/TransactionStatus>&#xa;            &lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:CallingApplicationName&quot;>&#xa;                &lt;CallingApplication>&#xa;                    &lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:CallingApplicationName&quot;/>&#xa;                &lt;/CallingApplication>&#xa;            &lt;/xsl:if>&#xa;            &lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:CountryCode&quot;>&#xa;                &lt;CountryCode>&#xa;                    &lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:CountryCode&quot;/>&#xa;                &lt;/CountryCode>&#xa;            &lt;/xsl:if>&#xa;            &lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:CustomerNumber&quot;>&#xa;                &lt;CustomerNumber>&#xa;                    &lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:CustomerNumber&quot;/>&#xa;                &lt;/CustomerNumber>&#xa;            &lt;/xsl:if>&#xa;            &lt;xsl:choose>&#xa;                &lt;xsl:when test=&quot;string-length($Start/pfx21:ErrorHandlerInput/pfx21:ErrorCode) > 0&quot;>&#xa;                    &lt;xsl:if test=&quot;$Start/pfx21:ErrorHandlerInput/pfx21:ErrorCode&quot;>&#xa;                        &lt;FailureType>&#xa;                            &lt;xsl:value-of select=&quot;$Start/pfx21:ErrorHandlerInput/pfx21:ErrorCode&quot;/>&#xa;                        &lt;/FailureType>&#xa;                    &lt;/xsl:if>&#xa;                &lt;/xsl:when>&#xa;                &lt;xsl:when test=&quot;contains(upper-case($Start/pfx21:ErrorHandlerInput/pfx21:ErrorText), &amp;quot;TIMEOUT&amp;quot;) or contains(upper-case($Start/pfx21:ErrorHandlerInput/pfx21:ErrorDetails/pfx21:StackTrace), &amp;quot;TIMEOUT&amp;quot;)&quot;>&#xa;                    &lt;FailureType>&#xa;                        &lt;xsl:value-of select=&quot;&amp;quot;BW8001-TIMEOUT&amp;quot;&quot;/>&#xa;                    &lt;/FailureType>&#xa;                &lt;/xsl:when>&#xa;                &lt;xsl:when test=&quot;contains(upper-case($Start/pfx21:ErrorHandlerInput/pfx21:ErrorText), &amp;quot;ABEND&amp;quot;) or contains(upper-case($Start/pfx21:ErrorHandlerInput/pfx21:ErrorDetails/pfx21:StackTrace), &amp;quot;ABEND&amp;quot;)&quot;>&#xa;                    &lt;FailureType>&#xa;                        &lt;xsl:value-of select=&quot;&amp;quot;BW8002-ABEND&amp;quot;&quot;/>&#xa;                    &lt;/FailureType>&#xa;                &lt;/xsl:when>&#xa;                &lt;xsl:when test=&quot;contains(upper-case($Start/pfx21:ErrorHandlerInput/pfx21:ErrorText), &amp;quot;OFFLINE&amp;quot;) or contains(upper-case($Start/pfx21:ErrorHandlerInput/pfx21:ErrorDetails/pfx21:StackTrace), &amp;quot;OFFLINE&amp;quot;) or contains(upper-case($Start/pfx21:ErrorHandlerInput/pfx21:ErrorText), &amp;quot;9999&amp;quot;) or contains(upper-case($Start/pfx21:ErrorHandlerInput/pfx21:ErrorDetails/pfx21:StackTrace), &amp;quot;9999&amp;quot;) or contains(upper-case($Start/pfx21:ErrorHandlerInput/pfx21:ErrorText), &amp;quot;DOWN&amp;quot;) or contains(upper-case($Start/pfx21:ErrorHandlerInput/pfx21:ErrorDetails/pfx21:StackTrace), &amp;quot;DOWN&amp;quot;)&quot;>&#xa;                    &lt;FailureType>&#xa;                        &lt;xsl:value-of select=&quot;&amp;quot;BW8003-OFFLINE&amp;quot;&quot;/>&#xa;                    &lt;/FailureType>&#xa;                &lt;/xsl:when>&#xa;                &lt;xsl:otherwise>&#xa;                    &lt;FailureType>&#xa;                        &lt;xsl:value-of select=&quot;&amp;quot;BW8888-MISC&amp;quot;&quot;/>&#xa;                    &lt;/FailureType>&#xa;                &lt;/xsl:otherwise>&#xa;            &lt;/xsl:choose>&#xa;        &lt;/ansbw6:ProcessExecutionStats>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                    </tibex:inputBindings>
+                    <tibex:CallProcess spawn="true"
+                        subProcessName="Common.ExecutionStatsFramework_v1_0" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"/>
+                </tibex:extActivity>
+            </bpws:extensionActivity>
+            <bpws:empty name="SendEmailErrorCheck" tibex:xpdlId="96444b77-2b5e-4261-9ced-f8f11599b840">
+                <bpws:targets>
+                    <bpws:target linkName="LogErrorToSendEmailErrorCheck"/>
+                </bpws:targets>
+                <bpws:sources>
+                    <bpws:source linkName="SendEmailErrorCheckToPublish-Alert-RV">
+                        <bpws:transitionCondition><![CDATA[##otherwise##]]></bpws:transitionCondition>
+                    </bpws:source>
+                    <bpws:source linkName="SendEmailErrorCheck-to-SendErrorMail">
+                        <tibex:DesignExpression>
+                            <tibex:expression
+                                expression="upper-case($EAIErrorHandler-Constants-SendErrorEmail) = &quot;TRUE&quot; or upper-case($EAIErrorHandler-Constants-SendErrorEmail) = &quot;1&quot; or upper-case($EAIErrorHandler-Constants-SendErrorEmail) = &quot;ENABLED&quot;" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0"/>
+                        </tibex:DesignExpression>
+                        <bpws:transitionCondition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0"><![CDATA[upper-case($EAIErrorHandler-Constants-SendErrorEmail) = "TRUE" or upper-case($EAIErrorHandler-Constants-SendErrorEmail) = "1" or upper-case($EAIErrorHandler-Constants-SendErrorEmail) = "ENABLED"]]></bpws:transitionCondition>
+                    </bpws:source>
+                </bpws:sources>
+            </bpws:empty>
+            <bpws:extensionActivity>
+                <tibex:activityExtension
+                    inputVariable="SendErrorMail-input"
+                    name="SendErrorMail"
+                    tibex:xpdlId="269a3c85-b20b-4705-a122-9f301fab3406" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                    <bpws:targets>
+                        <bpws:target linkName="SendEmailErrorCheck-to-SendErrorMail"/>
+                    </bpws:targets>
+                    <bpws:sources>
+                        <bpws:source linkName="SendErrorMailToPublish-Alert-RV"/>
+                        <bpws:source linkName="SendErrorMail-to-End"
+                            tibex:faultDetailsVar="_error" tibex:faultNameVar="FaultName">
+                            <tibex:DesignExpression>
+                                <tibex:expression expression="##error##" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0"/>
+                            </tibex:DesignExpression>
+                            <bpws:transitionCondition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0"><![CDATA[##error##]]></bpws:transitionCondition>
+                        </bpws:source>
+                    </bpws:sources>
+                    <tibex:inputBindings>
+                        <tibex:inputBinding
+                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:ns2=&quot;http://xmlns.tibco.com/encodings/mimefile&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:ansbw7=&quot;http://tns.tibco.com/bw/activity/sendmail/xsd/input+269a3c85-b20b-4705-a122-9f301fab3406+input&quot; xmlns:pfx23=&quot;http://www.tibco.com/schemas/EAILoggingFramework_1_0/Resources/Schema/LoggingFrameworkCDM.xsd&quot; xmlns:pfx21=&quot;http://www.tibco.com/schemas/SplunkEAILoggingLibrary_1_0/LoggingFrameworkResources/LoggingFrameworkSchema/ErrorHandler_V3.0.xsd&quot; xmlns:bw=&quot;http://www.tibco.com/bw/xpath/bw-custom-functions&quot; xmlns:tib=&quot;http://www.tibco.com/bw/xslt/custom-functions&quot; version=&quot;1.0&quot;>&#xa;    &lt;xsl:param name=&quot;Start&quot;/>&#xa;    &lt;xsl:param name=&quot;EAIErrorHandler-CurrentEnvironment&quot;/>&#xa;    &lt;xsl:param name=&quot;EAIErrorHandler-EmailSubject&quot;/>&#xa;    &lt;xsl:param name=&quot;EAIErrorHandler-EmailToAddress&quot;/>&#xa;    &lt;xsl:template name=&quot;SendErrorMail-Input&quot; match=&quot;/&quot;>&#xa;        &lt;ansbw7:mailActivityInput>&#xa;            &lt;from>&#xa;                &lt;xsl:value-of select=&quot;&amp;quot;tibcoerrorservice@ingrammicro.com&amp;quot;&quot;/>&#xa;            &lt;/from>&#xa;            &lt;to>&#xa;                &lt;xsl:value-of select=&quot;$EAIErrorHandler-EmailToAddress&quot;/>&#xa;            &lt;/to>&#xa;            &lt;subject>&#xa;                &lt;xsl:value-of select=&quot;concat(string($EAIErrorHandler-EmailSubject), &amp;quot;  (Env - &amp;quot;, string($EAIErrorHandler-CurrentEnvironment), &amp;quot;)&amp;quot;, &amp;quot;  (Server Name -&amp;quot;, bw:getHostName(), &amp;quot;)&amp;quot;)&quot;/>&#xa;            &lt;/subject>&#xa;            &lt;bodyElement>&#xa;                &lt;bodyText>&#xa;                    &lt;xsl:value-of select=&quot;concat(&amp;quot;&amp;lt;html>&amp;lt;body>Dear All,&amp;lt;/br>&amp;lt;/br>There is an error in &amp;quot;, string($Start/pfx21:ErrorHandlerInput/pfx21:SourceProcessName), &amp;quot; at &amp;quot;, string($EAIErrorHandler-CurrentEnvironment), ' Environment and requires your action &amp;lt;/br> Details for the same is as follows:&amp;lt;/br>&amp;lt;/br>&amp;lt;table>&amp;lt;table border=&amp;quot;1&amp;quot;>&amp;lt;th align=&amp;quot;center&amp;quot;>&amp;lt;b>Transaction Details&amp;lt;/b>&amp;lt;/th>&amp;lt;tr>&amp;lt;td>Activity Name&amp;lt;td>&amp;lt;td>', string($Start/pfx21:ErrorHandlerInput/pfx21:SourceActivityName), &amp;quot;&amp;lt;/td>&amp;lt;/tr>&amp;lt;tr>&amp;lt;td>Correlation ID&amp;lt;td>&amp;lt;td>&amp;quot;, string($Start/pfx23:LogPayload/pfx23:CorrelationId), &amp;quot;&amp;lt;/td>&amp;lt;/tr>&amp;lt;tr>&amp;lt;td>End System Transaction Name&amp;lt;td>&amp;lt;td>&amp;quot;, string($Start/pfx21:ErrorHandlerInput/pfx21:ErrorDetails/pfx21:EndSystemTransactionName), &amp;quot;&amp;lt;/td>&amp;lt;/tr>&amp;lt;tr>&amp;lt;td>Queue Name&amp;lt;td>&amp;lt;td>&amp;quot;, string($Start/pfx21:ErrorHandlerInput/pfx21:ErrorDetails/pfx21:QueueName), &amp;quot;&amp;lt;/td>&amp;lt;/tr>&amp;lt;tr>&amp;lt;td>Date/Timestamp&amp;lt;td>&amp;lt;td>&amp;quot;, format-dateTime(current-dateTime(), &amp;quot;[M01]-[D01]-[Y0001] [FNn,*-3] [H01]:[m01]:[s01] [zNn,*-3]&amp;quot;), &amp;quot;&amp;lt;/td>&amp;lt;/tr>&amp;lt;tr>&amp;lt;td>EAI Txn ID&amp;lt;td>&amp;lt;td>&amp;quot;, string($Start/pfx21:ErrorHandlerInput/pfx21:ErrorDetails/pfx21:TransactionId), '&amp;lt;/td>&amp;lt;/tr>&amp;lt;/table>&amp;lt;/br>&amp;lt;/br>&amp;lt;table>&amp;lt;table border=&amp;quot;1&amp;quot;>&amp;lt;th align=&amp;quot;center&amp;quot;>&amp;lt;b>Error Details&amp;lt;/b> &amp;lt;/th>&amp;lt;tr>&amp;lt;td>Error Code&amp;lt;/td>&amp;lt;td>Error Desc&amp;lt;/td>&amp;lt;td>Action Required&amp;lt;/td>&amp;lt;/tr>&amp;lt;tr>&amp;lt;td>', string($Start/pfx21:ErrorHandlerInput/pfx21:ErrorCode), &amp;quot;&amp;lt;/td>&amp;lt;td>&amp;quot;, string($Start/pfx21:ErrorHandlerInput/pfx21:ErrorText), &amp;quot;&amp;lt;/td>&amp;lt;td>&amp;quot;, string($Start/pfx21:ErrorHandlerInput/pfx21:ErrorDetails/pfx21:ActionRequired), &amp;quot;&amp;lt;/td>&amp;lt;/tr>&amp;lt;/table>&amp;lt;/br>&amp;lt;/br>&amp;lt;b>Data On Hand and Stack Trace:&amp;lt;/b> Please refer attached files   &amp;lt;/br>&amp;lt;/br>&amp;lt;b>This is an auto generated email . Please do not reply.&amp;lt;/b>&amp;lt;/br>&amp;lt;b>For non production support, Please contact:&amp;lt;/b> ITEAI NON PROD SUPPORT DL(iteai_nonprodsupport@ingrammicro.com) &amp;lt;/br>&amp;lt;b>For production support, please contact:&amp;lt;/b> ITEAI PROD SUPPORT DL(iteai_prodsupport@ingrammicro.com) &amp;lt;/br>&amp;lt;/br>&amp;lt;/body>&amp;lt;/html>&amp;quot;)&quot;/>&#xa;                &lt;/bodyText>&#xa;            &lt;/bodyElement>&#xa;            &lt;Headers>&#xa;                &lt;Content-Type>&#xa;                    &lt;xsl:value-of select=&quot;&amp;quot;text/html&amp;quot;&quot;/>&#xa;                &lt;/Content-Type>&#xa;            &lt;/Headers>&#xa;            &lt;ns2:mimeEnvelopeElement>&#xa;                &lt;mimePart>&#xa;                    &lt;mimeHeaders>&#xa;                        &lt;content-disposition>&#xa;                            &lt;xsl:value-of select=&quot;&amp;quot;*;filename=StackTrace.txt&amp;quot;&quot;/>&#xa;                        &lt;/content-disposition>&#xa;                        &lt;content-type>&#xa;                            &lt;xsl:value-of select=&quot;&amp;quot;text/xml&amp;quot;&quot;/>&#xa;                        &lt;/content-type>&#xa;                    &lt;/mimeHeaders>&#xa;                    &lt;textContent>&#xa;                        &lt;xsl:value-of select=&quot;tib:render-xml($Start/pfx21:ErrorHandlerInput/pfx21:ErrorDetails/pfx21:StackTrace)&quot;/>&#xa;                    &lt;/textContent>&#xa;                &lt;/mimePart>&#xa;                &lt;mimePart>&#xa;                    &lt;mimeHeaders>&#xa;                        &lt;content-disposition>&#xa;                            &lt;xsl:value-of select=&quot;&amp;quot;*;filename=DataOnHand.txt&amp;quot;&quot;/>&#xa;                        &lt;/content-disposition>&#xa;                        &lt;content-type>&#xa;                            &lt;xsl:value-of select=&quot;&amp;quot;text/xml&amp;quot;&quot;/>&#xa;                        &lt;/content-type>&#xa;                    &lt;/mimeHeaders>&#xa;                    &lt;textContent>&#xa;                        &lt;xsl:value-of select=&quot;tib:render-xml($Start/pfx21:ErrorHandlerInput/pfx21:ErrorDetails/pfx21:DataOnHand)&quot;/>&#xa;                    &lt;/textContent>&#xa;                &lt;/mimePart>&#xa;            &lt;/ns2:mimeEnvelopeElement>&#xa;        &lt;/ansbw7:mailActivityInput>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                    </tibex:inputBindings>
+                    <tibex:config>
+                        <bwext:BWActivity activityTypeID="bw.mail.send"
+                            xmlns:activityconfig="http://tns.tibco.com/bw/model/activityconfig"
+                            xmlns:bwext="http://tns.tibco.com/bw/model/core/bwext"
+                            xmlns:input="http://tns.tibco.com/bw/activity/sendmail/xsd/input+269a3c85-b20b-4705-a122-9f301fab3406+input"
+                            xmlns:mail="http://ns.tibco.com/bw/palette/mail" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <activityConfig>
+                                <properties name="config" xsi:type="activityconfig:EMFProperty">
+                                    <type href="http://ns.tibco.com/bw/palette/mail#//SendMail"/>
+                                    <value
+                                    inputHeadersQName="input:headersType"
+                                    newActivity="true"
+                                    smtpProperty="ErrorHandler_v3_0-SendErrorMail-SMTPResource" xsi:type="mail:SendMail"/>
+                                </properties>
+                            </activityConfig>
+                        </bwext:BWActivity>
+                    </tibex:config>
+                </tibex:activityExtension>
+            </bpws:extensionActivity>
+            <bpws:extensionActivity>
+                <tibex:activityExtension
+                    inputVariable="Publish-Alert-RV-input"
+                    name="Publish-Alert-RV"
+                    tibex:xpdlId="6992013f-2614-4632-9137-63dc69740a88" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                    <bpws:targets>
+                        <bpws:target linkName="SendErrorMailToPublish-Alert-RV"/>
+                        <bpws:target linkName="SendEmailErrorCheckToPublish-Alert-RV"/>
+                    </bpws:targets>
+                    <bpws:sources>
+                        <bpws:source linkName="Publish-Alert-RV-to-RethrowErrorCheck"/>
+                        <bpws:source
+                            linkName="Publish-Alert-RV-to-RV-Send-Failed-Log"
+                            tibex:faultDetailsVar="_error" tibex:faultNameVar="FaultName">
+                            <tibex:DesignExpression>
+                                <tibex:expression expression="##error##" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0"/>
+                            </tibex:DesignExpression>
+                            <bpws:transitionCondition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0"><![CDATA[##error##]]></bpws:transitionCondition>
+                        </bpws:source>
+                    </bpws:sources>
+                    <tibex:inputBindings>
+                        <tibex:inputBinding
+                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:ns4=&quot;http://tns.tibco.com/bw/rv/-756366949&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:ansbw7=&quot;http://tns.tibco.com/bw/rv/publish/xsd/input+tns.tibco.com/bw/rv/publish/xsd/input;ActivityInput;XSDElementDeclaration+ActivityInput+6992013f-2614-4632-9137-63dc69740a88+input&quot; xmlns:pfx21=&quot;http://www.tibco.com/schemas/SplunkEAILoggingLibrary_1_0/LoggingFrameworkResources/LoggingFrameworkSchema/ErrorHandler_V3.0.xsd&quot; version=&quot;1.0&quot;>&#xa;    &lt;xsl:param name=&quot;Start&quot;/>&#xa;    &lt;xsl:param name=&quot;_processContext&quot;/>&#xa;    &lt;xsl:template name=&quot;Publish-Alert-RV-Input&quot; match=&quot;/&quot;>&#xa;        &lt;ansbw7:ActivityInput>&#xa;            &lt;ns4:body>&#xa;                &lt;sourceProject>&#xa;                    &lt;xsl:value-of select=&quot;$_processContext/ApplicationName&quot;/>&#xa;                &lt;/sourceProject>&#xa;                &lt;sourceEngineName>&#xa;                    &lt;xsl:value-of select=&quot;$_processContext/EngineName&quot;/>&#xa;                &lt;/sourceEngineName>&#xa;                &lt;xsl:copy-of select=&quot;$Start/pfx21:ErrorHandlerInput&quot;/>&#xa;            &lt;/ns4:body>&#xa;        &lt;/ansbw7:ActivityInput>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                    </tibex:inputBindings>
+                    <tibex:config>
+                        <bwext:BWActivity
+                            activityTypeID="bw.rv.publishRVMessage"
+                            version="6.0.0.20130523"
+                            xmlns:activityconfig="http://tns.tibco.com/bw/model/activityconfig"
+                            xmlns:bwext="http://tns.tibco.com/bw/model/core/bwext"
+                            xmlns:rv="http://ns.tibco.com/bw/palette/rv"
+                            xmlns:rv_-756366949="http://tns.tibco.com/bw/rv/-756366949" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <attributeBindings
+                                bindingType="moduleProperty"
+                                eAttributeName="subject" processProperty="EAIErrorHandler-HawkErrorAlertPublistSubject"/>
+                            <activityConfig>
+                                <properties name="config" xsi:type="activityconfig:EMFProperty">
+                                    <type href="http://ns.tibco.com/bw/palette/rv#//PublishRendezvousMessage"/>
+                                    <value
+                                    inputElementQname="rv_-756366949:body"
+                                    needXMLCompliantFieldNames="true"
+                                    preRegisterListener=""
+                                    subject="%%EAIErrorHandler/HawkErrorAlertPublistSubject%%"
+                                    transport="ResourcesTransportsRVReliableTransport" xsi:type="rv:PublishRendezvousMessage"/>
+                                </properties>
+                            </activityConfig>
+                        </bwext:BWActivity>
+                    </tibex:config>
+                </tibex:activityExtension>
+            </bpws:extensionActivity>
+            <bpws:extensionActivity>
+                <tibex:activityExtension
+                    inputVariable="RV-Send-Failed-Log-input"
+                    name="RV-Send-Failed-Log"
+                    tibex:xpdlId="ca3aefd7-e72a-43c1-a5b0-9e14e6eddccb" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                    <bpws:targets>
+                        <bpws:target linkName="Publish-Alert-RV-to-RV-Send-Failed-Log"/>
+                    </bpws:targets>
+                    <bpws:sources>
+                        <bpws:source linkName="RV-Send-Failed-Log-to-RethrowErrorCheck"/>
+                    </bpws:sources>
+                    <tibex:inputBindings>
+                        <tibex:inputBinding
+                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:pfx6=&quot;http://www.tibco.com/tnt/utilitySchema&quot; xmlns:pfx7=&quot;http://www.tibco.com/TNT/pe/activityschemas/ProcessDefinitions/ErrorHandlerProcessDefinition/JavaCodeinput&quot; xmlns:pfx8=&quot;http://www.tibco.com/TNT/pe/activityschemas/ProcessDefinitions/ErrorHandlerProcessDefinition/JavaStaticFloodCheckingCodeinput&quot; xmlns:pfx=&quot;http://www.ingrammicro.com/eai/utilities/errorhandler&quot; xmlns:pfx9=&quot;http://www.tibco.com/namespaces/tnt/plugins/file&quot; xmlns:pfx2=&quot;http://www.tibco.com/xmlns/ae2xsd/2002/05/ae/ErrorHandlerEvent&quot; xmlns:ns=&quot;http://xmlns.tibco.com/body&quot; xmlns:pfx3=&quot;http://www.tibco.com/TNT/pe/activityschemas/ProcessDefinitions/ErrorHandlerProcessDefinition/AlertEvent/PublishRendezvousMessage&quot; xmlns:pfx4=&quot;http://www.tibco.com/TNT/pe/activityschemas/ProcessDefinitions/ErrorHandlerProcessDefinition/AlertEvent/PublishAlertRVMessage&quot; xmlns:pfx5=&quot;http://www.tibco.com/TNT/pe/activityschemas/ProcessDefinitions/ErrorHandlerProcessDefinition/PublishAlertRVMessage&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:ns2=&quot;http://xmlns.tibco.com/encodings/mime&quot; xmlns:tib=&quot;http://www.tibco.com/bw/xslt/custom-functions&quot; xmlns:ns1=&quot;http://www.tibco.com/schemas/SplunkEAILoggingLibrary_v1_0/Resources/Common/JobSharedVariables/Schema.xsd&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:bw=&quot;http://www.tibco.com/bw/xpath/bw-custom-functions&quot; xmlns:pfx22=&quot;http://www.tibco.com/schemas/EAILoggingFramework_1_0/Resources/Schema/SchemaCDM.xsd&quot; xmlns:pfx23=&quot;http://www.tibco.com/schemas/EAILoggingFramework_1_0/Resources/Schema/LoggingFrameworkCDM.xsd&quot; xmlns:pfx20=&quot;http://www.tibco.com/xmlns/ae2xsd/2002/05/Ingram/ErrorHandlerEvent_v2_1&quot; xmlns:pfx21=&quot;http://www.tibco.com/schemas/SplunkEAILoggingLibrary_1_0/LoggingFrameworkResources/LoggingFrameworkSchema/ErrorHandler_V3.0.xsd&quot; xmlns:pfx19=&quot;http://www.tibco.com/xmlns/ae2xsd/2002/05/Ingram/ErrorHandlerEvent&quot; xmlns:pfx17=&quot;http://www.tibco.com/namespaces/tnt/plugins/mail&quot; xmlns:pfx18=&quot;http://www.tibco.com/pe/GenerateErrorActivity/InputSchema&quot; xmlns:pd=&quot;http://xmlns.tibco.com/bw/process/2003&quot; xmlns:pfx11=&quot;www.tibco.com/pe/WriteToLogActivitySchema&quot; xmlns:pfx12=&quot;mail&quot; xmlns:pfx10=&quot;http://www.w3.org/2001/12/xquery-functions&quot; xmlns:pfx15=&quot;http://www.tibco.com/pe/DeployedVarsType&quot; xmlns:pfx16=&quot;http://www.tibco.com/pe/WriteToLogActivitySchema&quot; xmlns:pfx13=&quot;www.tibco.com/pe/GenerateErrorActivity/InputSchema&quot; xmlns:pfx14=&quot;http://www.tibco.com/pe/EngineTypes&quot; version=&quot;1.0&quot;>&#xa;    &lt;xsl:param name=&quot;_error&quot;/>&#xa;    &lt;xsl:template name=&quot;RV-Send-Failed-Log-Input&quot; match=&quot;/&quot;>&#xa;        &lt;pfx16:ActivityInput>&#xa;            &lt;message>&#xa;                &lt;xsl:value-of select=&quot;concat(&amp;quot;Failed to send HAWK RV message from error handler with stacktrace: &amp;quot;, string($_error/StackTrace))&quot;/>&#xa;            &lt;/message>&#xa;        &lt;/pfx16:ActivityInput>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                    </tibex:inputBindings>
+                    <tibex:config>
+                        <bwext:BWActivity
+                            activityTypeID="bw.generalactivities.log"
+                            version="6.0.0.001"
+                            xmlns:activityconfig="http://tns.tibco.com/bw/model/activityconfig"
+                            xmlns:bwext="http://tns.tibco.com/bw/model/core/bwext"
+                            xmlns:generalactivities="http://ns.tibco.com/bw/palette/generalactivities" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <attributeBindings
+                                bindingType="moduleProperty"
+                                eAttributeName="loggerName" processProperty="EAIErrorHandler-Constants-SendErrorEmail"/>
+                            <activityConfig>
+                                <properties name="config" xsi:type="activityconfig:EMFProperty">
+                                    <type href="http://ns.tibco.com/bw/palette/generalactivities#//Log"/>
+                                    <value controlBy="Application"
+                                    role="custom" xsi:type="generalactivities:Log"/>
+                                </properties>
+                            </activityConfig>
+                        </bwext:BWActivity>
+                    </tibex:config>
+                </tibex:activityExtension>
+            </bpws:extensionActivity>
+            <bpws:empty name="RethrowErrorCheck" tibex:xpdlId="bb9413dd-ecef-482e-9cb6-8decb54ca4df">
+                <bpws:targets>
+                    <bpws:target linkName="Publish-Alert-RV-to-RethrowErrorCheck"/>
+                    <bpws:target linkName="RV-Send-Failed-Log-to-RethrowErrorCheck"/>
+                </bpws:targets>
+                <bpws:sources>
+                    <bpws:source linkName="RethrowErrorCheck-to-End">
+                        <bpws:transitionCondition><![CDATA[##otherwise##]]></bpws:transitionCondition>
+                    </bpws:source>
+                    <bpws:source linkName="RethrowErrorCheck-to-Rethrow-Error">
+                        <tibex:DesignExpression>
+                            <tibex:expression
+                                expression="$Start/pfx21:ErrorHandlerInput/pfx21:RethrowErrorFlag = true()" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0"/>
+                        </tibex:DesignExpression>
+                        <bpws:transitionCondition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0"><![CDATA[$Start/pfx21:ErrorHandlerInput/pfx21:RethrowErrorFlag = true()]]></bpws:transitionCondition>
+                    </bpws:source>
+                </bpws:sources>
+            </bpws:empty>
+            <bpws:extensionActivity>
+                <tibex:activityExtension name="End"
+                    tibex:xpdlId="9508d9b7-a6f8-4a94-92a8-f8b84d66b912" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                    <bpws:targets>
+                        <bpws:target linkName="RethrowErrorCheck-to-End"/>
+                        <bpws:target linkName="SendErrorMail-to-End"/>
+                    </bpws:targets>
+                    <tibex:config>
+                        <bwext:BWActivity
+                            activityTypeID="bw.internal.end"
+                            xmlns:activityconfig="http://tns.tibco.com/bw/model/activityconfig"
+                            xmlns:bwext="http://tns.tibco.com/bw/model/core/bwext"
+                            xmlns:internalactivities="http://ns.tibco.com/bw/core/internalactivity" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <activityConfig>
+                                <properties name="config" xsi:type="activityconfig:EMFProperty">
+                                    <type href="http://ns.tibco.com/bw/core/internalactivity#//End"/>
+                                    <value xsi:type="internalactivities:End"/>
+                                </properties>
+                            </activityConfig>
+                        </bwext:BWActivity>
+                    </tibex:config>
+                </tibex:activityExtension>
+            </bpws:extensionActivity>
+            <bpws:throw faultName="ns9:DefaultFault"
+                faultVariable="Rethrow-Error-input" name="Rethrow-Error" tibex:xpdlId="b5346155-9154-440f-bfb3-3559b783ce82">
+                <tibex:inputBindings>
+                    <tibex:partBinding
+                        expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:ansbw7=&quot;http://schemas.tibco.com/bw/plugins/basic/6.0/Exceptions&quot; xmlns:pfx21=&quot;http://www.tibco.com/schemas/SplunkEAILoggingLibrary_1_0/LoggingFrameworkResources/LoggingFrameworkSchema/ErrorHandler_V3.0.xsd&quot; version=&quot;1.0&quot;>&#xa;    &lt;xsl:param name=&quot;Start&quot;/>&#xa;    &lt;xsl:template name=&quot;Rethrow-Error-Input&quot; match=&quot;/&quot;>&#xa;        &lt;ansbw7:DefaultFault>&#xa;            &lt;xsl:if test=&quot;$Start/pfx21:ErrorHandlerInput/pfx21:ErrorText&quot;>&#xa;                &lt;message>&#xa;                    &lt;xsl:value-of select=&quot;$Start/pfx21:ErrorHandlerInput/pfx21:ErrorText&quot;/>&#xa;                &lt;/message>&#xa;            &lt;/xsl:if>&#xa;            &lt;xsl:if test=&quot;$Start/pfx21:ErrorHandlerInput/pfx21:ErrorCode&quot;>&#xa;                &lt;msgCode>&#xa;                    &lt;xsl:value-of select=&quot;$Start/pfx21:ErrorHandlerInput/pfx21:ErrorCode&quot;/>&#xa;                &lt;/msgCode>&#xa;            &lt;/xsl:if>&#xa;        &lt;/ansbw7:DefaultFault>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                </tibex:inputBindings>
+                <bpws:targets>
+                    <bpws:target linkName="RethrowErrorCheck-to-Rethrow-Error"/>
+                </bpws:targets>
+            </bpws:throw>
+            <bpws:extensionActivity>
+                <tibex:activityExtension
+                    inputVariable="JMSSendMessage-input"
+                    name="JMSSendMessage"
+                    outputVariable="JMSSendMessage"
+                    tibex:xpdlId="16d94e15-95a3-4147-95fc-2b430710f3df" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                    <bpws:targets>
+                        <bpws:target linkName="StartToJMSSendMessage_ReportError"/>
+                    </bpws:targets>
+                    <bpws:sources>
+                        <bpws:source linkName="JMSSendMessageToGet-ExecutionStats"/>
+                    </bpws:sources>
+                    <tibex:inputBindings>
+                        <tibex:inputBinding
+                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://www.tibco.com/namespaces/tnt/plugins/jms+16d94e15-95a3-4147-95fc-2b430710f3df+input&quot; xmlns:pfx21=&quot;http://www.tibco.com/schemas/SplunkEAILoggingLibrary_1_0/LoggingFrameworkResources/LoggingFrameworkSchema/ErrorHandler_V3.0.xsd&quot; xmlns:ns=&quot;/SplunkEAILoggingLibrary/Processes/Common/ErrorHandler_v3_0-Start-Input.xsd&quot; xmlns:pfx23=&quot;http://www.tibco.com/schemas/EAILoggingFramework_1_0/Resources/Schema/LoggingFrameworkCDM.xsd&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;Start&quot;/>&lt;xsl:param name=&quot;ReportErrorQueue&quot;/>&lt;xsl:template name=&quot;JMSSendMessage-input&quot; match=&quot;/&quot;>&lt;tns:ActivityInput>&lt;destination>&lt;xsl:value-of select=&quot;$ReportErrorQueue&quot;/>&lt;/destination>&lt;Body>&lt;ns:root>&lt;xsl:copy-of select=&quot;$Start/pfx21:ErrorHandlerInput&quot;/>&lt;pfx23:LogPayload>&lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:DateTimestamp&quot;>&lt;pfx23:DateTimestamp>&lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:DateTimestamp&quot;/>&lt;/pfx23:DateTimestamp>&lt;/xsl:if>&lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:ServiceName&quot;>&lt;pfx23:ServiceName>&lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:ServiceName&quot;/>&lt;/pfx23:ServiceName>&lt;/xsl:if>&lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:CorrelationId&quot;>&lt;pfx23:CorrelationId>&lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:CorrelationId&quot;/>&lt;/pfx23:CorrelationId>&lt;/xsl:if>&lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:LogDescription&quot;>&lt;pfx23:LogDescription>&lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:LogDescription&quot;/>&lt;/pfx23:LogDescription>&lt;/xsl:if>&lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:CallingApplicationName&quot;>&lt;pfx23:CallingApplicationName>&lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:CallingApplicationName&quot;/>&lt;/pfx23:CallingApplicationName>&lt;/xsl:if>&lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:CountryCode&quot;>&lt;pfx23:CountryCode>&lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:CountryCode&quot;/>&lt;/pfx23:CountryCode>&lt;/xsl:if>&lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:JobID&quot;>&lt;pfx23:JobID>&lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:JobID&quot;/>&lt;/pfx23:JobID>&lt;/xsl:if>&lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:CustomerNumber&quot;>&lt;pfx23:CustomerNumber>&lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:CustomerNumber&quot;/>&lt;/pfx23:CustomerNumber>&lt;/xsl:if>&lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:ServerName&quot;>&lt;pfx23:ServerName>&lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:ServerName&quot;/>&lt;/pfx23:ServerName>&lt;/xsl:if>&lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:CustomKey&quot;>&lt;pfx23:CustomKey>&lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:CustomKey&quot;/>&lt;/pfx23:CustomKey>&lt;/xsl:if>&lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:ActivitySequenceNumber&quot;>&lt;pfx23:ActivitySequenceNumber>&lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:ActivitySequenceNumber&quot;/>&lt;/pfx23:ActivitySequenceNumber>&lt;/xsl:if>&lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:ErrorLogPayload&quot;>&lt;pfx23:ErrorLogPayload>&lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:ErrorLogPayload&quot;/>&lt;/pfx23:ErrorLogPayload>&lt;/xsl:if>&lt;xsl:copy-of select=&quot;$Start/pfx23:LogPayload/pfx23:ExtendedSpecs&quot;/>&lt;/pfx23:LogPayload>&lt;/ns:root>&lt;/Body>&lt;DynamicProperties>&lt;tns:property>&lt;tns:name>&lt;xsl:value-of select=&quot;&amp;quot;ServiceName&amp;quot;&quot;/>&lt;/tns:name>&lt;tns:value>&lt;xsl:choose>&lt;xsl:when test=&quot;exists($Start/pfx23:LogPayload/pfx23:ServiceName)&quot;>&lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:ServiceName&quot;/>&lt;/xsl:when>&lt;xsl:otherwise>&lt;xsl:attribute name=&quot;xsi:nil&quot;>true&lt;/xsl:attribute>&lt;/xsl:otherwise>&lt;/xsl:choose>&lt;/tns:value>&lt;/tns:property>&lt;/DynamicProperties>&lt;/tns:ActivityInput>&lt;/xsl:template>&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                    </tibex:inputBindings>
+                    <tibex:config>
+                        <bwext:BWActivity activityTypeID="bw.jms.send"
+                            version="6.0.0.20132205"
+                            xmlns:ErrorHandler_v3_0-Start-Input.xsd="/SplunkEAILoggingLibrary/Processes/Common/ErrorHandler_v3_0-Start-Input.xsd"
+                            xmlns:activityconfig="http://tns.tibco.com/bw/model/activityconfig"
+                            xmlns:bwext="http://tns.tibco.com/bw/model/core/bwext"
+                            xmlns:jms="http://ns.tibco.com/bw/palette/jms" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <activityConfig>
+                                <properties name="config" xsi:type="activityconfig:EMFProperty">
+                                    <type href="http://ns.tibco.com/bw/palette/jms#//JMSSenderActivityConfiguration"/>
+                                    <value
+                                    bodyTypeQName="ErrorHandler_v3_0-Start-Input.xsd:root"
+                                    connectionReference="jmsConnection"
+                                    messageType="XML Text"
+                                    messagingStyle="Queue"
+                                    priority="4" xsi:type="jms:JMSSenderActivityConfiguration"/>
+                                </properties>
+                            </activityConfig>
+                        </bwext:BWActivity>
+                    </tibex:config>
+                </tibex:activityExtension>
+            </bpws:extensionActivity>
+            <bpws:extensionActivity>
+                <tibex:extActivity inputVariable="LogError-input"
+                    name="LogError"
+                    tibex:xpdlId="4d0ae526-1df4-44aa-9dac-6a4cf9eb1af1"
+                    type="bw.generalactivities.callprocess" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                    <bpws:targets>
+                        <bpws:target linkName="ExecutionStatsFramework_v1_0ToLogError"/>
+                    </bpws:targets>
+                    <bpws:sources>
+                        <bpws:source linkName="LogErrorToSendEmailErrorCheck"/>
+                    </bpws:sources>
+                    <tibex:inputBindings>
+                        <tibex:inputBinding
+                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:pfx23=&quot;http://www.tibco.com/schemas/EAILoggingFramework_1_0/Resources/Schema/LoggingFrameworkCDM.xsd&quot; xmlns:pfx21=&quot;http://www.tibco.com/schemas/SplunkEAILoggingLibrary_1_0/LoggingFrameworkResources/LoggingFrameworkSchema/ErrorHandler_V3.0.xsd&quot; version=&quot;1.0&quot;>&#xa;    &lt;xsl:param name=&quot;_processContext&quot;/>&#xa;    &lt;xsl:param name=&quot;Start&quot;/>&#xa;    &lt;xsl:template name=&quot;LogError-input&quot; match=&quot;/&quot;>&#xa;        &lt;pfx23:LogPayload>&#xa;            &lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:DateTimestamp&quot;>&#xa;                &lt;pfx23:DateTimestamp>&#xa;                    &lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:DateTimestamp&quot;/>&#xa;                &lt;/pfx23:DateTimestamp>&#xa;            &lt;/xsl:if>&#xa;            &lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:ServiceName&quot;>&#xa;                &lt;pfx23:ServiceName>&#xa;                    &lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:ServiceName&quot;/>&#xa;                &lt;/pfx23:ServiceName>&#xa;            &lt;/xsl:if>&#xa;            &lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:LogType&quot;>&#xa;                &lt;pfx23:LogType>&#xa;                    &lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:LogType&quot;/>&#xa;                &lt;/pfx23:LogType>&#xa;            &lt;/xsl:if>&#xa;            &lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:CorrelationId&quot;>&#xa;                &lt;pfx23:CorrelationId>&#xa;                    &lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:CorrelationId&quot;/>&#xa;                &lt;/pfx23:CorrelationId>&#xa;            &lt;/xsl:if>&#xa;            &lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:LogDescription&quot;>&#xa;                &lt;pfx23:LogDescription>&#xa;                    &lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:LogDescription&quot;/>&#xa;                &lt;/pfx23:LogDescription>&#xa;            &lt;/xsl:if>&#xa;            &lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:CallingApplicationName&quot;>&#xa;                &lt;pfx23:CallingApplicationName>&#xa;                    &lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:CallingApplicationName&quot;/>&#xa;                &lt;/pfx23:CallingApplicationName>&#xa;            &lt;/xsl:if>&#xa;            &lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:CountryCode&quot;>&#xa;                &lt;pfx23:CountryCode>&#xa;                    &lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:CountryCode&quot;/>&#xa;                &lt;/pfx23:CountryCode>&#xa;            &lt;/xsl:if>&#xa;            &lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:JobID&quot;>&#xa;                &lt;pfx23:JobID>&#xa;                    &lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:JobID&quot;/>&#xa;                &lt;/pfx23:JobID>&#xa;            &lt;/xsl:if>&#xa;            &lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:CustomerNumber&quot;>&#xa;                &lt;pfx23:CustomerNumber>&#xa;                    &lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:CustomerNumber&quot;/>&#xa;                &lt;/pfx23:CustomerNumber>&#xa;            &lt;/xsl:if>&#xa;            &lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:ServerName&quot;>&#xa;                &lt;pfx23:ServerName>&#xa;                    &lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:ServerName&quot;/>&#xa;                &lt;/pfx23:ServerName>&#xa;            &lt;/xsl:if>&#xa;            &lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:CustomKey&quot;>&#xa;                &lt;pfx23:CustomKey>&#xa;                    &lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:CustomKey&quot;/>&#xa;                &lt;/pfx23:CustomKey>&#xa;            &lt;/xsl:if>&#xa;            &lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:ActivitySequenceNumber&quot;>&#xa;                &lt;pfx23:ActivitySequenceNumber>&#xa;                    &lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:ActivitySequenceNumber&quot;/>&#xa;                &lt;/pfx23:ActivitySequenceNumber>&#xa;            &lt;/xsl:if>&#xa;            &lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:RequestLogPayload&quot;>&#xa;                &lt;pfx23:RequestLogPayload>&#xa;                    &lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:RequestLogPayload&quot;/>&#xa;                &lt;/pfx23:RequestLogPayload>&#xa;            &lt;/xsl:if>&#xa;            &lt;xsl:if test=&quot;$Start/pfx23:LogPayload/pfx23:ResponseLogPayload&quot;>&#xa;                &lt;pfx23:ResponseLogPayload>&#xa;                    &lt;xsl:value-of select=&quot;$Start/pfx23:LogPayload/pfx23:ResponseLogPayload&quot;/>&#xa;                &lt;/pfx23:ResponseLogPayload>&#xa;            &lt;/xsl:if>&#xa;            &lt;pfx23:ErrorLogPayload>&#xa;                &lt;xsl:value-of select=&quot;concat(format-dateTime(current-dateTime(), &amp;quot;[Y0001] [MNn,*-3] [D01] [H01]:[m01]:[s01]:[f001]&amp;quot;), &amp;quot; GMT -7  BW.&amp;quot;, string($Start/pfx21:ErrorHandlerInput/pfx21:SourceProcessName), &amp;quot;.&amp;quot;, string($Start/pfx21:ErrorHandlerInput/pfx21:SourceActivityName), &amp;quot; Custom Job-&amp;quot;, string($_processContext/JobId), &amp;quot;[&amp;quot;, string($Start/pfx21:ErrorHandlerInput/pfx21:ErrorCode), &amp;quot;] &amp;quot;, string($Start/pfx21:ErrorHandlerInput/pfx21:ErrorText), string($Start/pfx23:LogPayload/pfx23:ErrorLogPayload))&quot;/>&#xa;            &lt;/pfx23:ErrorLogPayload>&#xa;            &lt;pfx23:ExtendedSpecs>&#xa;                &lt;pfx23:Key>&#xa;                    &lt;xsl:value-of select=&quot;&amp;quot;ERRORLOG&amp;quot;&quot;/>&#xa;                &lt;/pfx23:Key>&#xa;                &lt;pfx23:Value>&#xa;                    &lt;xsl:value-of select=&quot;&amp;quot;LOG&amp;quot;&quot;/>&#xa;                &lt;/pfx23:Value>&#xa;            &lt;/pfx23:ExtendedSpecs>&#xa;        &lt;/pfx23:LogPayload>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                    </tibex:inputBindings>
+                    <tibex:CallProcess spawn="true"
+                        subProcessName="Common.EAILoggingFramework_v1_0" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"/>
+                </tibex:extActivity>
+            </bpws:extensionActivity>
+        </bpws:flow>
+    </bpws:scope>
+</bpws:process>

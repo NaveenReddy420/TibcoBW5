@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pd="http://xmlns.tibco.com/bw/process/2003">
+    <pd:name>DataFormat/DelimeterSeperated.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startX>79</pd:startX>
+    <pd:startY>35</pd:startY>
+    <pd:returnBindings/>
+    <pd:endName>End</pd:endName>
+    <pd:endX>437</pd:endX>
+    <pd:endY>35</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1607339519240</pd:targetNamespace>
+    <pd:activity name="Parse Data">
+        <pd:type>com.tibco.plugin.parse.ParseActivity</pd:type>
+        <pd:resourceType>ae.activities.ParseActivity</pd:resourceType>
+        <pd:x>302</pd:x>
+        <pd:y>35</pd:y>
+        <config>
+            <InputType>String</InputType>
+            <Encoding>ASCII</Encoding>
+            <ParseSharedConfig>/DataFormat/Data-Format-2.sharedparse</ParseSharedConfig>
+            <StrictValidation>true</StrictValidation>
+        </config>
+        <pd:inputBindings>
+            <Input>
+                <text>
+                    <xsl:value-of select="$Render-Data/Text"/>
+                </text>
+                <noOfRecords>
+                    <xsl:value-of select="-1"/>
+                </noOfRecords>
+            </Input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Render Data">
+        <pd:type>com.tibco.plugin.parse.RenderActivity</pd:type>
+        <pd:resourceType>ae.activities.RenderActivity</pd:resourceType>
+        <pd:x>190</pd:x>
+        <pd:y>35</pd:y>
+        <config>
+            <ParseSharedConfig>/DataFormat/Data-Format-2.sharedparse</ParseSharedConfig>
+        </config>
+        <pd:inputBindings>
+            <Rows>
+                <root>
+                    <Ename>
+                        <xsl:value-of select="&quot;Somu&quot;"/>
+                    </Ename>
+                    <EID>
+                        <xsl:value-of select="101"/>
+                    </EID>
+                </root>
+            </Rows>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Render Data</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Render Data</pd:from>
+        <pd:to>Parse Data</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Parse Data</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>
